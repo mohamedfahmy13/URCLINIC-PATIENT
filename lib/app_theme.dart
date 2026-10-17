@@ -50,6 +50,10 @@ class AppTheme {
     radioTheme: RadioThemeData(
       fillColor: WidgetStateProperty.all(appColorPrimary),
     ),
+    progressIndicatorTheme: ProgressIndicatorThemeData(
+      color: appColorPrimary,
+      circularTrackColor: appColorPrimary.withValues(alpha: 0.15),
+    ),
     pageTransitionsTheme: const PageTransitionsTheme(
       builders: <TargetPlatform, PageTransitionsBuilder>{
         TargetPlatform.android: OpenUpwardsPageTransitionsBuilder(),
@@ -102,6 +106,10 @@ class AppTheme {
     textTheme: GoogleFonts.interTightTextTheme(),
     radioTheme: RadioThemeData(
       fillColor: WidgetStateProperty.all(appColorPrimary),
+    ),
+    progressIndicatorTheme: ProgressIndicatorThemeData(
+      color: appColorPrimaryOnDark,
+      circularTrackColor: Colors.white.withValues(alpha: 0.12),
     ),
     pageTransitionsTheme: const PageTransitionsTheme(
       builders: <TargetPlatform, PageTransitionsBuilder>{

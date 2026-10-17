@@ -136,24 +136,27 @@ class ClinicMapScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        child: ListView.separated(
-                          shrinkWrap: true,
-                          padding: EdgeInsets.zero,
-                          itemCount: controller.placePredictions.length,
-                          separatorBuilder: (context, index) => const Divider(height: 0),
-                          itemBuilder: (context, index) {
-                            final prediction = controller.placePredictions[index];
-                            final description = prediction['description'] as String;
-                            
-                            return ListTile(
-                              leading: const Icon(Icons.location_on_outlined, color: Colors.grey),
-                              title: Text(description, style: primaryTextStyle(size: 14)),
-                              onTap: () {
-                                final placeId = prediction['place_id'] as String;
-                                controller.onPlaceSelected(placeId, description);
-                              },
-                            );
-                          },
+                        child: Material(
+                          type: MaterialType.transparency,
+                          child: ListView.separated(
+                            shrinkWrap: true,
+                            padding: EdgeInsets.zero,
+                            itemCount: controller.placePredictions.length,
+                            separatorBuilder: (context, index) => const Divider(height: 0),
+                            itemBuilder: (context, index) {
+                              final prediction = controller.placePredictions[index];
+                              final description = prediction['description'] as String;
+
+                              return ListTile(
+                                leading: const Icon(Icons.location_on_outlined, color: Colors.grey),
+                                title: Text(description, style: primaryTextStyle(size: 14)),
+                                onTap: () {
+                                  final placeId = prediction['place_id'] as String;
+                                  controller.onPlaceSelected(placeId, description);
+                                },
+                              );
+                            },
+                          ),
                         ),
                       );
                     }),

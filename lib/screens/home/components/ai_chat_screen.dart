@@ -30,10 +30,9 @@ class _AIChatScreenState extends State<AIChatScreen>
   final RxBool _showSuggestions = true.obs;
 
   static const _modelCandidates = [
-    'gemini-2.0-flash',
-    'gemini-1.5-flash',
-    'gemini-1.5-pro',
-    'gemini-pro',
+    'gemini-3.8-flash',
+    'gemini-3.5-flash',
+    'gemini-flash-lite-latest',
   ];
 
   List<String> get _suggestionChips => [

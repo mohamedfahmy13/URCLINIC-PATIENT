@@ -1,14 +1,13 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nb_utils/nb_utils.dart';
 import '../utils/colors.dart';
 import '../utils/common_base.dart';
 import 'body_widget.dart';
-import 'shimmer_widget.dart';
+import 'loader_widget.dart';
 
 class AppScaffold extends StatelessWidget {
   final bool hideAppBar;
@@ -224,7 +223,11 @@ class AppScaffoldNew extends StatelessWidget {
                       topRight: Radius.circular(defaultRadius * 2),
                     ),
                   ),
-                  child: SafeArea(top: false, child: body),
+                  // Transparent Material so ListTile ripples/backgrounds paint above this decorated container.
+                  child: Material(
+                    type: MaterialType.transparency,
+                    child: SafeArea(top: false, child: body),
+                  ),
                 ),
                 SafeArea(
                   child: Stack(children: widgetsStackedOverBody),
@@ -242,19 +245,9 @@ class AppScaffoldNew extends StatelessWidget {
                   child: isBlurBackgroundinLoader
                       ? BackdropFilter(
                           filter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0, tileMode: TileMode.mirror),
-                          child: SpinKitFadingCircle(
-                            itemBuilder: (_, __) => const DecoratedBox(
-                              decoration: BoxDecoration(shape: BoxShape.circle, color: appColorSecondary),
-                            ),
-                          ),
+                          child: const LoaderWidget(),
                         )
-                      : Center(
-                          child: SpinKitFadingCircle(
-                            itemBuilder: (_, __) => const DecoratedBox(
-                              decoration: BoxDecoration(shape: BoxShape.circle, color: appColorSecondary),
-                            ),
-                          ),
-                        ),
+                      : const LoaderWidget(),
                 ),
               );
             }
@@ -271,7 +264,7 @@ class AppScaffoldNew extends StatelessWidget {
                   ),
                   child: Container(
                     color: scaffoldBackgroundColor ?? context.scaffoldBackgroundColor,
-                    child: const ShimmerLoader(),
+                    child: const LoaderWidget(),
                   ),
                 ),
               ),

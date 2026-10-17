@@ -20,6 +20,7 @@ import '../../../utils/local_storage.dart';
 import '../../../utils/notification_controller.dart';
 import '../../../utils/secure_storage.dart';
 import '../../../utils/session_guard.dart';
+import '../services/social_logins.dart';
 
 class SignInController extends GetxController {
   RxBool isNavigateToDashboard = false.obs;
@@ -130,6 +131,11 @@ class SignInController extends GetxController {
     return AuthServiceApis.verifyUser(request: request);
   }
 
+  @protected
+  Future<UserData> socialAppleSignInRequest() {
+    return AppleSignInAuthService.signInWithApple();
+  }
+
   Future<void> saveForm() async {
     isLoading(true);
     hideKeyBoardWithoutContext();
@@ -218,6 +224,35 @@ class SignInController extends GetxController {
         isNavigateToDashboard.value = true;
       }
       await handleLoginResponse(loginResponse: value, isVerifyOTP: true);
+    }).catchError((e) {
+      isLoading(false);
+      toast(e.toString(), print: true);
+    });
+  }
+
+  Future<void> appleSignIn() async {
+    isLoading(true);
+    await socialAppleSignInRequest().then((value) async {
+      final Map<String, dynamic> request = {
+        UserKeys.contactNumber: value.mobile,
+        UserKeys.email: value.email,
+        UserKeys.firstName: value.firstName,
+        UserKeys.lastName: value.lastName,
+        UserKeys.username: value.userName,
+        UserKeys.profileImage: value.profileImage,
+        UserKeys.userType: LoginTypeConst.LOGIN_TYPE_USER,
+        UserKeys.loginType: LoginTypeConst.LOGIN_TYPE_APPLE,
+      };
+
+      /// Social Login Api
+      await loginUserRequest(request: request, isSocialLogin: true)
+          .then((value) async {
+        await handleLoginResponse(loginResponse: value, isSocialLogin: true);
+        setValueToLocal(SharedPreferenceConst.LOGIN_SUCCESSFULL, true);
+      }).catchError((e) {
+        isLoading(false);
+        toast(e.toString(), print: true);
+      });
     }).catchError((e) {
       isLoading(false);
       toast(e.toString(), print: true);

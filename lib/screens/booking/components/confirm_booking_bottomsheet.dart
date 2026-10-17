@@ -124,20 +124,23 @@ class ConfirmBookingBottomSheet extends StatelessWidget {
                     16.height,
                   ],
                   Obx(
-                    () => CheckboxListTile(
-                      checkColor: whiteColor,
-                      value: isAgree.value,
-                      activeColor: appColorPrimary,
-                      onChanged: (val) async {
-                        isAgree.value = !isAgree.value;
-                      },
-                      checkboxShape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                    () => Material(
+                      type: MaterialType.transparency,
+                      child: CheckboxListTile(
+                        checkColor: whiteColor,
+                        value: isAgree.value,
+                        activeColor: appColorPrimary,
+                        onChanged: (val) async {
+                          isAgree.value = !isAgree.value;
+                        },
+                        checkboxShape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                        ),
+                        side: const BorderSide(color: secondaryTextColor, width: 1.5),
+                        title: Text("${confirmText ?? locale.value.iHaveReadAll} $APP_NAME.", style: secondaryTextStyle()),
+                        controlAffinity: ListTileControlAffinity.leading,
+                        contentPadding: EdgeInsets.zero,
                       ),
-                      side: const BorderSide(color: secondaryTextColor, width: 1.5),
-                      title: Text("${confirmText ?? locale.value.iHaveReadAll} $APP_NAME.", style: secondaryTextStyle()),
-                      controlAffinity: ListTileControlAffinity.leading,
-                      contentPadding: EdgeInsets.zero,
                     ).visible(!hideAgree),
                   ),
                 ],

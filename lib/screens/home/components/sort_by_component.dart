@@ -11,7 +11,7 @@ import '../../../components/discount_badge_widget.dart';
 import '../../../main.dart';
 import '../../../network/location_service.dart';
 import '../../../utils/colors.dart';
-import '../../../components/shimmer_widget.dart';
+import '../../../components/loader_widget.dart';
 import '../../../utils/common_base.dart';
 import '../../clinic/model/clinics_res_model.dart';
 import '../home_controller.dart';
@@ -220,7 +220,7 @@ class _SortByComponentState extends State<SortByComponent> {
         12.height,
 
         // Loading indicator for location
-        if (_loadingLocation) const ShimmerLoader(),
+        if (_loadingLocation) const LoaderWidget(),
 
         // Clinics List
         Obx(() {
@@ -264,7 +264,7 @@ class _SortByComponentState extends State<SortByComponent> {
                   });
 
           if (isResolvingDiscountFilter) {
-            return const ShimmerLoader();
+            return const LoaderWidget();
           }
 
           final sortedClinics = _sortClinics(clinics);

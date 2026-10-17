@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:get/get.dart';
+import 'package:kivicare_patient/utils/app_common.dart';
 import '../../../components/app_logo_widget.dart';
 import '../../../components/app_scaffold.dart';
 import '../../../configs.dart';
@@ -263,6 +264,30 @@ class SignInScreen extends StatelessWidget {
                             },
                           ).expand(),
                         ),
+                        if (isApple)
+                          Semantics(
+                            button: true,
+                            label: locale.value.signInWithApple,
+                            child: GestureDetector(
+                              onTap: () {
+                                signInController.appleSignIn();
+                              },
+                              child: Container(
+                                height: 54,
+                                width: 54,
+                                padding: const EdgeInsets.all(16),
+                                decoration: boxDecorationWithRoundedCorners(
+                                  backgroundColor:
+                                      bodyWhite.withValues(alpha: 0.1),
+                                  boxShape: BoxShape.circle,
+                                ),
+                                child: Image.asset(
+                                  Assets.imagesAppleLogo,
+                                  color: isDarkMode.value ? null : black,
+                                ).center(),
+                              ),
+                            ),
+                          ).paddingLeft(16),
                       ],
                     ),
                     8.height,

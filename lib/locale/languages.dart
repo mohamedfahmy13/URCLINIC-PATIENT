@@ -178,6 +178,7 @@ abstract class BaseLanguage {
 
   String get userCancelled;
 
+  String get appleSigninIsNot;
 
   String get eventStatus;
 
@@ -185,7 +186,7 @@ abstract class BaseLanguage {
 
   String get notRegistered;
 
-
+  String get signInWithApple;
 
   String get orSignInWith;
 

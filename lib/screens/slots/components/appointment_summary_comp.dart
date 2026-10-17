@@ -175,7 +175,7 @@ class AppointmentSummaryWidget extends StatelessWidget {
                           color: appColorSecondary,
                           borderRadius: radius(defaultAppButtonRadius / 2),
                         ),
-                        child: const Center(child: ThreeBounceLoadingWidget()),
+                        child: const LoaderWidget(loaderColor: Colors.white, size: 22),
                       )
                     : AppButton(
                         margin: const EdgeInsets.symmetric(horizontal: 16),

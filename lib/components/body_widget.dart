@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'shimmer_widget.dart';
+import 'loader_widget.dart';
 
 class Body extends StatelessWidget {
   final Widget child;
@@ -14,7 +14,7 @@ class Body extends StatelessWidget {
     return SizedBox(
       width: Get.width,
       height: Get.height,
-      child: Obx(() => isLoading.value ? const ShimmerLoader() : child),
+      child: Obx(() => isLoading.value ? const LoaderWidget() : child),
     );
   }
 }

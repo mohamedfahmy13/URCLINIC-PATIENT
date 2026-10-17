@@ -1,50 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart';
 
-import 'shimmer_widget.dart';
-
+/// App-wide loading indicator. Colors come from the theme's
+/// `progressIndicatorTheme`, so it adapts to light and dark mode.
 class LoaderWidget extends StatelessWidget {
   final bool isBlurBackground;
   final Color? loaderColor;
+  final double size;
 
-  const LoaderWidget({super.key, this.loaderColor, this.isBlurBackground = false});
-
-  @override
-  Widget build(BuildContext context) {
-    if (isBlurBackground) {
-      return AbsorbPointer(
-        child: Container(
-          color: Colors.white.withValues(alpha: 0.85),
-          child: const ShimmerLoader(),
-        ),
-      );
-    }
-    return const ShimmerLoader();
-  }
-}
-
-class ThreeBounceLoadingWidget extends StatelessWidget {
-  const ThreeBounceLoadingWidget({super.key});
+  const LoaderWidget({super.key, this.loaderColor, this.isBlurBackground = false, this.size = 36});
 
   @override
   Widget build(BuildContext context) {
-    return Shimmer.fromColors(
-      baseColor: const Color(0xFFE0E0E0),
-      highlightColor: Colors.white,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: List.generate(
-          3,
-          (_) => Container(
-            width: 12,
-            height: 12,
-            margin: const EdgeInsets.symmetric(horizontal: 4),
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              shape: BoxShape.circle,
-            ),
-          ),
+    final indicator = Center(
+      child: SizedBox.square(
+        dimension: size,
+        child: CircularProgressIndicator(
+          strokeWidth: 3,
+          strokeCap: StrokeCap.round,
+          color: loaderColor,
         ),
+      ),
+    );
+
+    if (!isBlurBackground) return indicator;
+
+    return AbsorbPointer(
+      child: ColoredBox(
+        color: Theme.of(context).scaffoldBackgroundColor.withValues(alpha: 0.6),
+        child: indicator,
       ),
     );
   }

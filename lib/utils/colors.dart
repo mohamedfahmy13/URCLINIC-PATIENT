@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 const appColorPrimary = Color(0xFF0074AD);
 const appColorSecondary = Color(0xff003C5A);
+// Lighter primary for indicators on dark backgrounds (appColorPrimary is too dim there).
+const appColorPrimaryOnDark = Color(0xFF5AB4E5);
 const lightPrimaryColor = Color(0xFFEBEDFF);
 const extraLightPrimaryColor = Color(0xFFF5F6FA);
 const lightSecondaryColor = Color(0xFFFEF1F1);
