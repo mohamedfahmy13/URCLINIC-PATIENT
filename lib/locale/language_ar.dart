@@ -273,8 +273,6 @@ class LanguageAr extends BaseLanguage {
   @override
   String get userCancelled => 'تم إلغاء المستخدم';
 
-  @override
-  String get appleSigninIsNot => 'علامة Apple غير متوفرة لجهازك';
 
   @override
   String get eventStatus => 'حالة الحدث';
@@ -285,11 +283,7 @@ class LanguageAr extends BaseLanguage {
   @override
   String get notRegistered => 'غير مسجل؟';
 
-  @override
-  String get signInWithGoogle => 'الدخول مع جوجل';
 
-  @override
-  String get signInWithApple => 'تسجيل الدخول مع Apple';
 
   @override
   String get orSignInWith => 'أو تسجيل الدخول مع';

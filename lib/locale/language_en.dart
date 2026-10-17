@@ -270,9 +270,6 @@ class LanguageEn extends BaseLanguage {
   @override
   String get userCancelled => 'User cancelled';
 
-  @override
-  String get appleSigninIsNot =>
-      'Apple SignIn is not available for your device';
 
   @override
   String get eventStatus => 'Event Status';
@@ -283,11 +280,7 @@ class LanguageEn extends BaseLanguage {
   @override
   String get notRegistered => 'Not registered?';
 
-  @override
-  String get signInWithGoogle => 'Sign In With Google';
 
-  @override
-  String get signInWithApple => 'Sign In With Apple';
 
   @override
   String get orSignInWith => 'Or sign in with';

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart' show CupertinoPageTransitionsBuilder;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -31,10 +32,15 @@ class AppTheme {
         color: canvasColor,
         fontFamily: GoogleFonts.interTight().fontFamily,
       ),
-      systemOverlayStyle: const SystemUiOverlayStyle(statusBarBrightness: Brightness.light, statusBarIconBrightness: Brightness.dark),
+      systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarBrightness: Brightness.light,
+          statusBarIconBrightness: Brightness.dark),
     ),
-    tabBarTheme: const TabBarThemeData(indicator: UnderlineTabIndicator(borderSide: BorderSide(color: Color(0xFFB6D5EF), width: 3))),
-    textSelectionTheme: const TextSelectionThemeData(cursorColor: appColorPrimary),
+    tabBarTheme: const TabBarThemeData(
+        indicator: UnderlineTabIndicator(
+            borderSide: BorderSide(color: Color(0xFFB6D5EF), width: 3))),
+    textSelectionTheme:
+        const TextSelectionThemeData(cursorColor: appColorPrimary),
     cardTheme: const CardThemeData(color: Colors.white),
     cardColor: appSectionBackground,
     iconTheme: const IconThemeData(color: textPrimaryColor),
@@ -69,7 +75,8 @@ class AppTheme {
     hoverColor: Colors.black12,
     dividerColor: canvasColor,
     fontFamily: GoogleFonts.interTight().fontFamily,
-    drawerTheme: const DrawerThemeData(backgroundColor: fullDarkCanvasColorDark),
+    drawerTheme:
+        const DrawerThemeData(backgroundColor: fullDarkCanvasColorDark),
     appBarTheme: AppBarTheme(
       surfaceTintColor: appScreenBackgroundDark,
       backgroundColor: appScreenBackgroundDark,
@@ -78,14 +85,20 @@ class AppTheme {
         color: whiteTextColor,
         fontFamily: GoogleFonts.interTight().fontFamily,
       ),
-      systemOverlayStyle: const SystemUiOverlayStyle(statusBarBrightness: Brightness.light, statusBarIconBrightness: Brightness.light),
+      systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarBrightness: Brightness.light,
+          statusBarIconBrightness: Brightness.light),
     ),
-    tabBarTheme: const TabBarThemeData(indicator: UnderlineTabIndicator(borderSide: BorderSide(color: Colors.white))),
-    textSelectionTheme: const TextSelectionThemeData(cursorColor: appColorPrimary),
+    tabBarTheme: const TabBarThemeData(
+        indicator:
+            UnderlineTabIndicator(borderSide: BorderSide(color: Colors.white))),
+    textSelectionTheme:
+        const TextSelectionThemeData(cursorColor: appColorPrimary),
     cardTheme: const CardThemeData(color: fullDarkCanvasColor),
     cardColor: fullDarkCanvasColor,
     iconTheme: const IconThemeData(color: whiteColor),
-    bottomSheetTheme: const BottomSheetThemeData(backgroundColor: appBackgroundColorDark),
+    bottomSheetTheme:
+        const BottomSheetThemeData(backgroundColor: appBackgroundColorDark),
     textTheme: GoogleFonts.interTightTextTheme(),
     radioTheme: RadioThemeData(
       fillColor: WidgetStateProperty.all(appColorPrimary),
