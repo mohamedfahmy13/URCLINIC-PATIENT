@@ -228,7 +228,7 @@ class AddOtherPatientController extends GetxController {
       OtherPatientConst.dob: dateOfBirthCont.text,
       OtherPatientConst.contactNumber:
           '+${mobileCont.text.trim().formatPhoneNumber(pickedPhoneCode.value.phoneCode)}',
-      UserKeys.gender: selectedGender.value.name,
+      UserKeys.gender: selectedGender.value.slug,
       UserKeys.userId: loginUserData.value.id,
     };
 

@@ -209,7 +209,7 @@ class AddOtherPatientScreen extends StatelessWidget {
                                     color: addOtherPatientController.selectedGender.value.id == genders[index].id ? appColorPrimary : context.cardColor,
                                   ),
                                   child: Text(
-                                    getOtherPatientGender(gender: genders[index].name),
+                                    getOtherPatientGender(gender: genders[index].slug),
                                     style: secondaryTextStyle(
                                       color: addOtherPatientController.selectedGender.value.id == genders[index].id ? white : null,
                                     ),

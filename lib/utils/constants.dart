@@ -112,17 +112,17 @@ class SettingsLocalConst {
 
 //region defaultCountry
 Country get defaultCountry => Country(
-      phoneCode: '91',
-      countryCode: 'IN',
-      e164Sc: 91,
+      phoneCode: '965',
+      countryCode: 'KW',
+      e164Sc: 0,
       geographic: true,
       level: 1,
-      name: 'India',
-      example: '23456789',
-      displayName: 'India (IN) [+91]',
-      displayNameNoCountryCode: 'India (IN)',
-      e164Key: '91-IN-0',
-      fullExampleWithPlusSign: '+919123456789',
+      name: 'Kuwait',
+      example: '50012345',
+      displayName: 'Kuwait (KW) [+965]',
+      displayNameNoCountryCode: 'Kuwait (KW)',
+      e164Key: '965-KW-0',
+      fullExampleWithPlusSign: '+96550012345',
     );
 //endregion
 

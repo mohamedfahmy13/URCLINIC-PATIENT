@@ -171,7 +171,7 @@ class SignUpScreen extends StatelessWidget {
                               hintText: signUpController.pickedPhoneCode.value
                                       .phoneCode.isNotEmpty
                                   ? "+${signUpController.pickedPhoneCode.value.phoneCode}"
-                                  : "+91",
+                                  : "+965",
                               prefixIcon: Text(
                                 signUpController
                                     .pickedPhoneCode.value.flagEmoji,

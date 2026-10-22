@@ -32,6 +32,7 @@ class SignInController extends GetxController {
   RxBool isLoading = false.obs;
   RxString userName = "".obs;
   RxInt isGoogleAuthentication = (-1).obs;
+  String mfaChallengeToken = "";
 
   TextEditingController emailCont = TextEditingController();
   TextEditingController passwordCont = TextEditingController();
@@ -157,6 +158,7 @@ class SignInController extends GetxController {
     await loginUserRequest(request: req).then((value) async {
       if (value.status == true) {
         startTimer();
+        mfaChallengeToken = value.mfaChallengeToken;
         setValueToLocal(
             SharedPreferenceConst.USER_ID, value.userData.id.toString());
         setValueToLocal(SharedPreferenceConst.IS_GOOGLE_AUTHENTICATION,
@@ -217,6 +219,7 @@ class SignInController extends GetxController {
       'id': userId,
       'one_time_password': otpCont.text,
       'google_authentication_type': authentication,
+      'mfa_challenge_token': mfaChallengeToken,
     };
 
     await verifyUserRequest(request: req).then((value) async {
