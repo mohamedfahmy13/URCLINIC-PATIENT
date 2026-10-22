@@ -19,7 +19,6 @@ import '../../../utils/constants.dart';
 import '../../../utils/local_storage.dart';
 import '../../../utils/notification_controller.dart';
 import '../../../utils/secure_storage.dart';
-import '../../../utils/session_guard.dart';
 import '../services/social_logins.dart';
 
 class SignInController extends GetxController {
@@ -28,7 +27,6 @@ class SignInController extends GetxController {
   RxBool tryToAnother = false.obs;
   final GlobalKey<FormState> signInformKey = GlobalKey();
 
-  RxBool isRememberMe = true.obs;
   RxBool isLoading = false.obs;
   RxString userName = "".obs;
   RxInt isGoogleAuthentication = (-1).obs;
@@ -46,16 +44,11 @@ class SignInController extends GetxController {
   final DashboardController dashcont = Get.put(DashboardController());
   Timer? _timer;
 
-  void toggleSwitch() {
-    isRememberMe.value = !isRememberMe.value;
-  }
-
   @override
   void onInit() {
     if (appConfigs.value.isDummyCredential != 1) {
       emailCont.text = '';
       passwordCont.text = '';
-      isRememberMe.value = false;
     } else {
       emailCont.text = Constants.DEFAULT_EMAIL;
       passwordCont.text = Constants.DEFAULT_PASS;
@@ -63,18 +56,10 @@ class SignInController extends GetxController {
     if (Get.arguments is bool) {
       isNavigateToDashboard(Get.arguments == true);
     }
-    final userIsRemeberMe =
-        getValueFromLocal(SharedPreferenceConst.IS_REMEMBER_ME);
     final userNameFromLocal =
         getValueFromLocal(SharedPreferenceConst.USER_NAME);
     if (userNameFromLocal is String) {
       userName(userNameFromLocal);
-    }
-    if (userIsRemeberMe == true) {
-      final userEmail = getValueFromLocal(SharedPreferenceConst.USER_EMAIL);
-      if (userEmail is String) {
-        emailCont.text = userEmail;
-      }
     }
     super.onInit();
   }
@@ -177,14 +162,6 @@ class SignInController extends GetxController {
               getValueFromLocal(SharedPreferenceConst.IS_GOOGLE_AUTHENTICATION)
                   .toString()) ??
           0;
-      if (isRememberMe.value) {
-        setValueToLocal(
-            SharedPreferenceConst.USER_EMAIL, emailCont.text.trim());
-        setValueToLocal(SharedPreferenceConst.USER_NAME, userName.value);
-      } else {
-        setValueToLocal(SharedPreferenceConst.USER_EMAIL, "");
-        setValueToLocal(SharedPreferenceConst.USER_NAME, "");
-      }
 
       await handleLoginResponse(loginResponse: value);
       setValueToLocal(SharedPreferenceConst.USER_ID, value.userData.id);
@@ -273,8 +250,6 @@ class SignInController extends GetxController {
       await saveUserDataSecure(loginUserData.value);
       isLoggedIn(true);
       setValueToLocal(SharedPreferenceConst.IS_LOGGED_IN, true);
-      setValueToLocal(SharedPreferenceConst.IS_REMEMBER_ME, isRememberMe.value);
-      markSessionActivity();
 
       isLoading(false);
 

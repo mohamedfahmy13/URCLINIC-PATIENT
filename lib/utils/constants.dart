@@ -89,11 +89,8 @@ class LoginTypeConst {
 class SharedPreferenceConst {
   static const IS_LOGGED_IN = 'IS_LOGGED_IN';
   static const USER_DATA = 'USER_LOGIN_DATA';
-  static const SESSION_LAST_ACTIVITY_AT = 'SESSION_LAST_ACTIVITY_AT';
-  static const USER_EMAIL = 'USER_EMAIL';
   static const USER_PASSWORD = 'USER_PASSWORD';
   static const FIRST_TIME = 'FIRST_TIME';
-  static const IS_REMEMBER_ME = 'IS_REMEMBER_ME';
   static const USER_NAME = 'USER_NAME';
   static const LOGIN_SUCCESSFULL = 'LOGIN_SUCCESSFULL';
   static const USER_ID = 'USER_ID';

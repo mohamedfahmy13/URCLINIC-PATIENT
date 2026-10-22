@@ -14,7 +14,6 @@ import '../screens/auth/model/login_response.dart';
 import '../utils/common_base.dart';
 import '../utils/constants.dart';
 import '../utils/secure_storage.dart';
-import '../utils/session_guard.dart';
 import 'dashboard/dashboard_screen.dart';
 
 class SplashScreenController extends GetxController {
@@ -107,21 +106,11 @@ class SplashScreenController extends GetxController {
     if (getValueFromLocal(SharedPreferenceConst.IS_LOGGED_IN) == true) {
       getUserDataSecure().then((userData) async {
         if (userData != null) {
-          // Check if session has expired
-          if (isSessionExpired()) {
-            // Session expired, clear all data
-            await AuthServiceApis.clearData();
-            isLoggedIn(false);
-            loginUserData(UserData());
-          } else {
-            // Session is still valid, restore the user
-            isLoggedIn(true);
-            loginUserData(userData);
-            // Re-persist the login flag to ensure it survives app crashes
-            setValueToLocal(SharedPreferenceConst.IS_LOGGED_IN, true);
-            // Mark the session as active
-            markSessionActivity();
-          }
+          // Signed in stays signed in until the user logs out.
+          isLoggedIn(true);
+          loginUserData(userData);
+          // Re-persist the login flag to ensure it survives app crashes
+          setValueToLocal(SharedPreferenceConst.IS_LOGGED_IN, true);
         } else {
           // User data not found in secure storage, clear the login flag
           isLoggedIn(false);

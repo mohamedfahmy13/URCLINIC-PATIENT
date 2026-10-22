@@ -16,7 +16,6 @@ import '../main.dart';
 import '../utils/api_end_points.dart';
 import '../utils/app_common.dart';
 import '../utils/common_base.dart';
-import '../utils/session_guard.dart';
 
 const Duration _requestTimeout = Duration(seconds: 20);
 const int _maxRequestAttempts = 2;
@@ -88,11 +87,6 @@ Future<Response> buildHttpResponse(
   final Uri url = buildBaseUrl(endPoint);
   final bool isInternalRequest = !endPoint.startsWith('http');
 
-  if (isLoggedIn.value && isInternalRequest && isSessionExpired()) {
-    await _handleUnauthorizedSession();
-    throw 'Session expired. Please sign in again.';
-  }
-
   try {
     final Response response = await _executeWithTimeoutAndRetry(
       url: url,
@@ -113,15 +107,11 @@ Future<Response> buildHttpResponse(
       methodtype: method.name,
     );
 
+    // Sessions never time out on the device: only a token the server no longer accepts
+    // (signed out on this device, or the account was removed) ends one.
     if (isLoggedIn.value && response.statusCode == 401 && isInternalRequest) {
       await _handleUnauthorizedSession();
       throw 'Session expired. Please sign in again.';
-    }
-
-    if (isLoggedIn.value &&
-        response.statusCode.isSuccessful() &&
-        isInternalRequest) {
-      markSessionActivity();
     }
 
     return response;
@@ -326,20 +316,8 @@ Future<MultipartRequest> getMultiPartRequest(String endPoint,
   return MultipartRequest('POST', Uri.parse(url));
 }
 
-bool _isInternalRequestUrl(Uri uri) {
-  return uri.toString().startsWith(BASE_URL);
-}
-
 Future<void> sendMultiPartRequest(MultipartRequest multiPartRequest,
     {Function(dynamic)? onSuccess, Function(dynamic)? onError}) async {
-  if (isLoggedIn.value &&
-      _isInternalRequestUrl(multiPartRequest.url) &&
-      isSessionExpired()) {
-    await _handleUnauthorizedSession();
-    onError?.call('Session expired. Please sign in again.');
-    return;
-  }
-
   try {
     final streamedResponse =
         await multiPartRequest.send().timeout(_requestTimeout);
@@ -358,9 +336,6 @@ Future<void> sendMultiPartRequest(MultipartRequest multiPartRequest,
     );
 
     if (response.statusCode.isSuccessful()) {
-      if (isLoggedIn.value && _isInternalRequestUrl(multiPartRequest.url)) {
-        markSessionActivity();
-      }
       onSuccess?.call(response.body.trim());
     } else {
       if (isLoggedIn.value && response.statusCode == 401) {
@@ -416,12 +391,6 @@ Future buildMultiPartResponse({
   bool isKeyRequireIndexing = false,
 }) async {
   try {
-    final bool isInternalRequest = !endPoint.startsWith('http');
-    if (isLoggedIn.value && isInternalRequest && isSessionExpired()) {
-      await _handleUnauthorizedSession();
-      throw 'Session expired. Please sign in again.';
-    }
-
     final MultipartRequest multiPartRequest =
         await getMultiPartRequest(endPoint);
     multiPartRequest.headers.addAll(buildHeaderTokens());
@@ -462,12 +431,6 @@ Future buildMultiPartResponse({
       responseBody: _summarizeResponseBody(response.body),
       methodtype: "MultiPart",
     );
-
-    if (isLoggedIn.value &&
-        response.statusCode.isSuccessful() &&
-        isInternalRequest) {
-      markSessionActivity();
-    }
 
     return await handleResponse(response);
   } on SocketException catch (e) {

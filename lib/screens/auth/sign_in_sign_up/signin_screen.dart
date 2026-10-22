@@ -189,30 +189,8 @@ class SignInScreen extends StatelessWidget {
                       ),
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Obx(
-                          () => CheckboxListTile(
-                            checkColor: whiteColor,
-                            value: signInController.isRememberMe.value,
-                            activeColor: appColorPrimary,
-                            visualDensity: VisualDensity.compact,
-                            dense: true,
-                            controlAffinity: ListTileControlAffinity.leading,
-                            contentPadding: EdgeInsets.zero,
-                            onChanged: (val) async {
-                              signInController.toggleSwitch();
-                            },
-                            checkboxShape:
-                                RoundedRectangleBorder(borderRadius: radius(0)),
-                            side: const BorderSide(
-                                color: secondaryTextColor, width: 1.5),
-                            title: Text(
-                              locale.value.rememberMe,
-                              style: secondaryTextStyle(color: darkGrayGeneral),
-                            ),
-                          ),
-                        ).expand(),
                         TextButton(
                           onPressed: () {
                             Get.to(() => ForgetPassword());

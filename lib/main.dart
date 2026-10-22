@@ -24,7 +24,6 @@ import 'utils/constants.dart';
 import 'utils/local_storage.dart';
 import 'utils/notification_controller.dart';
 import 'utils/push_notification_service.dart';
-import 'utils/session_guard.dart';
 
 @pragma('vm:entry-point')
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -157,36 +156,8 @@ void main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addObserver(this);
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.resumed && isLoggedIn.value) {
-      // App resumed from background - mark session activity to prevent timeout
-      markSessionActivity();
-      if (kDebugMode) {
-        log('App resumed - session activity marked');
-      }
-    }
-  }
 
   @override
   Widget build(BuildContext context) {

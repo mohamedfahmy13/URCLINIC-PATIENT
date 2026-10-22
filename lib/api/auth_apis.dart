@@ -14,7 +14,6 @@ import '../utils/app_common.dart';
 import '../utils/constants.dart';
 import '../utils/local_storage.dart';
 import '../utils/secure_storage.dart';
-import '../utils/session_guard.dart';
 import '../screens/auth/model/about_page_res.dart';
 import '../screens/auth/model/app_configuration_res.dart';
 import '../screens/auth/model/change_password_res.dart';
@@ -122,16 +121,12 @@ class AuthServiceApis {
     GoogleSignIn().signOut();
     await PushNotificationService().unsubscribeFirebaseTopic();
     await clearSensitiveAuthData();
-    clearSessionActivity();
 
     if (isFromDeleteAcc) {
       localStorage.erase();
       isLoggedIn(false);
       loginUserData(UserData());
     } else {
-      final tempEmail = loginUserData.value.email;
-      final tempIsRemeberMe =
-          getValueFromLocal(SharedPreferenceConst.IS_REMEMBER_ME);
       final tempUserName = loginUserData.value.userName;
 
       localStorage.erase();
@@ -139,13 +134,9 @@ class AuthServiceApis {
       loginUserData(UserData());
 
       setValueToLocal(SharedPreferenceConst.FIRST_TIME, true);
-      setValueToLocal(SharedPreferenceConst.USER_EMAIL, tempEmail);
       setValueToLocal(SharedPreferenceConst.USER_NAME, tempUserName);
       setValueToLocal(SharedPreferenceConst.USER_ID, "0");
       setValueToLocal(SharedPreferenceConst.LOGIN_SUCCESSFULL, false);
-      if (tempIsRemeberMe is bool) {
-        setValueToLocal(SharedPreferenceConst.IS_REMEMBER_ME, tempIsRemeberMe);
-      }
     }
   }
 
