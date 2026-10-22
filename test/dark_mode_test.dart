@@ -175,4 +175,18 @@ void main() {
     expect(style, isNotEmpty);
     expect(style.first['stylers'].first['color'], '#1b2431');
   });
+  test('clinic status text stays readable against its badge in both modes', () {
+    addTearDown(() => themeModeController.setMode(ThemeMode.light));
+    for (final brightness in Brightness.values) {
+      themeModeController.setMode(
+          brightness == Brightness.dark ? ThemeMode.dark : ThemeMode.light);
+      final theme = AppTheme.create(brightness, fontFamily: 'Test');
+      for (final status in ['open', 'close', 'unknown']) {
+        final background = Color.alphaBlend(
+            getClinicStatusLightColor(clinicStatus: status), theme.cardColor);
+        expect(contrast(getClinicStatusColor(clinicStatus: status), background),
+            greaterThanOrEqualTo(4.5));
+      }
+    }
+  });
 }

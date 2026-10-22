@@ -21,6 +21,7 @@ class SocialMediaElement extends StatelessWidget {
         decoration: boxDecorationDefault(color: context.themeSoftPrimary, shape: BoxShape.circle),
         child: CachedImageWidget(
           url: iconPath,
+          color: context.themePrimary,
           height: 14,
           fit: BoxFit.fitHeight,
         ),

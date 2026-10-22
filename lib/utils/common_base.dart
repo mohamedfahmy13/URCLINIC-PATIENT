@@ -1208,9 +1208,9 @@ Color getPrescriptionPaymentStatusColor({required String paymentStatus}) {
 
 Color getClinicStatusColor({required String clinicStatus}) {
   if (clinicStatus.toLowerCase().contains(ClinicStatus.OPEN)) {
-    return completedStatusColor;
+    return isDarkMode.value ? const Color(0xFF81D5AA) : const Color(0xFF23734D);
   } else if (clinicStatus.toLowerCase().contains(ClinicStatus.CLOSE)) {
-    return pendingStatusColor;
+    return isDarkMode.value ? const Color(0xFFFFB4AB) : const Color(0xFFBA1A1A);
   } else {
     return isDarkMode.value ? appDarkTextSecondary : defaultStatusColor;
   }
@@ -1219,14 +1219,14 @@ Color getClinicStatusColor({required String clinicStatus}) {
 Color getClinicStatusLightColor({required String clinicStatus}) {
   if (clinicStatus.toLowerCase().contains(ClinicStatus.OPEN)) {
     return isDarkMode.value
-        ? lightGreenColor.withValues(alpha: 0.1)
+        ? const Color(0xFF163A35)
         : lightGreenColor;
   } else if (clinicStatus.toLowerCase().contains(ClinicStatus.CLOSE)) {
     return isDarkMode.value
-        ? lightSecondaryColor.withValues(alpha: 0.1)
+        ? const Color(0xFF442A30)
         : lightSecondaryColor;
   } else {
-    return isDarkMode.value ? appDarkTextSecondary : defaultStatusColor;
+    return isDarkMode.value ? appDarkSurface : extraLightPrimaryColor;
   }
 }
 

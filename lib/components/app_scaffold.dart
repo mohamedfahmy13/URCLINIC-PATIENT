@@ -253,8 +253,9 @@ class AppScaffoldNew extends StatelessWidget {
               ),
             ),
             Obx(() {
-              if (!(isLoading ?? false.obs).value)
+              if (!(isLoading ?? false.obs).value) {
                 return const SizedBox.shrink();
+              }
               if (isAuthScreen) {
                 return AbsorbPointer(
                   child: SizedBox(
