@@ -142,14 +142,21 @@ class BannerModel {
   factory BannerModel.fromJson(Map<String, dynamic> json) {
     return BannerModel(
       id: json['id'] is int ? json['id'] : -1,
-      name: json['name'] is String ? json['name'] : "",
-      status: json['status'] is int ? json['status'] : -1,
+      name: (json['name'] ?? json['clinic_name'])?.toString() ?? '',
+      status: json['status'] is int
+          ? json['status']
+          : json['type'] == 'clinic'
+              ? 1
+              : -1,
       type: json['type'] is String ? json['type'] : "",
       link: json['link'] is String ? json['link'] : "",
-      linkId: json['link_id'] is int ? json['link_id'] : -1,
-      sliderImage: json['slider_image'] is String ? json['slider_image'] : "",
+      linkId: int.tryParse('${json['link_id'] ?? json['clinic_id']}') ?? -1,
+      sliderImage:
+          (json['slider_image'] ?? json['banner_image'])?.toString() ?? '',
     );
   }
+
+  bool get opensClinic => type == 'clinic' && linkId > 0;
 
   Map<String, dynamic> toJson() {
     return {

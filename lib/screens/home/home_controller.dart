@@ -52,11 +52,14 @@ class HomeController extends GetxController {
   /// Get Banners List
   Future<void> getBannersList() async {
     isBannersLoading(true);
-    await HomeServiceApis.getBannersList().then((value) {
-      bannerList(value.data);
-    }).catchError((e) {
-      debugPrint('Error fetching banners: $e');
-    }).whenComplete(() => isBannersLoading(false));
+    try {
+      final banners = await HomeServiceApis.getHomeBanners();
+      sliderCurrentPage(0);
+      if (sliderPageController.hasClients) sliderPageController.jumpToPage(0);
+      bannerList(banners);
+    } finally {
+      isBannersLoading(false);
+    }
   }
 
   ///Get ChooseService List

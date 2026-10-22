@@ -6,6 +6,8 @@ import 'package:kivicare_patient/utils/colors.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../../components/cached_image_widget.dart';
+import '../../clinic/clinic_detail_screen.dart';
+import '../../clinic/model/clinics_res_model.dart';
 import '../home_controller.dart';
 
 class SliderComponent extends StatefulWidget {
@@ -28,7 +30,8 @@ class _SliderComponentState extends State<SliderComponent> {
   void _startAutoScroll() {
     _timer?.cancel(); // Cancel any existing timer
     _timer = Timer.periodic(const Duration(seconds: 5), (Timer timer) {
-      if (homeScreenController.bannerList.isNotEmpty) {
+      if (homeScreenController.bannerList.length > 1 &&
+          homeScreenController.sliderPageController.hasClients) {
         int nextPage = homeScreenController.sliderCurrentPage.value + 1;
         if (nextPage >= homeScreenController.bannerList.length) {
           nextPage = 0; // Loop back to the first page
@@ -72,16 +75,29 @@ class _SliderComponentState extends State<SliderComponent> {
               itemCount: sliderList.length,
               itemBuilder: (context, index) {
                 final sliderItem = sliderList[index];
-                return Container(
-                  color: context.scaffoldBackgroundColor,
-                  width: Get.width,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(12),
-                    child: CachedImageWidget(
-                      url: sliderItem.sliderImage,
-                      fit: BoxFit.fitWidth,
-                      usePlaceholderIfUrlEmpty: false,
+                return GestureDetector(
+                  onTap: sliderItem.opensClinic
+                      ? () => Get.to(() => ClinicDetailScreen(),
+                          arguments: Clinic.fromJson({
+                            'id': sliderItem.linkId,
+                            'name': sliderItem.name
+                          }))
+                      : null,
+                  child: Semantics(
+                    button: sliderItem.opensClinic,
+                    label: sliderItem.name,
+                    child: Container(
+                      color: context.scaffoldBackgroundColor,
                       width: Get.width,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: CachedImageWidget(
+                          url: sliderItem.sliderImage,
+                          fit: BoxFit.fitWidth,
+                          usePlaceholderIfUrlEmpty: false,
+                          width: Get.width,
+                        ),
+                      ),
                     ),
                   ),
                 );

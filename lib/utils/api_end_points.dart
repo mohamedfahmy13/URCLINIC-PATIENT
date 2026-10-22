@@ -76,4 +76,5 @@ class APIEndPoints {
 
   //Banners
   static const String getBannersList = 'get-banners-list';
+  static const String getClinicBanners = 'get-clinic-banners';
 }
