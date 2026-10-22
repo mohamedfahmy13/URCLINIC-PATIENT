@@ -210,14 +210,10 @@ void viewFiles(String url) {
 }
 
 void launchCall(String? url) {
-  if (url.validate().isNotEmpty) {
-    if (isIOS) {
-      commonLaunchUrl('tel://${url!}',
-          launchMode: LaunchMode.externalApplication);
-    } else {
-      commonLaunchUrl('tel:${url!}',
-          launchMode: LaunchMode.externalApplication);
-    }
+  // Numbers come from the API formatted like "+965 1234 5678"; tel: needs digits only.
+  final String number = url.validate().replaceAll(RegExp(r'[^\d+]'), '');
+  if (number.isNotEmpty) {
+    _launchOrCopy(Uri(scheme: 'tel', path: number), number);
   }
 }
 
@@ -230,8 +226,25 @@ void launchMap(String? url) {
 }
 
 void launchMail(String url) {
-  if (url.validate().isNotEmpty) {
-    launchUrl(mailTo(to: []), mode: LaunchMode.externalApplication);
+  final String email = url.validate().trim();
+  if (email.isNotEmpty) {
+    _launchOrCopy(Uri(scheme: 'mailto', path: email), email);
+  }
+}
+
+/// tel:/mailto: fail silently when no phone or mail app is available (e.g. the
+/// iOS Simulator), so copy the value instead of leaving the tap with no effect.
+Future<void> _launchOrCopy(Uri uri, String value) async {
+  bool launched = false;
+  try {
+    launched = await launchUrl(uri, mode: LaunchMode.externalApplication);
+  } catch (e) {
+    log('launchUrl failed for $uri: $e');
+  }
+
+  if (!launched) {
+    await value.copyToClipboard();
+    toast(locale.value.copiedToClipboard);
   }
 }
 

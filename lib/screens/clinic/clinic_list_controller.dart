@@ -32,10 +32,15 @@ class ClinicListController extends GetxController {
   RxInt clinicId = (-1).obs;
   RxBool isFromSearch = false.obs;
 
+  /// Typing fires overlapping requests; only the newest one may touch the list.
+  int _latestRequest = 0;
+
   @override
   void onInit() {
     _scrollController.addListener(() => Get.context != null ? hideKeyboard(Get.context) : null);
-    searchClinicStream.stream.debounce(const Duration(seconds: 1)).listen((s) {
+    searchClinicStream.stream.debounce(const Duration(milliseconds: 400)).listen((s) {
+      // A new query starts over from the first page.
+      page(1);
       getClinicList();
     });
     if (Get.arguments is ServiceElement) {
@@ -48,11 +53,9 @@ class ClinicListController extends GetxController {
         super.onInit();
         return;
       }
-      getClinicList();
     } else if (Get.arguments is int) {
       clinicId(Get.arguments as int);
       log('clinicId==== $clinicId');
-      getClinicList();
     }
     getClinicList();
     super.onInit();
@@ -62,10 +65,12 @@ class ClinicListController extends GetxController {
     if (showLoader) {
       isLoading(true);
     }
+    final int request = ++_latestRequest;
+    final List<Clinic> loaded = page.value == 1 ? <Clinic>[] : clinics.toList();
     await clinicsFuture(
       CoreServiceApis.getClinics(
         page: page.value,
-        clinics: clinics,
+        clinics: loaded,
         serviceId: service.value.id,
         search: searchClinicCont.text.trim(),
         servicePriceMin: priceMin.value,
@@ -73,15 +78,19 @@ class ClinicListController extends GetxController {
         clinicId: clinicId.value,
         isPopulars: isPopular.value,
         lastPageCallBack: (p0) {
-          isLastPage(p0);
+          if (request == _latestRequest) isLastPage(p0);
         },
-      ),
+      ).then((value) {
+        if (request == _latestRequest) clinics.assignAll(value);
+        return clinics;
+      }),
     ).then((value) {
       log('value.length ==> ${value.length}');
     }).catchError((e) {
-      isLoading(false);
       log("getClinics error $e");
-    }).whenComplete(() => isLoading(false));
+    }).whenComplete(() {
+      if (request == _latestRequest) isLoading(false);
+    });
   }
 
   @override

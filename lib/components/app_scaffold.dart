@@ -166,8 +166,8 @@ class AppScaffoldNew extends StatelessWidget {
                     ).expand(),
                   ],
                 ).paddingSymmetric(horizontal: Get.width * 0.12),
-                Positioned(
-                  left: 0,
+                PositionedDirectional(
+                  start: 0,
                   child: leadingWidget ??
                       (hasLeadingWidget
                           ? IconButton(
@@ -181,8 +181,8 @@ class AppScaffoldNew extends StatelessWidget {
                             )
                           : const Offstage()),
                 ),
-                Positioned(
-                  right: 0,
+                PositionedDirectional(
+                  end: 0,
                   child: Row(
                     children: actions ?? [],
                   ),

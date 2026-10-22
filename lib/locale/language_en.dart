@@ -68,6 +68,9 @@ class LanguageEn extends BaseLanguage {
   String get invalidUrl => 'Invalid URL';
 
   @override
+  String get copiedToClipboard => 'Copied to clipboard';
+
+  @override
   String get cancel => 'Cancel';
 
   @override

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kivicare_patient/utils/app_common.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -84,27 +83,6 @@ class DoctorDetailScreen extends StatelessWidget {
                                             const CachedImageWidget(url: Assets.iconsIcVerified, width: 14, height: 14).paddingLeft(8),
                                           ],
                                         ).paddingRight(16).flexible().visible(doctorDetailCont.doctorData.value.fullName.isNotEmpty),
-                                        Container(
-                                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                                          decoration: boxDecorationDefault(color: isDarkMode.value ? extraLightPrimaryColor.withValues(alpha: 0.1) : extraLightPrimaryColor, borderRadius: radius(22)),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              const CachedImageWidget(
-                                                url: Assets.iconsIcStarFilled,
-                                                color: checkoutStatusColor,
-                                                height: 12,
-                                              ),
-                                              8.width,
-                                              Text(
-                                                doctorDetailCont.doctorData.value.averageRating.toString(),
-                                                maxLines: 1,
-                                                overflow: TextOverflow.ellipsis,
-                                                style: boldTextStyle(size: 12, color: appColorPrimary),
-                                              ).paddingTop(2),
-                                            ],
-                                          ),
-                                        ),
                                       ],
                                     ),
                                     Row(

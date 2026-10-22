@@ -121,7 +121,7 @@ class CoreServiceApis {
         : '';
     String docId =
         (doctorId != null && doctorId != -1) ? '&doctor_id=$doctorId' : '';
-    String searchService = search.isNotEmpty ? '&search=$search' : '';
+    String searchService = search.isNotEmpty ? '&search=${Uri.encodeQueryComponent(search)}' : '';
     String type = serviceType.isNotEmpty ? '&type=$serviceType' : '';
     String priceMin =
         servicePriceMin.isNotEmpty ? '&is_price_min=$servicePriceMin' : '';
@@ -155,7 +155,7 @@ class CoreServiceApis {
   }) async {
     String docId =
         (doctorId != null && doctorId != -1) ? '&doctor_id=$doctorId' : '';
-    String searchService = search.isNotEmpty ? '&search=$search' : '';
+    String searchService = search.isNotEmpty ? '&search=${Uri.encodeQueryComponent(search)}' : '';
     final doctorServiceListRes = ServiceListRes.fromJson(await handleResponse(
         await buildHttpResponse(
             "${APIEndPoints.getServiceList}?per_page=$perPage&page=$page$docId$searchService",
@@ -204,7 +204,7 @@ class CoreServiceApis {
   }) async {
     String servId =
         (serviceId != null && serviceId != -1) ? '&service_id=$serviceId' : '';
-    String searchClinic = search.isNotEmpty ? '&search=$search' : '';
+    String searchClinic = search.isNotEmpty ? '&search=${Uri.encodeQueryComponent(search)}' : '';
     String isPopular = isPopulars != -1 ? '&is_popular=$isPopulars' : '';
     String priceMin =
         servicePriceMin.isNotEmpty ? '&is_price_min=$servicePriceMin' : '';
@@ -265,7 +265,7 @@ class CoreServiceApis {
         doctorRatingMin != '' ? '&is_rating_min=$doctorRatingMin' : '';
     final String doctorMaxRating =
         doctorRatingMax != '' ? '&is_rating_max=$doctorRatingMax' : '';
-    final String searchDoctor = search.isNotEmpty ? '&search=$search' : '';
+    final String searchDoctor = search.isNotEmpty ? '&search=${Uri.encodeQueryComponent(search)}' : '';
     final String isPopular = isPopulars != -1 ? '&is_popular=$isPopulars' : '';
     final String listServiceId =
         (selectedServices != null && selectedServices.isNotEmpty)
@@ -381,7 +381,7 @@ class CoreServiceApis {
         !clinicId.isNegative && clinicId > 0 ? '&clinic_id=$clinicId' : '';
     final String docId =
         !doctorId.isNegative && doctorId > 0 ? '&doctor_id=$doctorId' : '';
-    final String searchBooking = search.isNotEmpty ? '&search=$search' : '';
+    final String searchBooking = search.isNotEmpty ? '&search=${Uri.encodeQueryComponent(search)}' : '';
     String payStatus =
         paymentStatus.isNotEmpty ? '&payment_status=$paymentStatus' : '';
     if (paymentStatus == PaymentStatus.REFUNDED) {

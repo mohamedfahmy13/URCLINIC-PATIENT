@@ -293,7 +293,7 @@ class _ClinicListScreenState extends State<ClinicListScreen> {
                       Icon(Icons.search, size: 64, color: Colors.grey.shade300),
                       16.height,
                       Text(
-                        locale.value.searchDoctorClinicService,
+                        locale.value.searchClinicHere,
                         style: secondaryTextStyle(),
                         textAlign: TextAlign.center,
                       ),

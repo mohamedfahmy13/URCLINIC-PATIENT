@@ -17,7 +17,7 @@ import '../slots/booking_form_screen.dart';
 import 'doctor_list_controller.dart';
 import 'model/doctor_list_res.dart';
 
-enum DoctorSortOption { none, nameAZ, nameZA, ratingHigh, ratingLow, nearest }
+enum DoctorSortOption { none, nameAZ, nameZA, nearest }
 
 class DoctorsListScreen extends StatefulWidget {
   const DoctorsListScreen({super.key});
@@ -41,10 +41,6 @@ class _DoctorsListScreenState extends State<DoctorsListScreen> {
         return locale.value.nameAZ;
       case DoctorSortOption.nameZA:
         return locale.value.nameZA;
-      case DoctorSortOption.ratingHigh:
-        return locale.value.ratingHighToLow;
-      case DoctorSortOption.ratingLow:
-        return locale.value.ratingLowToHigh;
       case DoctorSortOption.nearest:
         return locale.value
             .nearestClinics; // Actually nearest doctors, but using same string
@@ -59,10 +55,6 @@ class _DoctorsListScreenState extends State<DoctorsListScreen> {
         return Icons.sort_by_alpha_rounded;
       case DoctorSortOption.nameZA:
         return Icons.sort_by_alpha_rounded;
-      case DoctorSortOption.ratingHigh:
-        return Icons.star_rounded;
-      case DoctorSortOption.ratingLow:
-        return Icons.star_outline_rounded;
       case DoctorSortOption.nearest:
         return Icons.near_me_rounded;
     }
@@ -112,12 +104,6 @@ class _DoctorsListScreenState extends State<DoctorsListScreen> {
       case DoctorSortOption.nameZA:
         sorted.sort((a, b) =>
             b.fullName.toLowerCase().compareTo(a.fullName.toLowerCase()));
-        break;
-      case DoctorSortOption.ratingHigh:
-        sorted.sort((a, b) => b.averageRating.compareTo(a.averageRating));
-        break;
-      case DoctorSortOption.ratingLow:
-        sorted.sort((a, b) => a.averageRating.compareTo(b.averageRating));
         break;
       case DoctorSortOption.nearest:
         if (_userPosition != null) {

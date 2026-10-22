@@ -9,7 +9,6 @@ import '../../../utils/common_base.dart';
 import '../doctor_detail_controller.dart';
 import 'about_doctor_component.dart';
 import 'doctor_qualification_component.dart';
-import '../doctor_review_screen.dart';
 import 'doctor_services_component.dart';
 
 class DoctorDetailBtmComp extends StatelessWidget {
@@ -48,21 +47,6 @@ class DoctorDetailBtmComp extends StatelessWidget {
               },
               titleTextStyle: boldTextStyle(size: 14),
               leading: commonLeadingWid(imgPath: Assets.iconsIcServices, color: appColorSecondary),
-              trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 12, color: darkGray),
-              padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
-            ).paddingTop(16),
-          ),
-          Obx(
-            () => SettingItemWidget(
-              title: locale.value.reviews,
-              decoration: boxDecorationDefault(color: context.cardColor),
-              subTitle: doctorDetailCont.doctorData.value.totalReviews != 0 ? "${locale.value.total} ${doctorDetailCont.doctorData.value.totalReviews} ${locale.value.reviews}" : locale.value.noReviewsAvailable,
-              splashColor: transparentColor,
-              onTap: () {
-                Get.to(() => DoctorReviewScreen(), arguments: doctorDetailCont.doctorData.value.doctorId);
-              },
-              titleTextStyle: boldTextStyle(size: 14),
-              leading: commonLeadingWid(imgPath: Assets.iconsIcStar, color: appColorSecondary),
               trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 12, color: darkGray),
               padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
             ).paddingTop(16),

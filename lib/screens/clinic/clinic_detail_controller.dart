@@ -62,24 +62,43 @@ class ClinicDetailController extends GetxController {
       return;
     }
 
-    final bool hasActiveServices =
-        await _hasAnyActiveService(clinicData.value.id);
-    if (!hasActiveServices) {
+    // The details and the service list don't depend on each other, so request
+    // them together instead of one after the other.
+    final Future<ClinicDetailModel> requestFuture =
+        CoreServiceApis.getClinicDetails(clinicId: clinicData.value.id);
+    // Awaited further down; until then, don't report an early failure as uncaught.
+    requestFuture.ignore();
+
+    isServicesLoading(true);
+    final List<ServiceElement>? allServices =
+        await _getAllServices(clinicData.value.id);
+    isServicesLoading(false);
+
+    if (allServices != null &&
+        !allServices.any((service) => service.status == 1)) {
       clinicFetchError(locale.value.noServicesAvailable);
       isLoading(false);
       return;
     }
 
+    if (allServices != null) {
+      // Same list getServiceList() + getAllServicesForCount() would fetch again.
+      servicesPage(1);
+      serviceList.assignAll(allServices);
+      isServicesLastPage(true);
+      activeServicesCount(
+          allServices.where((service) => service.status == 1).length);
+    }
+
     try {
-      final Future<ClinicDetailModel> requestFuture =
-          CoreServiceApis.getClinicDetails(clinicId: clinicData.value.id);
       getClinicDetail(requestFuture);
       final ClinicDetailModel value = await requestFuture;
 
       clinicData(value.data);
 
-      // Load services after clinic details are loaded to calculate active count
-      getServiceList(showLoader: false);
+      if (allServices == null) {
+        getServiceList(showLoader: false);
+      }
       // Load doctors after clinic details are loaded to calculate active count
       getDoctors(showLoader: false);
     } catch (e, st) {
@@ -92,22 +111,21 @@ class ClinicDetailController extends GetxController {
     }
   }
 
-  Future<bool> _hasAnyActiveService(int clinicId) async {
+  /// All of the clinic's services, or null when the request fails.
+  Future<List<ServiceElement>?> _getAllServices(int clinicId) async {
     try {
-      final List<ServiceElement> probeList = <ServiceElement>[];
+      final List<ServiceElement> allServices = <ServiceElement>[];
 
       await CoreServiceApis.getServiceList(
-        page: 1,
-        perPage: 20,
-        serviceList: probeList,
+        serviceList: allServices,
         clinicId: clinicId,
         allServices: 'all',
       );
 
-      return probeList.any((service) => service.status == 1);
+      return allServices;
     } catch (_) {
-      // Do not block detail fetch on a probe failure.
-      return true;
+      // Do not block detail fetch on a failed service request.
+      return null;
     }
   }
 

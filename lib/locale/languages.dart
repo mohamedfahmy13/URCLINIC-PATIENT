@@ -48,6 +48,8 @@ abstract class BaseLanguage {
 
   String get invalidUrl;
 
+  String get copiedToClipboard;
+
   String get cancel;
 
   String get delete;

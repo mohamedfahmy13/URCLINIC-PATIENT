@@ -70,6 +70,9 @@ class LanguageAr extends BaseLanguage {
   String get invalidUrl => 'URL غير صالح';
 
   @override
+  String get copiedToClipboard => 'تم النسخ';
+
+  @override
   String get cancel => 'يلغي';
 
   @override
@@ -994,7 +997,7 @@ class LanguageAr extends BaseLanguage {
       "يبدو أنه لا توجد عيادة لهذه الخدمة ، سنبقيك على اطلاع عندما يكون هناك تحديث.";
 
   @override
-  String get searchClinicHere => "عيادة البحث هنا";
+  String get searchClinicHere => "ابحث عن عيادة";
 
   @override
   String get home => "بيت";
