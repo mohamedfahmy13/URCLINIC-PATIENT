@@ -1,3 +1,4 @@
+import 'package:kivicare_patient/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -42,7 +43,7 @@ class PopularDoctorCard extends StatelessWidget {
                       ),
                     ),
                     4.width,
-                    const Icon(Icons.circle, color: Colors.green, size: 12),
+                    Icon(Icons.circle, color: context.themeSuccess, size: 12),
                   ],
                 ),
 
@@ -50,7 +51,7 @@ class PopularDoctorCard extends StatelessWidget {
                 Text(
                   doctorElement.expert,
                   style: primaryTextStyle(
-                    color: Colors.grey,
+                    color: context.themeMuted,
                     size: 12,
                   ),
                 ),
@@ -69,7 +70,7 @@ class PopularDoctorCard extends StatelessWidget {
                         return const Icon(Icons.star_half, color: Colors.amber, size: 20);
                       } else {
                         // Empty star
-                        return Icon(Icons.star_border, color: Colors.grey[300], size: 20);
+                        return Icon(Icons.star_border, color: context.themeMuted, size: 20);
                       }
                     }),
                   ],

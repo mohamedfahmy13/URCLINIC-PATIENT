@@ -77,9 +77,9 @@ class NearbyClinicMapButton extends StatelessWidget {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.arrow_forward_ios,
-                  color: appColorPrimary,
+                  color: context.themePrimary,
                   size: 16,
                 ),
               ),

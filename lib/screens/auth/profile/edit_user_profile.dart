@@ -110,7 +110,7 @@ class EditUserProfileScreen extends StatelessWidget {
                           ),
                           suffix: commonLeadingWid(
                             imgPath: Assets.navigationIcUserOutlined,
-                            color: secondaryTextColor,
+                            color: context.themeMuted,
                             size: 12,
                           ).paddingAll(16),
                         ),
@@ -143,7 +143,7 @@ class EditUserProfileScreen extends StatelessWidget {
                           ),
                           suffix: commonLeadingWid(
                             imgPath: Assets.navigationIcUserOutlined,
-                            color: secondaryTextColor,
+                            color: context.themeMuted,
                             size: 12,
                           ).paddingAll(16),
                         ),
@@ -180,7 +180,7 @@ class EditUserProfileScreen extends StatelessWidget {
                           ),
                           suffix: commonLeadingWid(
                             imgPath: Assets.iconsIcMail,
-                            color: secondaryTextColor,
+                            color: context.themeMuted,
                             size: 12,
                           ).paddingAll(16),
                         ),
@@ -272,7 +272,7 @@ class EditUserProfileScreen extends StatelessWidget {
                               ),
                               suffix: commonLeadingWid(
                                 imgPath: Assets.iconsIcCall,
-                                color: secondaryTextColor,
+                                color: context.themeMuted,
                                 size: 12,
                               ).paddingAll(16),
                             ).expand(flex: 8),
@@ -376,9 +376,9 @@ class EditUserProfileScreen extends StatelessWidget {
                                 fillColor: context.cardColor,
                                 filled: true,
                               ),
-                              suffix: const Icon(
+                              suffix: Icon(
                                 Icons.calendar_today,
-                                color: secondaryTextColor,
+                                color: context.themeMuted,
                               ).paddingAll(16),
                             ),
                           ],

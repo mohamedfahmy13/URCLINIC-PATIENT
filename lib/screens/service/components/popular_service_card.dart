@@ -112,7 +112,7 @@ class PopularServiceCard extends StatelessWidget {
                     ),
                     child: Text(
                       serviceElement.localizedCategoryName,
-                      style: secondaryTextStyle(color: appColorSecondary),
+                      style: secondaryTextStyle(color: context.themePrimary),
                     ),
                   ),
                 ),
@@ -158,7 +158,7 @@ class PopularServiceCard extends StatelessWidget {
                         Text(
                           locale.value.includesInclusiveTax,
                           style: secondaryTextStyle(
-                            color: appColorSecondary,
+                            color: context.themePrimary,
                             size: 10,
                             fontStyle: FontStyle.italic,
                           ),
@@ -170,7 +170,7 @@ class PopularServiceCard extends StatelessWidget {
                 8.height,
                 Row(
                   children: [
-                    const Icon(Icons.access_time, size: 16, color: Colors.grey),
+                    Icon(Icons.access_time, size: 16, color: context.themeMuted),
                     4.width,
                     Text(
                       "Duration: ",

@@ -100,7 +100,7 @@ class ServiceDetailScreen extends StatelessWidget {
                                   serviceDetailController
                                       .serviceData.value.localizedCategoryName,
                                   style: boldTextStyle(
-                                      size: 14, color: appColorSecondary),
+                                      size: 14, color: context.themePrimary),
                                 ),
                               ],
                             ),
@@ -169,7 +169,7 @@ class ServiceDetailScreen extends StatelessWidget {
                         .serviceData.value.isInclusiveTaxesAvailable) ...[
                       Text(locale.value.includesInclusiveTax,
                               style: secondaryTextStyle(
-                                  color: appColorSecondary,
+                                  color: context.themePrimary,
                                   size: 12,
                                   fontStyle: FontStyle.italic))
                           .paddingSymmetric(horizontal: 16),
@@ -185,7 +185,7 @@ class ServiceDetailScreen extends StatelessWidget {
                           textAlign: TextAlign.justify,
                           style: primaryTextStyle(
                               size: 12,
-                              color: secondaryTextColor.withValues(alpha: 0.8)),
+                              color: context.themeMuted.withValues(alpha: 0.8)),
                         ),
                       ).paddingSymmetric(horizontal: 16),
                     ServiceDetailClinicsComponent(

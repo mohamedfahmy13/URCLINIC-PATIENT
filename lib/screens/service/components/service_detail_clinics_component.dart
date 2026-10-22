@@ -102,7 +102,7 @@ class ServiceDetailClinicsComponent extends StatelessWidget {
                                           children: [
                                             const CachedImageWidget(url: Assets.iconsIcCall, color: iconColor, width: 14, height: 14),
                                             12.width,
-                                            Text(clinicData.contactNumber, style: primaryTextStyle(color: appColorPrimary)),
+                                            Text(clinicData.contactNumber, style: primaryTextStyle(color: context.themePrimary)),
                                           ],
                                         ),
                                       ).paddingTop(8).visible(clinicData.contactNumber.trim().isNotEmpty),
@@ -118,7 +118,7 @@ class ServiceDetailClinicsComponent extends StatelessWidget {
                                         },
                                         child: Text(
                                           locale.value.viewDetail,
-                                          style: boldTextStyle(size: 14, fontFamily: fontFamilyWeight700, color: appColorSecondary),
+                                          style: boldTextStyle(size: 14, fontFamily: fontFamilyWeight700, color: context.themePrimary),
                                         ).paddingSymmetric(horizontal: 8),
                                       ),
                                       Container(

@@ -364,8 +364,8 @@ class SignUpScreen extends StatelessWidget {
                                 splashRadius: 0,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: radius(0)),
-                                side: const BorderSide(
-                                    color: secondaryTextColor, width: 1.5),
+                                side: BorderSide(
+                                    color: context.themeMuted, width: 1.5),
                                 onChanged: (val) async {
                                   signUpController.isAcceptedTc.value =
                                       !signUpController.isAcceptedTc.value;
@@ -380,10 +380,10 @@ class SignUpScreen extends StatelessWidget {
                                   TextSpan(
                                     text: locale.value.termsConditions,
                                     style: primaryTextStyle(
-                                        color: appColorPrimary,
+                                        color: context.themePrimary,
                                         size: 12,
                                         decoration: TextDecoration.underline,
-                                        decorationColor: appColorPrimary),
+                                        decorationColor: context.themePrimary),
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () {
                                         commonLaunchUrl(TERMS_CONDITION_URL,
@@ -397,10 +397,10 @@ class SignUpScreen extends StatelessWidget {
                                   TextSpan(
                                     text: locale.value.privacyPolicy,
                                     style: primaryTextStyle(
-                                        color: appColorPrimary,
+                                        color: context.themePrimary,
                                         size: 12,
                                         decoration: TextDecoration.underline,
-                                        decorationColor: appColorPrimary),
+                                        decorationColor: context.themePrimary),
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () {
                                         commonLaunchUrl(PRIVACY_POLICY_URL,
@@ -448,7 +448,7 @@ class SignUpScreen extends StatelessWidget {
                       locale.value.signIn,
                       style: boldTextStyle(
                         size: 12,
-                        color: appColorSecondary,
+                        color: context.themePrimary,
                         decorationColor: appColorSecondary,
                       ),
                     ),

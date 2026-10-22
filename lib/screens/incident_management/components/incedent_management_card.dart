@@ -59,7 +59,7 @@ class IncidentManagementCard extends StatelessWidget {
               children: [
                 Text(
                   incidentData.incidentDate.dateInDDMMYYYYFormat,
-                  style: boldTextStyle(size: 12, color: secondaryTextColor),
+                  style: boldTextStyle(size: 12, color: context.themeMuted),
                 ),
                 if (isClosed)
                   Container(
@@ -172,7 +172,7 @@ class IncidentManagementCard extends StatelessWidget {
             8.height,
             Text(
               incidentData.description,
-              style: primaryTextStyle(size: 14, color: secondaryTextColor),
+              style: primaryTextStyle(size: 14, color: context.themeMuted),
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
@@ -190,7 +190,7 @@ class IncidentManagementCard extends StatelessWidget {
               },
               child: Text(
                 locale.value.viewDetail,
-                style: boldTextStyle(color: Colors.red, size: 14),
+                style: boldTextStyle(color: context.themeDanger, size: 14),
               ),
             ),
             if (isClosed) ...[

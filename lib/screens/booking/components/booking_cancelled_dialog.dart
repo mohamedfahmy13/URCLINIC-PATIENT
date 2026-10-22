@@ -62,7 +62,7 @@ class BookingCancelledDialog extends StatelessWidget {
                           locale.value
                               .noteCheckYourAppointmentHistoryForRefundDetailsIfApplicable,
                           style:
-                              boldTextStyle(color: appColorSecondary, size: 12),
+                              boldTextStyle(color: context.themePrimary, size: 12),
                         ),
                       ),
                       24.height,

@@ -45,7 +45,7 @@ class IncidentManagementListScreen extends StatelessWidget {
                     CachedImageWidget(
                       url: Assets.iconsIcIncidentAlert,
                       height: Get.height * 0.12,
-                      color: appColorPrimary,
+                      color: context.themePrimary,
                       fit: BoxFit.fitHeight,
                     ),
                     30.height,
@@ -136,7 +136,7 @@ class IncidentManagementListScreen extends StatelessWidget {
                             CachedImageWidget(
                               url: Assets.iconsIcIncidentAlert,
                               height: Get.height * 0.12,
-                              color: appColorPrimary,
+                              color: context.themePrimary,
                               fit: BoxFit.fitHeight,
                             ),
                             30.height,

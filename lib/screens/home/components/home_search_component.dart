@@ -45,7 +45,7 @@ class HomeSearchComponent extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  Icon(Icons.search, color: appColorPrimary, size: 24),
+                  Icon(Icons.search, color: context.themePrimary, size: 24),
                   12.width,
                   Text(
                     locale.value.searchDoctorClinicService,
@@ -57,7 +57,7 @@ class HomeSearchComponent extends StatelessWidget {
                       color: appColorPrimary.withOpacity(0.1),
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Icon(Icons.tune, color: appColorPrimary, size: 18),
+                    child: Icon(Icons.tune, color: context.themePrimary, size: 18),
                   ),
                 ],
               ),
@@ -207,7 +207,7 @@ class _SearchBottomSheetState extends State<_SearchBottomSheet> {
             width: 40,
             height: 4,
             decoration: boxDecorationDefault(
-              color: Colors.grey.shade300,
+              color: context.themeBorder,
               borderRadius: BorderRadius.circular(2),
             ),
           ),
@@ -220,7 +220,7 @@ class _SearchBottomSheetState extends State<_SearchBottomSheet> {
               autofocus: true,
               decoration: InputDecoration(
                 hintText: locale.value.searchDoctorClinicService,
-                prefixIcon: Icon(Icons.search, color: appColorPrimary),
+                prefixIcon: Icon(Icons.search, color: context.themePrimary),
                 suffixIcon: IconButton(
                   icon: const Icon(Icons.close),
                   onPressed: () {
@@ -279,7 +279,7 @@ class _SearchBottomSheetState extends State<_SearchBottomSheet> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.search, size: 64, color: Colors.grey.shade300),
+                      Icon(Icons.search, size: 64, color: context.themeMuted),
                       16.height,
                       Text(
                         locale.value.searchForDoctorsClinicsServices,
@@ -312,7 +312,7 @@ class _SearchBottomSheetState extends State<_SearchBottomSheet> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.search_off, size: 64, color: Colors.grey.shade300),
+            Icon(Icons.search_off, size: 64, color: context.themeMuted),
             16.height,
             Text(
               locale.value.noDataFound,
@@ -389,7 +389,7 @@ class _SearchBottomSheetState extends State<_SearchBottomSheet> {
             borderRadius: BorderRadius.circular(12),
           ),
           child: Text('$count',
-              style: boldTextStyle(size: 12, color: appColorPrimary)),
+              style: boldTextStyle(size: 12, color: context.themePrimary)),
         ),
       ],
     );
@@ -431,7 +431,7 @@ class _SearchBottomSheetState extends State<_SearchBottomSheet> {
                 ],
               ),
             ),
-            Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey),
+            Icon(Icons.arrow_forward_ios, size: 16, color: context.themeMuted),
           ],
         ),
       ),
@@ -479,7 +479,7 @@ class _SearchBottomSheetState extends State<_SearchBottomSheet> {
                 ],
               ),
             ),
-            Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey),
+            Icon(Icons.arrow_forward_ios, size: 16, color: context.themeMuted),
           ],
         ),
       ),
@@ -519,12 +519,12 @@ class _SearchBottomSheetState extends State<_SearchBottomSheet> {
                   4.height,
                   Text(
                     '${service.charges} ${appCurrency.value}',
-                    style: boldTextStyle(size: 12, color: appColorPrimary),
+                    style: boldTextStyle(size: 12, color: context.themePrimary),
                   ),
                 ],
               ),
             ),
-            Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey),
+            Icon(Icons.arrow_forward_ios, size: 16, color: context.themeMuted),
           ],
         ),
       ),

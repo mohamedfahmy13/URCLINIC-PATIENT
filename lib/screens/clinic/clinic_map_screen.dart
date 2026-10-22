@@ -1,3 +1,4 @@
+import '../../utils/map_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -28,6 +29,7 @@ class ClinicMapScreen extends StatelessWidget {
           children: [
             // ─── Google Map (full screen) ───
             Obx(() => GoogleMap(
+              style: context.themeIsDark ? darkMapStyle : null,
                   initialCameraPosition: controller.initialCameraPosition,
                   onMapCreated: controller.onMapCreated,
                   markers: controller.markers.toSet(),
@@ -54,7 +56,7 @@ class ClinicMapScreen extends StatelessWidget {
                           child: Container(
                             padding: const EdgeInsets.all(10),
                             decoration: boxDecorationDefault(
-                              color: Colors.white,
+                              color: context.themeSurface,
                               shape: BoxShape.circle,
                               boxShadow: [
                                 BoxShadow(
@@ -64,8 +66,8 @@ class ClinicMapScreen extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            child: const Icon(Icons.arrow_back_ios_new_rounded,
-                                size: 18, color: appColorPrimary),
+                            child: Icon(Icons.arrow_back_ios_new_rounded,
+                                size: 18, color: context.themePrimary),
                           ),
                         ),
                         12.width,
@@ -74,7 +76,7 @@ class ClinicMapScreen extends StatelessWidget {
                         Expanded(
                           child: Container(
                             decoration: boxDecorationDefault(
-                              color: Colors.white,
+                              color: context.themeSurface,
                               borderRadius: BorderRadius.circular(30),
                               boxShadow: [
                                 BoxShadow(
@@ -90,8 +92,8 @@ class ClinicMapScreen extends StatelessWidget {
                                 hintText:
                                     locale.value.searchForDoctorsClinicsServices,
                                 hintStyle: secondaryTextStyle(size: 13),
-                                prefixIcon: const Icon(Icons.search,
-                                    color: appColorPrimary, size: 20),
+                                prefixIcon: Icon(Icons.search,
+                                    color: context.themePrimary, size: 20),
                                 suffixIcon: Obx(
                                     () => controller.searchQuery.value.isNotEmpty
                                         ? IconButton(
@@ -99,8 +101,8 @@ class ClinicMapScreen extends StatelessWidget {
                                               controller.searchTextController.clear();
                                               controller.updateSearch('');
                                             },
-                                            icon: const Icon(Icons.close,
-                                                size: 18, color: Colors.grey),
+                                            icon: Icon(Icons.close,
+                                                size: 18, color: context.themeMuted),
                                           )
                                         : const SizedBox.shrink()),
                                 border: InputBorder.none,
@@ -126,7 +128,7 @@ class ClinicMapScreen extends StatelessWidget {
                         margin: const EdgeInsets.only(top: 8, left: 45),
                         padding: const EdgeInsets.symmetric(vertical: 8),
                         decoration: boxDecorationDefault(
-                          color: Colors.white,
+                          color: context.themeSurface,
                           borderRadius: BorderRadius.circular(16),
                           boxShadow: [
                             BoxShadow(
@@ -148,7 +150,7 @@ class ClinicMapScreen extends StatelessWidget {
                               final description = prediction['description'] as String;
 
                               return ListTile(
-                                leading: const Icon(Icons.location_on_outlined, color: Colors.grey),
+                                leading: Icon(Icons.location_on_outlined, color: context.themeMuted),
                                 title: Text(description, style: primaryTextStyle(size: 14)),
                                 onTap: () {
                                   final placeId = prediction['place_id'] as String;
@@ -171,9 +173,9 @@ class ClinicMapScreen extends StatelessWidget {
               bottom: 200,
               child: FloatingActionButton.small(
                 heroTag: 'current_location',
-                backgroundColor: Colors.white,
+                backgroundColor: context.themeSurface,
                 onPressed: controller.goToCurrentLocation,
-                child: const Icon(Icons.my_location, color: appColorPrimary),
+                child: Icon(Icons.my_location, color: context.themePrimary),
               ),
             ),
 
@@ -218,7 +220,7 @@ class _SelectedClinicCard extends StatelessWidget {
         onTap: onTap,
         child: Container(
           decoration: boxDecorationDefault(
-            color: Colors.white,
+            color: context.themeSurface,
             borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
@@ -293,7 +295,7 @@ class _SelectedClinicCard extends StatelessWidget {
                                 Text(
                                   distance,
                                   style: secondaryTextStyle(
-                                      size: 11, color: appColorPrimary),
+                                      size: 11, color: context.themePrimary),
                                 ),
                               ],
                             ],
@@ -312,7 +314,7 @@ class _SelectedClinicCard extends StatelessWidget {
                       ),
                       child: Icon(
                         Icons.arrow_upward_rounded,
-                        color: appColorPrimary,
+                        color: context.themePrimary,
                         size: 22,
                       ),
                     ),

@@ -41,7 +41,7 @@ class SettingScreen extends StatelessWidget {
                     const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
                 titleTextStyle: primaryTextStyle(),
                 leading: commonLeadingWid(
-                    imgPath: Assets.iconsIcLanguage, color: appColorPrimary),
+                    imgPath: Assets.iconsIcLanguage, color: context.themePrimary),
                 trailing: DropdownButtonHideUnderline(
                   child: Container(
                     decoration: BoxDecoration(
@@ -107,7 +107,7 @@ class SettingScreen extends StatelessWidget {
                     const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
                 titleTextStyle: primaryTextStyle(),
                 leading: commonLeadingWid(
-                    imgPath: Assets.iconsIcDarkMode, color: appColorPrimary),
+                    imgPath: Assets.iconsIcDarkMode, color: context.themePrimary),
                 trailing: DropdownButtonHideUnderline(
                   child: Container(
                     decoration: BoxDecoration(
@@ -148,8 +148,8 @@ class SettingScreen extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
                 titleTextStyle: primaryTextStyle(),
-                leading: const Icon(Icons.notifications_active_outlined,
-                    color: appColorPrimary),
+                leading: Icon(Icons.notifications_active_outlined,
+                    color: context.themePrimary),
                 trailing: Transform.scale(
                   scale: .75,
                   child: Switch(
@@ -170,7 +170,7 @@ class SettingScreen extends StatelessWidget {
               },
               titleTextStyle: primaryTextStyle(),
               leading: commonLeadingWid(
-                  imgPath: Assets.iconsIcLock, color: appColorPrimary),
+                  imgPath: Assets.iconsIcLock, color: context.themePrimary),
             ).visible(isLoggedIn.value),
             SettingItemWidget(
               title: locale.value.deleteAccount,
@@ -194,7 +194,7 @@ class SettingScreen extends StatelessWidget {
               },
               titleTextStyle: primaryTextStyle(),
               leading: commonLeadingWid(
-                  imgPath: Assets.iconsIcDelete, color: appColorPrimary),
+                  imgPath: Assets.iconsIcDelete, color: context.themePrimary),
             ).visible(isLoggedIn.value),
             SettingItemWidget(
               title: locale.value.aboutApp,
@@ -204,7 +204,7 @@ class SettingScreen extends StatelessWidget {
               },
               titleTextStyle: primaryTextStyle(),
               leading: commonLeadingWid(
-                  imgPath: Assets.iconsIcInfo, color: appColorPrimary),
+                  imgPath: Assets.iconsIcInfo, color: context.themePrimary),
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
             ).visible(!isLoggedIn.value),
             SettingItemWidget(
@@ -215,7 +215,7 @@ class SettingScreen extends StatelessWidget {
               },
               titleTextStyle: primaryTextStyle(),
               leading: commonLeadingWid(
-                  imgPath: Assets.iconsIcContactUs, color: appColorPrimary),
+                  imgPath: Assets.iconsIcContactUs, color: context.themePrimary),
             ).visible(!isLoggedIn.value),
             SettingItemWidget(
               title: locale.value.signIn,
@@ -224,7 +224,7 @@ class SettingScreen extends StatelessWidget {
               },
               titleTextStyle: primaryTextStyle(),
               leading: commonLeadingWid(
-                  imgPath: Assets.iconsIcLogin, color: appColorPrimary),
+                  imgPath: Assets.iconsIcLogin, color: context.themePrimary),
             ).visible(!isLoggedIn.value),
           ],
         ),

@@ -160,7 +160,7 @@ class ServiceCard extends StatelessWidget {
                         Text(
                           locale.value.includesInclusiveTax,
                           style: secondaryTextStyle(
-                            color: appColorSecondary,
+                            color: context.themePrimary,
                             size: 10,
                             fontStyle: FontStyle.italic,
                           ),

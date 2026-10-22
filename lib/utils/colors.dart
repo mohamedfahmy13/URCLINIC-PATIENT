@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 const appColorPrimary = Color(0xFF0074AD);
 const appColorSecondary = Color(0xff003C5A);
 // Lighter primary for indicators on dark backgrounds (appColorPrimary is too dim there).
-const appColorPrimaryOnDark = Color(0xFF5AB4E5);
+const appColorPrimaryOnDark = Color(0xFF7AC9F5);
 const lightPrimaryColor = Color(0xFFEBEDFF);
 const extraLightPrimaryColor = Color(0xFFF5F6FA);
 const lightSecondaryColor = Color(0xFFFEF1F1);
@@ -79,3 +79,31 @@ const switchActiveColor = Colors.white;
 const switchColor = Color(0xFF808080);
 const iconColor = Color(0xFF6E8192);
 const browseColor = Color(0xFFEAEAFA);
+
+// Shared semantic surfaces for both light and dark screens.
+const appDarkBackground = Color(0xFF10151D);
+const appDarkSurface = Color(0xFF1B2431);
+const appDarkTextPrimary = Color(0xFFF1F5FB);
+const appDarkTextSecondary = Color(0xFFB5C1D0);
+const appLightTextSecondary = Color(0xFF566274);
+const appDarkOutline = Color(0xFF3D4C60);
+
+extension AppThemeColors on BuildContext {
+  Color themeTint(Color color) =>
+      Color.alphaBlend(color.withValues(alpha: .12), themeSurface);
+  bool get themeIsDark => Theme.of(this).brightness == Brightness.dark;
+  Color get themePrimary => Theme.of(this).colorScheme.primary;
+  Color get themeText => Theme.of(this).colorScheme.onSurface;
+  Color get themeMuted => Theme.of(this).colorScheme.onSurfaceVariant;
+  Color get themeSurface => Theme.of(this).colorScheme.surface;
+  Color get themeSubtleSurface =>
+      Theme.of(this).colorScheme.surfaceContainerLow;
+  Color get themeSoftPrimary => Theme.of(this).colorScheme.primaryContainer;
+  Color get themeOnSoftPrimary => Theme.of(this).colorScheme.onPrimaryContainer;
+  Color get themeBorder => Theme.of(this).colorScheme.outlineVariant;
+  Color get themeSuccess =>
+      themeIsDark ? const Color(0xFF81D5AA) : const Color(0xFF23734D);
+  Color get themeWarning =>
+      themeIsDark ? const Color(0xFFFFCA86) : const Color(0xFF875000);
+  Color get themeDanger => Theme.of(this).colorScheme.error;
+}

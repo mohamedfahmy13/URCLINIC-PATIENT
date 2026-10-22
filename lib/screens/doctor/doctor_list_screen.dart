@@ -134,7 +134,7 @@ class _DoctorsListScreenState extends State<DoctorsListScreen> {
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade300,
+                  color: context.themeBorder,
                   borderRadius: radius(2),
                 ),
               ),
@@ -148,18 +148,18 @@ class _DoctorsListScreenState extends State<DoctorsListScreen> {
                       leading: Icon(
                         _getSortIcon(option),
                         color: _currentSort == option
-                            ? appColorPrimary
+                            ? context.themePrimary
                             : iconColor,
                       ),
                       title: Text(
                         _getSortLabel(option),
                         style: _currentSort == option
-                            ? boldTextStyle(color: appColorPrimary)
+                            ? boldTextStyle(color: context.themePrimary)
                             : primaryTextStyle(),
                       ),
                       trailing: _currentSort == option
-                          ? const Icon(Icons.check_circle,
-                              color: appColorPrimary)
+                          ? Icon(Icons.check_circle,
+                              color: context.themePrimary)
                           : null,
                       onTap: () {
                         Navigator.pop(ctx);
@@ -238,7 +238,7 @@ class _DoctorsListScreenState extends State<DoctorsListScreen> {
                           _getSortIcon(_currentSort),
                           size: 16,
                           color: _currentSort != DoctorSortOption.none
-                              ? appColorPrimary
+                              ? context.themePrimary
                               : iconColor,
                         ),
                         6.width,
@@ -249,7 +249,7 @@ class _DoctorsListScreenState extends State<DoctorsListScreen> {
                           style: boldTextStyle(
                             size: 12,
                             color: _currentSort != DoctorSortOption.none
-                                ? appColorPrimary
+                                ? context.themePrimary
                                 : null,
                           ),
                         ),
@@ -258,7 +258,7 @@ class _DoctorsListScreenState extends State<DoctorsListScreen> {
                           Icons.keyboard_arrow_down_rounded,
                           size: 18,
                           color: _currentSort != DoctorSortOption.none
-                              ? appColorPrimary
+                              ? context.themePrimary
                               : iconColor,
                         ),
                       ],

@@ -71,7 +71,7 @@ class WelcomeScreen extends StatelessWidget {
                           AppButton(
                             height: 52,
                             elevation: 0,
-                            color: lightPrimaryColor,
+                            color: context.themeSoftPrimary,
                             onTap: () {
                               Get.to(
                                 () => SignInScreen(),
@@ -83,7 +83,7 @@ class WelcomeScreen extends StatelessWidget {
                               locale.value.signIn,
                               style: boldTextStyle(
                                 size: 12,
-                                color: blackTextColor,
+                                color: context.themeText,
                               ),
                             ),
                           ).expand(),

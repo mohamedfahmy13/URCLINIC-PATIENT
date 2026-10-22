@@ -43,7 +43,7 @@ class ClinicSelectionCardWidget extends StatelessWidget {
                     edgeInsets: EdgeInsets.zero,
                     expandedText: true,
                     textStyle: secondaryTextStyle(size: 14),
-                    prefix: const CachedImageWidget(url: Assets.iconsIcLocation, color: secondaryTextColor, width: 14, height: 14),
+                    prefix: CachedImageWidget(url: Assets.iconsIcLocation, color: context.themeMuted, width: 14, height: 14),
                     onTap: () {
                       launchMap(clinicData.address);
                     },
@@ -57,8 +57,8 @@ class ClinicSelectionCardWidget extends StatelessWidget {
                       edgeInsets: EdgeInsets.zero,
                       expandedText: true,
                       useMarquee: true,
-                      textStyle: primaryTextStyle(color: appColorPrimary),
-                      prefix: const CachedImageWidget(url: Assets.iconsIcCall, color: secondaryTextColor, width: 14, height: 14),
+                      textStyle: primaryTextStyle(color: context.themePrimary),
+                      prefix: CachedImageWidget(url: Assets.iconsIcCall, color: context.themeMuted, width: 14, height: 14),
                       onTap: () {
                         launchMap(clinicData.contactNumber);
                       },

@@ -35,7 +35,7 @@ class AboutDoctorComponent extends StatelessWidget {
                 child: ReadMoreText(
                   parseHtmlString(doctorData.aboutSelf),
                   trimLines: 4,
-                  style: secondaryTextStyle(size: 14, color: secondaryTextColor),
+                  style: secondaryTextStyle(size: 14, color: context.themeMuted),
                   colorClickableText: appColorPrimary,
                   trimMode: TrimMode.Line,
                   textAlign: TextAlign.justify,
@@ -67,7 +67,7 @@ class AboutDoctorComponent extends StatelessWidget {
                           children: [
                             CachedImageWidget(url: Assets.iconsIcMail, color: context.primaryColor, width: 14, height: 14),
                             12.width,
-                            Text(doctorData.email, style: primaryTextStyle(color: secondaryTextColor)),
+                            Text(doctorData.email, style: primaryTextStyle(color: context.themeMuted)),
                           ],
                         ),
                       ).paddingBottom(16),
@@ -81,7 +81,7 @@ class AboutDoctorComponent extends StatelessWidget {
                           children: [
                             CachedImageWidget(url: Assets.iconsIcCall, color: context.primaryColor, width: 14, height: 14),
                             12.width,
-                            Text(doctorData.mobile, style: primaryTextStyle(color: secondaryTextColor)),
+                            Text(doctorData.mobile, style: primaryTextStyle(color: context.themeMuted)),
                           ],
                         ),
                       ),
@@ -102,7 +102,7 @@ class AboutDoctorComponent extends StatelessWidget {
                   children: [
                     CachedImageWidget(url: Assets.iconsIcSpecialization, color: context.primaryColor, width: 14, height: 14),
                     12.width,
-                    Text(doctorData.expert, style: primaryTextStyle(color: secondaryTextColor)),
+                    Text(doctorData.expert, style: primaryTextStyle(color: context.themeMuted)),
                   ],
                 ),
               ),
@@ -120,7 +120,7 @@ class AboutDoctorComponent extends StatelessWidget {
                   children: [
                     CachedImageWidget(url: Assets.iconsIcExperience, color: context.primaryColor, width: 14, height: 14),
                     12.width,
-                    Text(doctorData.experience, style: primaryTextStyle(color: secondaryTextColor)),
+                    Text(doctorData.experience, style: primaryTextStyle(color: context.themeMuted)),
                   ],
                 ),
               ),

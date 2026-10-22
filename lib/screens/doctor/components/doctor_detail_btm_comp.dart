@@ -32,7 +32,7 @@ class DoctorDetailBtmComp extends StatelessWidget {
               Get.to(() => AboutDoctorComponent(doctorData: doctorDetailCont.doctorData.value));
             },
             titleTextStyle: boldTextStyle(size: 14),
-            leading: commonLeadingWid(imgPath: Assets.iconsIcInfo, color: appColorSecondary),
+            leading: commonLeadingWid(imgPath: Assets.iconsIcInfo, color: context.themePrimary),
             trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 12, color: darkGray),
             padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
           ),
@@ -46,7 +46,7 @@ class DoctorDetailBtmComp extends StatelessWidget {
                 Get.to(() => DoctorServicesComponent());
               },
               titleTextStyle: boldTextStyle(size: 14),
-              leading: commonLeadingWid(imgPath: Assets.iconsIcServices, color: appColorSecondary),
+              leading: commonLeadingWid(imgPath: Assets.iconsIcServices, color: context.themePrimary),
               trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 12, color: darkGray),
               padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
             ).paddingTop(16),
@@ -60,7 +60,7 @@ class DoctorDetailBtmComp extends StatelessWidget {
               Get.to(() => QualificationComponent(qualificationList: doctorDetailCont.doctorData.value.qualifications));
             },
             titleTextStyle: boldTextStyle(size: 14),
-            leading: commonLeadingWid(imgPath: Assets.iconsIcQualification, color: appColorSecondary),
+            leading: commonLeadingWid(imgPath: Assets.iconsIcQualification, color: context.themePrimary),
             trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 12, color: darkGray),
             padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
           ).paddingTop(16),

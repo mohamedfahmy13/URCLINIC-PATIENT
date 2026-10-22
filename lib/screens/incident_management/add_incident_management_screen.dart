@@ -48,7 +48,7 @@ class AddIncidentManagement extends StatelessWidget {
                             fillColor: context.cardColor,
                             filled: true,
                           ),
-                          suffix: commonLeadingWid(imgPath: Assets.iconsIcNotebook, color: secondaryTextColor, size: 12).paddingAll(16),
+                          suffix: commonLeadingWid(imgPath: Assets.iconsIcNotebook, color: context.themeMuted, size: 12).paddingAll(16),
                         ),
                         16.height,
                         AppTextField(
@@ -124,7 +124,7 @@ class AddIncidentManagement extends StatelessWidget {
                                 fillColor: context.cardColor,
                                 filled: true,
                               ),
-                              suffix: commonLeadingWid(imgPath: Assets.iconsIcCall, color: secondaryTextColor, size: 12).paddingAll(16),
+                              suffix: commonLeadingWid(imgPath: Assets.iconsIcCall, color: context.themeMuted, size: 12).paddingAll(16),
                             ).expand(flex: 8),
                           ],
                         ),
@@ -143,7 +143,7 @@ class AddIncidentManagement extends StatelessWidget {
                             fillColor: context.cardColor,
                             filled: true,
                           ),
-                          suffix: commonLeadingWid(imgPath: Assets.iconsIcMail, color: secondaryTextColor, size: 12).paddingAll(16),
+                          suffix: commonLeadingWid(imgPath: Assets.iconsIcMail, color: context.themeMuted, size: 12).paddingAll(16),
                         ),
                         16.height,
                         AppTextField(

@@ -206,7 +206,7 @@ class AppointmentSummaryWidget extends StatelessWidget {
               Obx(
                 () => Text(
                   _paymentController.bookingErrorMessage.value,
-                  style: secondaryTextStyle(color: Colors.red, size: 12),
+                  style: secondaryTextStyle(color: context.themeDanger, size: 12),
                   textAlign: TextAlign.center,
                 ).paddingSymmetric(horizontal: 16).visible(
                     _paymentController.bookingErrorMessage.value.isNotEmpty),

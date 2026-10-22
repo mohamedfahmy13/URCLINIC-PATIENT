@@ -18,7 +18,7 @@ class SocialMediaElement extends StatelessWidget {
       onPressed: onPressed,
       icon: Container(
         padding: const EdgeInsets.all(10),
-        decoration: boxDecorationDefault(color: lightPrimaryColor, shape: BoxShape.circle),
+        decoration: boxDecorationDefault(color: context.themeSoftPrimary, shape: BoxShape.circle),
         child: CachedImageWidget(
           url: iconPath,
           height: 14,

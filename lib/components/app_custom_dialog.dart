@@ -28,7 +28,7 @@ class AppCustomDialog extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(color: appColorPrimary.withValues(alpha: 0.2), shape: BoxShape.circle),
               padding: const EdgeInsets.all(16),
-              child: const Icon(Icons.warning_amber_rounded, color: appColorPrimary, size: 40),
+              child: Icon(Icons.warning_amber_rounded, color: context.themePrimary, size: 40),
             ),
           ).cornerRadiusWithClipRRectOnly(topLeft: defaultRadius.toInt(), topRight: defaultRadius.toInt()),
           Container(

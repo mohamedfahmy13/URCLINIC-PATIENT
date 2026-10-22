@@ -176,10 +176,10 @@ class SignInScreen extends StatelessWidget {
                                 locale.value.tryToAnotherWay,
                                 style: primaryTextStyle(
                                   size: 12,
-                                  color: appColorPrimary,
+                                  color: context.themePrimary,
                                   // decoration: TextDecoration.underline,
                                   fontStyle: FontStyle.italic,
-                                  decorationColor: appColorPrimary,
+                                  decorationColor: context.themePrimary,
                                 ),
                               ),
                             )
@@ -199,10 +199,10 @@ class SignInScreen extends StatelessWidget {
                             locale.value.forgotPassword,
                             style: primaryTextStyle(
                               size: 12,
-                              color: appColorPrimary,
+                              color: context.themePrimary,
                               decoration: TextDecoration.underline,
                               fontStyle: FontStyle.italic,
-                              decorationColor: appColorPrimary,
+                              decorationColor: context.themePrimary,
                             ),
                           ),
                         ),
@@ -286,7 +286,7 @@ class SignInScreen extends StatelessWidget {
                             locale.value.signUp,
                             style: boldTextStyle(
                               size: 12,
-                              color: appColorSecondary,
+                              color: context.themePrimary,
                               decorationColor: appColorSecondary,
                             ),
                           ),

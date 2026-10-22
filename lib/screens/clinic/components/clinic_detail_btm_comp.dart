@@ -33,7 +33,7 @@ class ClinicDetailBtmComp extends StatelessWidget {
               Get.to(() => ClinicSessionComponent(clinicDetailCont: clinicDetailCont));
             },
             titleTextStyle: boldTextStyle(size: 14),
-            leading: commonLeadingWid(imgPath: Assets.iconsIcClock, color: appColorSecondary),
+            leading: commonLeadingWid(imgPath: Assets.iconsIcClock, color: context.themePrimary),
             trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 12, color: darkGray),
             padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
           ),
@@ -53,7 +53,7 @@ class ClinicDetailBtmComp extends StatelessWidget {
                       Get.to(() => ServiceListScreen(isFromClinicDetail: true), arguments: clinicDetailCont.clinicData.value.id);
                     },
                     titleTextStyle: boldTextStyle(size: 14),
-                    leading: commonLeadingWid(imgPath: Assets.iconsIcServices, color: appColorSecondary),
+                    leading: commonLeadingWid(imgPath: Assets.iconsIcServices, color: context.themePrimary),
                     trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 12, color: darkGray),
                     padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
                   ).paddingTop(16),
@@ -77,7 +77,7 @@ class ClinicDetailBtmComp extends StatelessWidget {
                       Get.to(() => DoctorsListScreen(), arguments: clinicDetailCont.clinicData.value.id);
                     },
                     titleTextStyle: boldTextStyle(size: 14),
-                    leading: commonLeadingWid(imgPath: Assets.iconsIcDoctor, color: appColorSecondary),
+                    leading: commonLeadingWid(imgPath: Assets.iconsIcDoctor, color: context.themePrimary),
                     trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 12, color: darkGray),
                     padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
                   ).paddingTop(16),
@@ -95,7 +95,7 @@ class ClinicDetailBtmComp extends StatelessWidget {
                 Get.to(() => ClinicGalleryListScreen(), arguments: clinicDetailCont.clinicData.value.id);
               },
               titleTextStyle: boldTextStyle(size: 14),
-              leading: commonLeadingWid(imgPath: Assets.iconsIcGallery, color: appColorSecondary),
+              leading: commonLeadingWid(imgPath: Assets.iconsIcGallery, color: context.themePrimary),
               trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 12, color: darkGray),
               padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
             ).paddingTop(16),

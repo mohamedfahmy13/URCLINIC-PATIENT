@@ -49,7 +49,7 @@ class ConfirmBookingDialog extends StatelessWidget {
           16.height,
           Text(titleText ?? locale.value.confirmAppointment, style: primaryTextStyle()),
           16.height,
-          Text(subTitleText ?? locale.value.doYouConfirmThisAppointment, textAlign: TextAlign.center, style: primaryTextStyle(color: secondaryTextColor)).paddingSymmetric(horizontal: 32),
+          Text(subTitleText ?? locale.value.doYouConfirmThisAppointment, textAlign: TextAlign.center, style: primaryTextStyle(color: context.themeMuted)).paddingSymmetric(horizontal: 32),
           16.height,
           Obx(
             () => CheckboxListTile(
@@ -62,7 +62,7 @@ class ConfirmBookingDialog extends StatelessWidget {
               checkboxShape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(5)),
               ),
-              side: const BorderSide(color: secondaryTextColor, width: 1.5),
+              side: BorderSide(color: context.themeMuted, width: 1.5),
               title: Text("${confirmText ?? locale.value.iHaveReadAll} $APP_NAME.", style: secondaryTextStyle()),
               controlAffinity: ListTileControlAffinity.leading,
               contentPadding: EdgeInsets.zero,

@@ -66,7 +66,7 @@ class BookingFormScreen extends StatelessWidget {
                       monthTextStyle: secondaryTextStyle(size: 14),
                       DateTime.now(),
                       initialSelectedDate: DateTime.now(),
-                      selectionColor: lightPrimaryColor,
+                      selectionColor: context.themeSoftPrimary,
                       selectedTextColor: appColorPrimary,
                       height: 100,
                       onDateChange: (date) {
@@ -100,7 +100,7 @@ class BookingFormScreen extends StatelessWidget {
                                 child: Text(
                                     timeSlotsCont.timeSlotsMessage.value,
                                     style: secondaryTextStyle(
-                                        color: Colors.red, size: 14)));
+                                        color: context.themeDanger, size: 14)));
                           }
 
                           return Obx(
@@ -169,7 +169,7 @@ class BookingFormScreen extends StatelessWidget {
                                                                 .value ==
                                                             slot)
                                                         ? Colors.white
-                                                        : appColorPrimary,
+                                                        : context.themePrimary,
                                                   ),
                                                 ),
                                               ),

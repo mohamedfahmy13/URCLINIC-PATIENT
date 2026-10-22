@@ -1,3 +1,5 @@
+import 'colors.dart';
+import 'theme_mode_controller.dart';
 import 'package:get/get.dart';
 import 'package:kivicare_patient/screens/auth/model/user_wallet_model.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -23,6 +25,11 @@ RxBool isLoggedIn = false.obs;
 Rx<UserData> loginUserData = UserData().obs;
 Rx<UserWalletData> userWalletData = UserWalletData().obs;
 RxBool isDarkMode = false.obs;
+final themeModeController = AppThemeModeController(onBrightnessChanged: (dark) {
+  isDarkMode(dark);
+  textPrimaryColorGlobal = dark ? appDarkTextPrimary : primaryTextColor;
+  textSecondaryColorGlobal = dark ? appDarkTextSecondary : appLightTextSecondary;
+});
 RxInt unreadNotificationCount = 0.obs;
 
 // Global language list variable

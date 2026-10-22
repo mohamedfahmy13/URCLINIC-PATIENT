@@ -587,7 +587,7 @@ class AppointmentDetail extends StatelessWidget {
         Text(
           locale.value.noteInCaseYouFailToMakeTheAdvancePaymentYouWi,
           style: secondaryTextStyle(
-              color: appColorSecondary, size: 11, fontStyle: FontStyle.italic),
+              color: context.themePrimary, size: 11, fontStyle: FontStyle.italic),
         )
             .paddingSymmetric(horizontal: 16)
             .paddingTop(16)
@@ -742,8 +742,8 @@ class AppointmentDetail extends StatelessWidget {
                       Text(locale.value.exclusiveTax,
                               style: secondaryTextStyle())
                           .expand(),
-                      const Icon(Icons.info_outline_rounded,
-                              size: 20, color: appColorPrimary)
+                      Icon(Icons.info_outline_rounded,
+                              size: 20, color: context.themePrimary)
                           .onTap(
                         () {
                           showModalBottomSheet(
@@ -810,7 +810,7 @@ class AppointmentDetail extends StatelessWidget {
                           TaxType.PERCENTAGE)
                         Text(
                           ' (${appointmentDetailCont.appointmentDetail.value.billingFinalDiscountValue}% ${locale.value.off})',
-                          style: boldTextStyle(color: Colors.green, size: 12),
+                          style: boldTextStyle(color: context.themeSuccess, size: 12),
                         )
                       else if (appointmentDetailCont.appointmentDetail.value
                               .billingFinalDiscountType ==
@@ -818,7 +818,7 @@ class AppointmentDetail extends StatelessWidget {
                         PriceWidget(
                           price: appointmentDetailCont.appointmentDetail.value
                               .billingFinalDiscountValue,
-                          color: Colors.green,
+                          color: context.themeSuccess,
                           size: 12,
                           isDiscountedPrice: true,
                         )
@@ -844,7 +844,7 @@ class AppointmentDetail extends StatelessWidget {
                         appointmentDetailCont.appointmentDetail.value.bedDetails
                             .fold(
                                 0, (sum, item) => sum + item.charge.validate()),
-                    color: appColorPrimary,
+                    color: context.themePrimary,
                   ),
                 ],
               ),
@@ -917,7 +917,7 @@ class AppointmentDetail extends StatelessWidget {
                   leadingWidget: Text("Refundable Amount (Advance Paid)",
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
-                      style: primaryTextStyle(color: Colors.red)),
+                      style: primaryTextStyle(color: context.themeDanger)),
                   textColor: Colors.red,
                   value: appointmentDetailCont
                       .appointmentDetail.value.refundAmount,
@@ -944,7 +944,7 @@ class AppointmentDetail extends StatelessWidget {
                           TaxType.PERCENTAGE)
                         Text(
                           ' (${appointmentDetailCont.appointmentDetail.value.cancellationCharges}%)',
-                          style: boldTextStyle(color: Colors.green, size: 12),
+                          style: boldTextStyle(color: context.themeSuccess, size: 12),
                         )
                       else if (appointmentDetailCont
                               .appointmentDetail.value.cancellationType ==
@@ -1069,7 +1069,7 @@ class AppointmentDetail extends StatelessWidget {
                 },
                 child: commonLeadingWid(
                   imgPath: Assets.iconsIcDelete,
-                  color: appColorSecondary,
+                  color: context.themePrimary,
                   icon: Icons.delete_outline,
                   size: 16,
                 ),
@@ -1092,7 +1092,7 @@ class AppointmentDetail extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 12, vertical: 6),
                           decoration: boxDecorationDefault(
-                              color: extraLightPrimaryColor,
+                              color: context.themeSubtleSurface,
                               borderRadius: radius(22)),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
@@ -1108,7 +1108,7 @@ class AppointmentDetail extends StatelessWidget {
                                 appointmentDetailCont.yourReview.value.rating
                                     .toStringAsFixed(0),
                                 style: boldTextStyle(
-                                    size: 12, color: appColorPrimary),
+                                    size: 12, color: context.themePrimary),
                               ).paddingTop(2),
                             ],
                           ),
@@ -1125,7 +1125,7 @@ class AppointmentDetail extends StatelessWidget {
                             commonLeadingWid(
                                 imgPath: Assets.iconsIcVerified,
                                 size: 12,
-                                color: Colors.green),
+                                color: context.themeSuccess),
                           ],
                         ).paddingLeft(8).expand(),
                         10.width,

@@ -123,7 +123,7 @@ class NotificationScreen extends StatelessWidget {
                                           width: 20,
                                           firstName: "#${notification.data.notificationDetail.id}",
                                           fit: BoxFit.cover,
-                                          color: appColorPrimary,
+                                          color: context.themePrimary,
                                           circle: true,
                                         ),
                                       ),
@@ -131,7 +131,7 @@ class NotificationScreen extends StatelessWidget {
                                       Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Text(notification.data.subject, style: primaryTextStyle(color: appColorPrimary),),
+                                          Text(notification.data.subject, style: primaryTextStyle(color: context.themePrimary),),
                                           Text(
                                             getAppointmentNotification(notification: notification.data.notificationDetail.type),
                                             style: secondaryTextStyle(size: 14),

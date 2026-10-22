@@ -308,7 +308,7 @@ class _AIChatScreenState extends State<AIChatScreen>
                         return ActionChip(
                           label: Text(_suggestionChips[index],
                               style: secondaryTextStyle(
-                                  size: 12, color: appColorPrimary)),
+                                  size: 12, color: context.themePrimary)),
                           backgroundColor: appColorPrimary.withOpacity(0.08),
                           side: BorderSide(
                               color: appColorPrimary.withOpacity(0.2)),
@@ -406,7 +406,7 @@ class _AIChatScreenState extends State<AIChatScreen>
               shape: BoxShape.circle,
             ),
             child:
-                Icon(Icons.smart_toy_rounded, color: appColorPrimary, size: 48),
+                Icon(Icons.smart_toy_rounded, color: context.themePrimary, size: 48),
           ),
           20.height,
           Text(
@@ -460,7 +460,7 @@ class _AIChatScreenState extends State<AIChatScreen>
               ),
               child: Icon(
                 message.isError ? Icons.error_outline : Icons.smart_toy_rounded,
-                color: message.isError ? Colors.red : appColorPrimary,
+                color: message.isError ? Colors.red : context.themePrimary,
                 size: 20,
               ),
             ),
@@ -531,7 +531,7 @@ class _AIChatScreenState extends State<AIChatScreen>
               ),
               child: Icon(
                 Icons.person_rounded,
-                color: appColorPrimary,
+                color: context.themePrimary,
                 size: 20,
               ),
             ),

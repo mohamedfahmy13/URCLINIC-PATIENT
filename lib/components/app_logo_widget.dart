@@ -34,7 +34,7 @@ class AppLogoWidget extends StatelessWidget {
           errorBuilder: (context, error, stackTrace) => Text(
             APP_NAME.toUpperCase(),
             style: boldTextStyle(
-              color: appColorPrimary,
+              color: context.themePrimary,
               letterSpacing: 10,
             ),
           ),

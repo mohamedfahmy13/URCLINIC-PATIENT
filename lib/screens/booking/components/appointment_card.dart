@@ -48,7 +48,7 @@ class AppointmentCard extends StatelessWidget {
                   alignment: Alignment.centerLeft,
                   child: Text(
                     '${locale.value.appointment} #${appointment.id}',
-                    style: boldTextStyle(size: 14, color: appColorPrimary),
+                    style: boldTextStyle(size: 14, color: context.themePrimary),
                   ),
                 ),
                 8.height,
@@ -65,17 +65,17 @@ class AppointmentCard extends StatelessWidget {
                       children: [
                         Text(
                           appointment.appointmentDate.dateInDMMMMyyyyFormat,
-                          style: boldTextStyle(size: 12, color: appColorSecondary),
+                          style: boldTextStyle(size: 12, color: context.themePrimary),
                         ),
                         6.width,
                         Text(
                           "|",
-                          style: boldTextStyle(size: 12, color: appColorSecondary),
+                          style: boldTextStyle(size: 12, color: context.themePrimary),
                         ),
                         6.width,
                         Text(
                           '${appointment.appointmentTime.format24HourtoAMPM} - ${appointment.endTime.format24HourtoAMPM}',
-                          style: boldTextStyle(size: 12, color: appColorSecondary),
+                          style: boldTextStyle(size: 12, color: context.themePrimary),
                         ),
                       ],
                     ),
@@ -95,7 +95,7 @@ class AppointmentCard extends StatelessWidget {
                       ),
                       Text(
                         appointment.clinicName,
-                        style: primaryTextStyle(size: 14, color: secondaryTextColor),
+                        style: primaryTextStyle(size: 14, color: context.themeMuted),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ).paddingTop(8),
@@ -113,14 +113,14 @@ class AppointmentCard extends StatelessWidget {
                         children: [
                           Text(
                             getServiceType(serviceType: appointment.serviceType),
-                            style: secondaryTextStyle(size: 12, color: secondaryTextColor),
+                            style: secondaryTextStyle(size: 12, color: context.themeMuted),
                           ),
                           6.height,
                           Row(
                             children: [
                               Text(
                                 '${locale.value.doctor}:',
-                                style: primaryTextStyle(size: 12, color: secondaryTextColor),
+                                style: primaryTextStyle(size: 12, color: context.themeMuted),
                               ),
                               6.width,
                               Text(
@@ -144,7 +144,7 @@ class AppointmentCard extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        const Icon(Icons.calendar_today_outlined, color: secondaryTextColor, size: 12),
+                        Icon(Icons.calendar_today_outlined, color: context.themeMuted, size: 12),
                         4.width,
                         Text("${locale.value.appointment}:", style: secondaryTextStyle()),
                         4.width,

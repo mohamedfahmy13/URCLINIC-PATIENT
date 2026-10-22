@@ -158,19 +158,19 @@ class QuickBookComponent extends StatelessWidget {
                 },
                 controller: quickBookController.serviceCont,
                 textFieldType: TextFieldType.NAME,
-                textStyle: primaryTextStyle(decorationColor: appColorPrimary),
+                textStyle: primaryTextStyle(decorationColor: context.themePrimary),
                 decoration: inputDecorationWithOutBorder(
                   context,
                   hintText: locale.value.selectService,
                   filled: true,
                   fillColor: context.cardColor,
                 ),
-                suffix: const Icon(Icons.arrow_drop_down_outlined,
-                    color: Colors.grey),
+                suffix: Icon(Icons.arrow_drop_down_outlined,
+                    color: context.themeMuted),
               ),
             ),
             Obx(() => Text(quickBookController.serviceError.value,
-                    style: secondaryTextStyle(color: Colors.red))
+                    style: secondaryTextStyle(color: context.themeDanger))
                 .visible(quickBookController.serviceError.value.isNotEmpty)),
             16.height,
             SizedBox(
@@ -215,19 +215,19 @@ class QuickBookComponent extends StatelessWidget {
                 },
                 controller: quickBookController.clinicCont,
                 textFieldType: TextFieldType.NAME,
-                textStyle: primaryTextStyle(decorationColor: appColorPrimary),
+                textStyle: primaryTextStyle(decorationColor: context.themePrimary),
                 decoration: inputDecorationWithOutBorder(
                   context,
                   hintText: locale.value.selectClinic,
                   filled: true,
                   fillColor: context.cardColor,
                 ),
-                suffix: const Icon(Icons.arrow_drop_down_outlined,
-                    color: Colors.grey),
+                suffix: Icon(Icons.arrow_drop_down_outlined,
+                    color: context.themeMuted),
               ),
             ),
             Obx(() => Text(quickBookController.clinicError.value,
-                    style: secondaryTextStyle(color: Colors.red))
+                    style: secondaryTextStyle(color: context.themeDanger))
                 .visible(quickBookController.clinicError.value.isNotEmpty)),
             16.height,
             SizedBox(
@@ -274,7 +274,7 @@ class QuickBookComponent extends StatelessWidget {
                   }
                 },
                 controller: quickBookController.dateCont,
-                textStyle: primaryTextStyle(decorationColor: appColorPrimary),
+                textStyle: primaryTextStyle(decorationColor: context.themePrimary),
                 decoration: inputDecorationWithOutBorder(
                   context,
                   hintText: locale.value.chooseDate,
@@ -282,14 +282,14 @@ class QuickBookComponent extends StatelessWidget {
                   fillColor: context.cardColor,
                 ),
                 textFieldType: TextFieldType.NAME,
-                suffix: const Icon(
+                suffix: Icon(
                   Icons.date_range_rounded,
-                  color: Colors.grey,
+                  color: context.themeMuted,
                 ),
               ),
             ),
             Obx(() => Text(quickBookController.dateError.value,
-                    style: secondaryTextStyle(color: Colors.red))
+                    style: secondaryTextStyle(color: context.themeDanger))
                 .visible(quickBookController.dateError.value.isNotEmpty)),
             16.height,
             SizedBox(
@@ -322,7 +322,7 @@ class QuickBookComponent extends StatelessWidget {
                 },
                 readOnly: true,
                 controller: quickBookController.timeCont,
-                textStyle: primaryTextStyle(decorationColor: appColorPrimary),
+                textStyle: primaryTextStyle(decorationColor: context.themePrimary),
                 decoration: inputDecorationWithOutBorder(
                   context,
                   hintText: locale.value.chooseTime,
@@ -330,14 +330,14 @@ class QuickBookComponent extends StatelessWidget {
                   fillColor: context.cardColor,
                 ),
                 textFieldType: TextFieldType.NAME,
-                suffix: const Icon(
+                suffix: Icon(
                   Icons.arrow_drop_down_outlined,
-                  color: Colors.grey,
+                  color: context.themeMuted,
                 ),
               ),
             ),
             Obx(() => Text(quickBookController.timeError.value,
-                    style: secondaryTextStyle(color: Colors.red))
+                    style: secondaryTextStyle(color: context.themeDanger))
                 .visible(quickBookController.timeError.value.isNotEmpty)),
 
             Obx(
@@ -431,7 +431,7 @@ class QuickBookComponent extends StatelessWidget {
                                                         .selectedSlot.value ==
                                                     slot)
                                                 ? Colors.white
-                                                : appColorPrimary,
+                                                : context.themePrimary,
                                           ),
                                         ),
                                       ),

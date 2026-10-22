@@ -53,7 +53,7 @@ class ServiceInfoCardWidget extends StatelessWidget {
                             style: boldTextStyle(
                                 size: 10,
                                 fontFamily: fontFamilyWeight700,
-                                color: appColorSecondary),
+                                color: context.themePrimary),
                           ),
                         ).visible(appointmentDet.categoryName.isNotEmpty),
                         8.height,

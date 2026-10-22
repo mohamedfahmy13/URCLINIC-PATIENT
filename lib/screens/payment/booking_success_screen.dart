@@ -39,11 +39,11 @@ class BookingSuccessScreen extends StatelessWidget {
                   ),
                   24.height,
                   Text(locale.value.great,
-                      style: boldTextStyle(color: appColorSecondary),
+                      style: boldTextStyle(color: context.themePrimary),
                       textAlign: TextAlign.center),
                   8.height,
                   Text(locale.value.bookingSuccessful,
-                      style: boldTextStyle(size: 20, color: appColorSecondary),
+                      style: boldTextStyle(size: 20, color: context.themePrimary),
                       textAlign: TextAlign.center),
                   12.height,
                   Text(locale.value.yourAppointmentHasBeenBookedSuccessfully,
@@ -61,12 +61,12 @@ class BookingSuccessScreen extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Icon(Icons.schedule_rounded,
-                            color: appColorPrimary, size: 18),
+                            color: context.themePrimary, size: 18),
                         8.width,
                         Text(
                           '${locale.value.appointmentStatus}: ${locale.value.pending}',
                           textAlign: TextAlign.center,
-                          style: boldTextStyle(color: appColorPrimary),
+                          style: boldTextStyle(color: context.themePrimary),
                         ),
                       ],
                     ),
@@ -86,7 +86,7 @@ class BookingSuccessScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Icon(Icons.info_outline_rounded,
-                            color: appColorPrimary, size: 18),
+                            color: context.themePrimary, size: 18),
                         10.width,
                         Expanded(
                           child: Text(

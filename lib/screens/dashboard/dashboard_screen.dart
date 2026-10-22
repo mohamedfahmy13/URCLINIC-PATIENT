@@ -46,7 +46,7 @@ class DashboardScreen extends StatelessWidget {
               type: BottomNavigationBarType.fixed,
               currentIndex: dashboardController.currentIndex.value,
               backgroundColor: context.cardColor,
-              selectedItemColor: appColorPrimary,
+              selectedItemColor: context.themePrimary,
               unselectedItemColor:
                   isDarkMode.value ? Colors.white54 : Colors.grey.shade400,
               showSelectedLabels: false,
@@ -76,7 +76,7 @@ class DashboardScreen extends StatelessWidget {
                         navBar.activeIcon,
                         height: 24,
                         width: 24,
-                        color: appColorPrimary,
+                        color: context.themePrimary,
                       ),
                       label: '',
                     ),

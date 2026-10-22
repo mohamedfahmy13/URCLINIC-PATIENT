@@ -196,11 +196,11 @@ class _ServiceDoctorsScreenState extends State<ServiceDoctorsScreen> {
               child: Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade100,
+                  color: context.themeSubtleSurface,
                   shape: BoxShape.circle,
                 ),
                 child: Icon(Icons.info_outline,
-                    size: 20, color: Colors.grey.shade600),
+                    size: 20, color: context.themeMuted),
               ),
             ),
           ],

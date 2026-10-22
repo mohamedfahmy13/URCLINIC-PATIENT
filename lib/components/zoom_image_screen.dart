@@ -57,7 +57,7 @@ class _ZoomImageScreenState extends State<ZoomImageScreen> {
           },
           child: PhotoViewGallery.builder(
             scrollPhysics: const BouncingScrollPhysics(),
-            backgroundDecoration: const BoxDecoration(color: white),
+            backgroundDecoration: BoxDecoration(color: Theme.of(context).scaffoldBackgroundColor),
             pageController: PageController(initialPage: widget.index),
             builder: (BuildContext context, int index) {
               return PhotoViewGalleryPageOptions(

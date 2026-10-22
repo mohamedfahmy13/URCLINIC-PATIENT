@@ -41,7 +41,7 @@ class NotificationBellBadge extends StatelessWidget {
           children: <Widget>[
             CachedImageWidget(
               url: Assets.navigationIcNotifyOutlined,
-              color: iconColor ?? appColorPrimary,
+              color: iconColor ?? context.themePrimary,
               height: iconSize,
             ),
             if (count > 0)

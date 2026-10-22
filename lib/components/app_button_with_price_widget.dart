@@ -62,7 +62,7 @@ class AppButtonWithPricing extends StatelessWidget {
                       children: [
                         PriceWidget(
                           price: price.toStringAsFixed(Constants.DECIMAL_POINT).toDouble(),
-                          color: appColorPrimary,
+                          color: context.themePrimary,
                           size: 14,
                         ),
                         Text.rich(

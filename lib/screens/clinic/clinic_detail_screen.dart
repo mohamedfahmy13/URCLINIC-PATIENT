@@ -261,8 +261,8 @@ class ClinicDetailScreen extends StatelessWidget {
                     borderRadius: radius(20),
                     border: Border.all(color: appColorSecondary, width: 1),
                   ),
-                  child: const Icon(Icons.access_time_rounded,
-                      color: appColorSecondary, size: 18),
+                  child: Icon(Icons.access_time_rounded,
+                      color: context.themePrimary, size: 18),
                 ),
               ),
               8.width,
@@ -284,8 +284,8 @@ class ClinicDetailScreen extends StatelessWidget {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Icon(Icons.location_on_outlined,
-                          color: appColorPrimary, size: 16),
+                      Icon(Icons.location_on_outlined,
+                          color: context.themePrimary, size: 16),
                       6.width,
                       Text(
                           clinicDetailCont.clinicData.value.additionalAddresses
@@ -293,7 +293,7 @@ class ClinicDetailScreen extends StatelessWidget {
                               ? locale.value.selectBranch
                               : locale.value.address,
                           style:
-                              boldTextStyle(size: 12, color: appColorPrimary)),
+                              boldTextStyle(size: 12, color: context.themePrimary)),
                     ],
                   ),
                 ),
@@ -371,7 +371,7 @@ class ClinicDetailScreen extends StatelessWidget {
                               child: Text(
                                 service.localizedName,
                                 style: boldTextStyle(
-                                    size: 13, color: appColorPrimary),
+                                    size: 13, color: context.themePrimary),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -426,9 +426,9 @@ class ClinicDetailScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const CachedImageWidget(
+                        CachedImageWidget(
                           url: Assets.iconsIcCall,
-                          color: appColorPrimary,
+                          color: context.themePrimary,
                           height: 18,
                           width: 18,
                         ),
@@ -436,7 +436,7 @@ class ClinicDetailScreen extends StatelessWidget {
                         Flexible(
                           child: Text(
                             locale.value.contactNumber,
-                            style: boldTextStyle(size: 12, color: Colors.black),
+                            style: boldTextStyle(size: 12, color: context.themeText),
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                           ),
@@ -469,9 +469,9 @@ class ClinicDetailScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const CachedImageWidget(
+                        CachedImageWidget(
                           url: Assets.iconsIcMail,
-                          color: appColorPrimary,
+                          color: context.themePrimary,
                           height: 18,
                           width: 18,
                         ),
@@ -479,7 +479,7 @@ class ClinicDetailScreen extends StatelessWidget {
                         Flexible(
                           child: Text(
                             locale.value.email,
-                            style: boldTextStyle(size: 12, color: Colors.black),
+                            style: boldTextStyle(size: 12, color: context.themeText),
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                           ),
@@ -552,8 +552,8 @@ class ClinicDetailScreen extends StatelessWidget {
                     color: appColorSecondary.withOpacity(0.1),
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(Icons.access_time_rounded,
-                      color: appColorSecondary, size: 32),
+                  child: Icon(Icons.access_time_rounded,
+                      color: context.themePrimary, size: 32),
                 ),
                 16.height,
                 Text(
@@ -576,7 +576,7 @@ class ClinicDetailScreen extends StatelessWidget {
                         TextSpan(
                           text: startTime,
                           style:
-                              boldTextStyle(size: 15, color: appColorPrimary),
+                              boldTextStyle(size: 15, color: context.themePrimary),
                         ),
                         TextSpan(
                           text: ' ${locale.value.toTime} ',
@@ -585,7 +585,7 @@ class ClinicDetailScreen extends StatelessWidget {
                         TextSpan(
                           text: endTime,
                           style:
-                              boldTextStyle(size: 15, color: appColorPrimary),
+                              boldTextStyle(size: 15, color: context.themePrimary),
                         ),
                       ],
                     ),

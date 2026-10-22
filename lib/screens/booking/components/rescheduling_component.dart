@@ -83,7 +83,7 @@ class ReschedulingComponent extends StatelessWidget {
                                             textAlign: TextAlign.center,
                                             style: primaryTextStyle(
                                               size: 12,
-                                              color: (appointmentDetailCont.selectedSlot.value == slot) ? Colors.white : appColorPrimary,
+                                              color: (appointmentDetailCont.selectedSlot.value == slot) ? Colors.white : context.themePrimary,
                                             ),
                                           ),
                                         ),
@@ -135,7 +135,7 @@ void handleRescheduleClick({required BuildContext context, required RxBool isLoa
                   child: DatePicker(
                     DateTime.now(),
                     initialSelectedDate: DateTime.now(),
-                    selectionColor: lightPrimaryColor,
+                    selectionColor: context.themeSoftPrimary,
                     selectedTextColor: appColorPrimary,
                     height: 90,
                     onDateChange: (date) {

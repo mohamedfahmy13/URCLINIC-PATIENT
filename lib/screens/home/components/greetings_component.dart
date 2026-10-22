@@ -25,9 +25,9 @@ class GreetingsComponent extends StatelessWidget {
                   arguments: {'isFromSearch': true});
             },
             behavior: HitTestBehavior.translucent,
-            child: const Icon(
+            child: Icon(
               Icons.search,
-              color: appColorPrimary,
+              color: context.themePrimary,
               size: 24,
             ),
           ),
@@ -38,9 +38,9 @@ class GreetingsComponent extends StatelessWidget {
               Get.to(() => AIChatScreen());
             },
             behavior: HitTestBehavior.translucent,
-            child: const Icon(
+            child: Icon(
               Icons.chat_bubble_outline,
-              color: appColorPrimary,
+              color: context.themePrimary,
               size: 24,
             ),
           ),
@@ -51,9 +51,9 @@ class GreetingsComponent extends StatelessWidget {
               Get.to(() => ClinicMapScreen());
             },
             behavior: HitTestBehavior.translucent,
-            child: const Icon(
+            child: Icon(
               Icons.near_me_outlined,
-              color: appColorPrimary,
+              color: context.themePrimary,
               size: 24,
             ),
           ),
@@ -61,7 +61,7 @@ class GreetingsComponent extends StatelessWidget {
           // Right side: App name
           Text(
             'UrClinic',
-            style: boldTextStyle(size: 20, color: appColorPrimary),
+            style: boldTextStyle(size: 20, color: context.themePrimary),
           ),
           10.width,
           NotificationBellBadge(

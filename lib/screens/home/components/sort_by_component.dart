@@ -187,7 +187,7 @@ class _SortByComponentState extends State<SortByComponent> {
                         _getSortIcon(_currentSort),
                         size: 16,
                         color: _currentSort != ClinicSortOption.none
-                            ? appColorPrimary
+                            ? context.themePrimary
                             : iconColor,
                       ),
                       6.width,
@@ -198,7 +198,7 @@ class _SortByComponentState extends State<SortByComponent> {
                         style: boldTextStyle(
                           size: 12,
                           color: _currentSort != ClinicSortOption.none
-                              ? appColorPrimary
+                              ? context.themePrimary
                               : null,
                         ),
                       ),
@@ -207,7 +207,7 @@ class _SortByComponentState extends State<SortByComponent> {
                         Icons.keyboard_arrow_down_rounded,
                         size: 18,
                         color: _currentSort != ClinicSortOption.none
-                            ? appColorPrimary
+                            ? context.themePrimary
                             : iconColor,
                       ),
                     ],
@@ -246,7 +246,7 @@ class _SortByComponentState extends State<SortByComponent> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Icons.local_hospital_outlined,
-                      size: 48, color: Colors.grey.shade300),
+                      size: 48, color: context.themeMuted),
                   12.height,
                   Text(locale.value.noDataFound, style: secondaryTextStyle()),
                 ],
@@ -278,7 +278,7 @@ class _SortByComponentState extends State<SortByComponent> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Icons.local_offer_outlined,
-                      size: 44, color: Colors.grey.shade300),
+                      size: 44, color: context.themeMuted),
                   12.height,
                   Text(locale.value.noDataFound, style: secondaryTextStyle()),
                 ],
@@ -327,7 +327,7 @@ class _SortByComponentState extends State<SortByComponent> {
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade300,
+                  color: context.themeBorder,
                   borderRadius: radius(2),
                 ),
               ),
@@ -341,18 +341,18 @@ class _SortByComponentState extends State<SortByComponent> {
                       leading: Icon(
                         _getSortIcon(option),
                         color: _currentSort == option
-                            ? appColorPrimary
+                            ? context.themePrimary
                             : iconColor,
                       ),
                       title: Text(
                         _getSortLabel(option),
                         style: _currentSort == option
-                            ? boldTextStyle(color: appColorPrimary)
+                            ? boldTextStyle(color: context.themePrimary)
                             : primaryTextStyle(),
                       ),
                       trailing: _currentSort == option
-                          ? const Icon(Icons.check_circle,
-                              color: appColorPrimary)
+                          ? Icon(Icons.check_circle,
+                              color: context.themePrimary)
                           : null,
                       onTap: () {
                         Navigator.pop(ctx);
@@ -508,15 +508,15 @@ class _ClinicListCard extends StatelessWidget {
                         // Distance
                         if (distance != null &&
                             distance != double.infinity) ...[
-                          const Icon(Icons.near_me_rounded,
-                              size: 12, color: appColorSecondary),
+                          Icon(Icons.near_me_rounded,
+                              size: 12, color: context.themePrimary),
                           2.width,
                           Text(
                             distance! < 1
                                 ? '${(distance! * 1000).toStringAsFixed(0)} m'
                                 : '${distance!.toStringAsFixed(1)} km',
                             style: boldTextStyle(
-                                size: 11, color: appColorSecondary),
+                                size: 11, color: context.themePrimary),
                           ),
                           8.width,
                         ],

@@ -37,9 +37,9 @@ class CommonPdfPlaceHolder extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(
+            Icon(
               Icons.file_copy_rounded,
-              color: appColorPrimary,
+              color: context.themePrimary,
               size: 32,
             ),
             12.height,

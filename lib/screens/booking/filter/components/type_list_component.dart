@@ -58,7 +58,7 @@ class _FilterTypeListComponentState extends State<FilterTypeListComponent> {
                       Flexible(
                         child: Text(
                           "${widget.filterList[index]}",
-                          style: filterCont.filterType.value == widget.filterList[index] ? boldTextStyle(size: 12, color: appColorPrimary) : primaryTextStyle(size: 12),
+                          style: filterCont.filterType.value == widget.filterList[index] ? boldTextStyle(size: 12, color: context.themePrimary) : primaryTextStyle(size: 12),
                         ).paddingOnly(left: 10),
                       ),
                     ],

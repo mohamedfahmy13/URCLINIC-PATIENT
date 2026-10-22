@@ -107,7 +107,7 @@ class _ServiceListScreenState extends State<ServiceListScreen> {
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade300,
+                  color: context.themeBorder,
                   borderRadius: radius(2),
                 ),
               ),
@@ -118,16 +118,16 @@ class _ServiceListScreenState extends State<ServiceListScreen> {
                 (option) => ListTile(
                   leading: Icon(
                     _getSortIcon(option),
-                    color: _currentSort == option ? appColorPrimary : iconColor,
+                    color: _currentSort == option ? context.themePrimary : iconColor,
                   ),
                   title: Text(
                     _getSortLabel(option),
                     style: _currentSort == option
-                        ? boldTextStyle(color: appColorPrimary)
+                        ? boldTextStyle(color: context.themePrimary)
                         : primaryTextStyle(),
                   ),
                   trailing: _currentSort == option
-                      ? const Icon(Icons.check_circle, color: appColorPrimary)
+                      ? Icon(Icons.check_circle, color: context.themePrimary)
                       : null,
                   onTap: () {
                     Navigator.pop(ctx);
@@ -204,7 +204,7 @@ class _ServiceListScreenState extends State<ServiceListScreen> {
                             _getSortIcon(_currentSort),
                             size: 16,
                             color: _currentSort != ServiceSortOption.none
-                                ? appColorPrimary
+                                ? context.themePrimary
                                 : iconColor,
                           ),
                           6.width,
@@ -215,7 +215,7 @@ class _ServiceListScreenState extends State<ServiceListScreen> {
                             style: boldTextStyle(
                               size: 12,
                               color: _currentSort != ServiceSortOption.none
-                                  ? appColorPrimary
+                                  ? context.themePrimary
                                   : null,
                             ),
                           ),
@@ -224,7 +224,7 @@ class _ServiceListScreenState extends State<ServiceListScreen> {
                             Icons.keyboard_arrow_down_rounded,
                             size: 18,
                             color: _currentSort != ServiceSortOption.none
-                                ? appColorPrimary
+                                ? context.themePrimary
                                 : iconColor,
                           ),
                         ],

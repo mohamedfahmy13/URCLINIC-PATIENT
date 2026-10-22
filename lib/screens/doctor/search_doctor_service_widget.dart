@@ -30,7 +30,7 @@ class SearchDoctorServiceWidget extends StatelessWidget {
       controller: doctorDetailController.searchCont,
       textFieldType: TextFieldType.OTHER,
       textInputAction: TextInputAction.done,
-      textStyle: primaryTextStyle(decorationColor: appColorPrimary),
+      textStyle: primaryTextStyle(decorationColor: context.themePrimary),
       onTap: onTap,
       onFieldSubmitted: onFieldSubmitted,
       onChanged: (p0) {

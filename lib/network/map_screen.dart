@@ -1,3 +1,4 @@
+import '../utils/map_styles.dart';
 // ignore_for_file: body_might_complete_normally_catch_error
 
 import 'package:flutter/material.dart';
@@ -153,6 +154,7 @@ class MapScreenState extends State<MapScreen> {
         body: Stack(
           children: <Widget>[
             GoogleMap(
+              style: context.themeIsDark ? darkMapStyle : null,
               markers: Set<Marker>.from(markers),
               initialCameraPosition: _initialLocation,
               myLocationEnabled: true,

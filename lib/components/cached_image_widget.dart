@@ -1,3 +1,4 @@
+import 'package:kivicare_patient/utils/colors.dart';
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -49,38 +50,63 @@ class CachedImageWidget extends StatelessWidget {
       return Container(
         height: height,
         width: width,
-        color: color ?? grey.withValues(alpha: 0.1),
+        color: color ?? context.themeSubtleSurface,
         alignment: alignment,
         //padding: EdgeInsets.all(10),
         //child: Image.asset(ic_no_photo, color: appStore.isDarkMode ? Colors.white : Colors.black),
         child: PlaceHolderWidget(
+          color: context.themeSubtleSurface,
           height: height,
           width: width,
           alignment: alignment ?? Alignment.center,
           child: circle
               ? Text(
                   "${firstName.firstLetter.toUpperCase()}${lastName.firstLetter.toUpperCase()}",
-                  style: primaryTextStyle(size: (height.validate() * 0.3).toInt(), decoration: TextDecoration.none),
+                  style: primaryTextStyle(
+                      size: (height.validate() * 0.3).toInt(),
+                      decoration: TextDecoration.none),
                 )
               : null,
-        ).cornerRadiusWithClipRRectOnly(topLeft: topLeftRadius, topRight: topRightRadius, bottomLeft: bottomLeftRadius, bottomRight: bottomRightRadius).cornerRadiusWithClipRRect(radius ?? (circle ? (height.validate() / 2) : 0)),
-      ).cornerRadiusWithClipRRectOnly(topLeft: topLeftRadius, topRight: topRightRadius, bottomLeft: bottomLeftRadius, bottomRight: bottomRightRadius).cornerRadiusWithClipRRect(radius ?? (circle ? (height.validate() / 2) : 0));
+        )
+            .cornerRadiusWithClipRRectOnly(
+                topLeft: topLeftRadius,
+                topRight: topRightRadius,
+                bottomLeft: bottomLeftRadius,
+                bottomRight: bottomRightRadius)
+            .cornerRadiusWithClipRRect(
+                radius ?? (circle ? (height.validate() / 2) : 0)),
+      )
+          .cornerRadiusWithClipRRectOnly(
+              topLeft: topLeftRadius,
+              topRight: topRightRadius,
+              bottomLeft: bottomLeftRadius,
+              bottomRight: bottomRightRadius)
+          .cornerRadiusWithClipRRect(
+              radius ?? (circle ? (height.validate() / 2) : 0));
     } else if (url.validate().startsWith('http')) {
       return CachedNetworkImage(
         placeholder: (_, __) {
           return PlaceHolderWidget(
+            color: context.themeSubtleSurface,
             height: height,
             width: width,
             alignment: alignment ?? Alignment.center,
             child: circle
                 ? Text(
                     "${firstName.firstLetter.toUpperCase()}${lastName.firstLetter.toUpperCase()}",
-                    style: primaryTextStyle(size: (height.validate() * 0.3).toInt(), decoration: TextDecoration.none),
+                    style: primaryTextStyle(
+                        size: (height.validate() * 0.3).toInt(),
+                        decoration: TextDecoration.none),
                   )
                 : null,
           )
-              .cornerRadiusWithClipRRectOnly(topLeft: topLeftRadius, topRight: topRightRadius, bottomLeft: bottomLeftRadius, bottomRight: bottomRightRadius)
-              .cornerRadiusWithClipRRect(radius ?? (circle ? (height.validate() / 2) : 0))
+              .cornerRadiusWithClipRRectOnly(
+                  topLeft: topLeftRadius,
+                  topRight: topRightRadius,
+                  bottomLeft: bottomLeftRadius,
+                  bottomRight: bottomRightRadius)
+              .cornerRadiusWithClipRRect(
+                  radius ?? (circle ? (height.validate() / 2) : 0))
               .visible(usePlaceholderIfUrlEmpty);
         },
         imageUrl: url,
@@ -91,18 +117,35 @@ class CachedImageWidget extends StatelessWidget {
         alignment: alignment as Alignment? ?? Alignment.center,
         errorWidget: (_, s, d) {
           return PlaceHolderWidget(
+            color: context.themeSubtleSurface,
             height: height,
             width: width,
             alignment: alignment ?? Alignment.center,
             child: circle
                 ? Text(
                     "${firstName.firstLetter.toUpperCase()}${lastName.firstLetter.toUpperCase()}",
-                    style: primaryTextStyle(size: (height.validate() * 0.3).toInt(), decoration: TextDecoration.none),
+                    style: primaryTextStyle(
+                        size: (height.validate() * 0.3).toInt(),
+                        decoration: TextDecoration.none),
                   )
                 : null,
-          ).cornerRadiusWithClipRRectOnly(topLeft: topLeftRadius, topRight: topRightRadius, bottomLeft: bottomLeftRadius, bottomRight: bottomRightRadius).cornerRadiusWithClipRRect(radius ?? (circle ? (height.validate() / 2) : 0));
+          )
+              .cornerRadiusWithClipRRectOnly(
+                  topLeft: topLeftRadius,
+                  topRight: topRightRadius,
+                  bottomLeft: bottomLeftRadius,
+                  bottomRight: bottomRightRadius)
+              .cornerRadiusWithClipRRect(
+                  radius ?? (circle ? (height.validate() / 2) : 0));
         },
-      ).cornerRadiusWithClipRRectOnly(topLeft: topLeftRadius, topRight: topRightRadius, bottomLeft: bottomLeftRadius, bottomRight: bottomRightRadius).cornerRadiusWithClipRRect(radius ?? (circle ? (height.validate() / 2) : 0));
+      )
+          .cornerRadiusWithClipRRectOnly(
+              topLeft: topLeftRadius,
+              topRight: topRightRadius,
+              bottomLeft: bottomLeftRadius,
+              bottomRight: bottomRightRadius)
+          .cornerRadiusWithClipRRect(
+              radius ?? (circle ? (height.validate() / 2) : 0));
     } else {
       if (url.startsWith("assets/")) {
         return Image.asset(
@@ -114,18 +157,35 @@ class CachedImageWidget extends StatelessWidget {
           alignment: alignment ?? Alignment.center,
           errorBuilder: (_, s, d) {
             return PlaceHolderWidget(
+              color: context.themeSubtleSurface,
               height: height,
               width: width,
               alignment: alignment ?? Alignment.center,
               child: circle
                   ? Text(
                       "${firstName.firstLetter.toUpperCase()}${lastName.firstLetter.toUpperCase()}",
-                      style: primaryTextStyle(size: (height.validate() * 0.3).toInt(), decoration: TextDecoration.none),
+                      style: primaryTextStyle(
+                          size: (height.validate() * 0.3).toInt(),
+                          decoration: TextDecoration.none),
                     )
                   : null,
-            ).cornerRadiusWithClipRRectOnly(topLeft: topLeftRadius, topRight: topRightRadius, bottomLeft: bottomLeftRadius, bottomRight: bottomRightRadius).cornerRadiusWithClipRRect(radius ?? (circle ? (height.validate() / 2) : 0));
+            )
+                .cornerRadiusWithClipRRectOnly(
+                    topLeft: topLeftRadius,
+                    topRight: topRightRadius,
+                    bottomLeft: bottomLeftRadius,
+                    bottomRight: bottomRightRadius)
+                .cornerRadiusWithClipRRect(
+                    radius ?? (circle ? (height.validate() / 2) : 0));
           },
-        ).cornerRadiusWithClipRRectOnly(topLeft: topLeftRadius, topRight: topRightRadius, bottomLeft: bottomLeftRadius, bottomRight: bottomRightRadius).cornerRadiusWithClipRRect(radius ?? (circle ? (height.validate() / 2) : 0));
+        )
+            .cornerRadiusWithClipRRectOnly(
+                topLeft: topLeftRadius,
+                topRight: topRightRadius,
+                bottomLeft: bottomLeftRadius,
+                bottomRight: bottomRightRadius)
+            .cornerRadiusWithClipRRect(
+                radius ?? (circle ? (height.validate() / 2) : 0));
       } else {
         return Image.file(
           File(url),
@@ -136,18 +196,29 @@ class CachedImageWidget extends StatelessWidget {
           alignment: alignment ?? Alignment.center,
           errorBuilder: (_, s, d) {
             return PlaceHolderWidget(
+              color: context.themeSubtleSurface,
               height: height,
               width: width,
               alignment: alignment ?? Alignment.center,
               child: circle
                   ? Text(
                       "${firstName.firstLetter.toUpperCase()}${lastName.firstLetter.toUpperCase()}",
-                      style: primaryTextStyle(size: (height.validate() * 0.3).toInt(), decoration: TextDecoration.none),
+                      style: primaryTextStyle(
+                          size: (height.validate() * 0.3).toInt(),
+                          decoration: TextDecoration.none),
                     )
                   : null,
-            ).cornerRadiusWithClipRRectOnly(topLeft: topLeftRadius, topRight: topRightRadius, bottomLeft: bottomLeftRadius, bottomRight: bottomRightRadius).cornerRadiusWithClipRRect(radius ?? (circle ? (height.validate() / 2) : 0));
+            )
+                .cornerRadiusWithClipRRectOnly(
+                    topLeft: topLeftRadius,
+                    topRight: topRightRadius,
+                    bottomLeft: bottomLeftRadius,
+                    bottomRight: bottomRightRadius)
+                .cornerRadiusWithClipRRect(
+                    radius ?? (circle ? (height.validate() / 2) : 0));
           },
-        ).cornerRadiusWithClipRRect(radius ?? (circle ? (height.validate() / 2) : 0));
+        ).cornerRadiusWithClipRRect(
+            radius ?? (circle ? (height.validate() / 2) : 0));
       }
     }
   }

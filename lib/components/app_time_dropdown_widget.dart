@@ -19,7 +19,7 @@ class AppTimeDropDownWidget extends StatelessWidget {
       height: height ?? 40.0,
       width: double.infinity,
       alignment: Alignment.center,
-      decoration: boxDecorationDefault(color: bgColor ?? white, borderRadius: BorderRadius.circular(6)),
+      decoration: boxDecorationDefault(color: bgColor ?? context.themeSubtleSurface, borderRadius: BorderRadius.circular(6)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

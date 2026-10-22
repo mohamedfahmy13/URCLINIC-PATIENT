@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -195,84 +196,106 @@ class AppScaffoldNew extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: resizeToAvoidBottomPadding,
-      backgroundColor: scaffoldBackgroundColor ?? context.scaffoldBackgroundColor,
-      body: Stack(
-        children: [
-          Container(
-            width: Get.width,
-            height: Get.height,
-            decoration: BoxDecoration(color: topBarBgColor ?? appColorPrimary),
-            child: Stack(
-              fit: StackFit.expand,
-              children: [
-                Positioned(
-                  height: topBarHeight,
-                  child: Container(
-                    child: topBarComponent.paddingTop(context.statusBarHeight),
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarBrightness: Brightness.dark,
+        statusBarIconBrightness: Brightness.light,
+        systemNavigationBarColor: Theme.of(context).scaffoldBackgroundColor,
+        systemNavigationBarIconBrightness:
+            context.themeIsDark ? Brightness.light : Brightness.dark,
+      ),
+      child: Scaffold(
+        resizeToAvoidBottomInset: resizeToAvoidBottomPadding,
+        backgroundColor:
+            scaffoldBackgroundColor ?? context.scaffoldBackgroundColor,
+        body: Stack(
+          children: [
+            Container(
+              width: Get.width,
+              height: Get.height,
+              decoration: BoxDecoration(
+                  color: topBarBgColor ??
+                      (context.themeIsDark
+                          ? context.themeSurface
+                          : appColorPrimary)),
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  Positioned(
+                    height: topBarHeight,
+                    child: Container(
+                      child:
+                          topBarComponent.paddingTop(context.statusBarHeight),
+                    ),
                   ),
-                ),
-                Container(
-                  clipBehavior: clipBehaviorSplitRegion,
-                  margin: EdgeInsets.only(top: topBarHeight),
-                  decoration: boxDecorationDefault(
-                    color: scaffoldBackgroundColor ?? context.scaffoldBackgroundColor,
+                  Container(
+                    clipBehavior: clipBehaviorSplitRegion,
+                    margin: EdgeInsets.only(top: topBarHeight),
+                    decoration: boxDecorationDefault(
+                      color: scaffoldBackgroundColor ??
+                          context.scaffoldBackgroundColor,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(defaultRadius * 2),
+                        topRight: Radius.circular(defaultRadius * 2),
+                      ),
+                    ),
+                    // Transparent Material so ListTile ripples/backgrounds paint above this decorated container.
+                    child: Material(
+                      type: MaterialType.transparency,
+                      child: SafeArea(top: false, child: body),
+                    ),
+                  ),
+                  SafeArea(
+                    child: Stack(children: widgetsStackedOverBody),
+                  ),
+                ],
+              ),
+            ),
+            Obx(() {
+              if (!(isLoading ?? false.obs).value)
+                return const SizedBox.shrink();
+              if (isAuthScreen) {
+                return AbsorbPointer(
+                  child: SizedBox(
+                    height: Get.height,
+                    width: Get.width,
+                    child: isBlurBackgroundinLoader
+                        ? BackdropFilter(
+                            filter: ImageFilter.blur(
+                                sigmaX: 4.0,
+                                sigmaY: 4.0,
+                                tileMode: TileMode.mirror),
+                            child: const LoaderWidget(),
+                          )
+                        : const LoaderWidget(),
+                  ),
+                );
+              }
+              return Positioned(
+                top: topBarHeight,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                child: AbsorbPointer(
+                  child: ClipRRect(
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(defaultRadius * 2),
                       topRight: Radius.circular(defaultRadius * 2),
                     ),
+                    child: Container(
+                      color: scaffoldBackgroundColor ??
+                          context.scaffoldBackgroundColor,
+                      child: const LoaderWidget(),
+                    ),
                   ),
-                  // Transparent Material so ListTile ripples/backgrounds paint above this decorated container.
-                  child: Material(
-                    type: MaterialType.transparency,
-                    child: SafeArea(top: false, child: body),
-                  ),
-                ),
-                SafeArea(
-                  child: Stack(children: widgetsStackedOverBody),
-                ),
-              ],
-            ),
-          ),
-          Obx(() {
-            if (!(isLoading ?? false.obs).value) return const SizedBox.shrink();
-            if (isAuthScreen) {
-              return AbsorbPointer(
-                child: SizedBox(
-                  height: Get.height,
-                  width: Get.width,
-                  child: isBlurBackgroundinLoader
-                      ? BackdropFilter(
-                          filter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0, tileMode: TileMode.mirror),
-                          child: const LoaderWidget(),
-                        )
-                      : const LoaderWidget(),
                 ),
               );
-            }
-            return Positioned(
-              top: topBarHeight,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              child: AbsorbPointer(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(defaultRadius * 2),
-                    topRight: Radius.circular(defaultRadius * 2),
-                  ),
-                  child: Container(
-                    color: scaffoldBackgroundColor ?? context.scaffoldBackgroundColor,
-                    child: const LoaderWidget(),
-                  ),
-                ),
-              ),
-            );
-          }),
-        ],
+            }),
+          ],
+        ),
+        floatingActionButton: fabWidget,
       ),
-      floatingActionButton: fabWidget,
     );
   }
 }

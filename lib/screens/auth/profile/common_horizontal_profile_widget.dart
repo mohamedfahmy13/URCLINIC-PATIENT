@@ -105,7 +105,7 @@ class ProfilePicHorizotalWidget extends StatelessWidget {
                   children: [
                     Text(userName, style: boldTextStyle(size: 20)),
                     4.height,
-                    Text(subInfo, style: primaryTextStyle(size: 14, color: secondaryTextColor)),
+                    Text(subInfo, style: primaryTextStyle(size: 14, color: context.themeMuted)),
                   ],
                 ).expand(),
                 /* IconButton(

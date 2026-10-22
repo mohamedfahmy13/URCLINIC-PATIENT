@@ -118,7 +118,7 @@ class ConfirmBookingBottomSheet extends StatelessWidget {
                                   : '',
                           appConfigs.value.isCancellationHoursAvailable ? '${appConfigs.value.cancellationChargeHours}' : '',
                         ),
-                        style: boldTextStyle(color: appColorSecondary, size: 12),
+                        style: boldTextStyle(color: context.themePrimary, size: 12),
                       ),
                     ),
                     16.height,
@@ -136,7 +136,7 @@ class ConfirmBookingBottomSheet extends StatelessWidget {
                         checkboxShape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(5)),
                         ),
-                        side: const BorderSide(color: secondaryTextColor, width: 1.5),
+                        side: BorderSide(color: context.themeMuted, width: 1.5),
                         title: Text("${confirmText ?? locale.value.iHaveReadAll} $APP_NAME.", style: secondaryTextStyle()),
                         controlAffinity: ListTileControlAffinity.leading,
                         contentPadding: EdgeInsets.zero,

@@ -173,7 +173,7 @@ class ClinicLocationScreen extends StatelessWidget {
                 ),
                 child: Icon(
                   isMain ? Icons.location_on : Icons.location_on_outlined,
-                  color: isMain ? appColorPrimary : appColorSecondary,
+                  color: isMain ? context.themePrimary : appColorSecondary,
                   size: 24,
                 ),
               ),
@@ -194,7 +194,7 @@ class ClinicLocationScreen extends StatelessWidget {
                         child: Text(
                           locale.value.mainBranch,
                           style:
-                              boldTextStyle(size: 10, color: appColorPrimary),
+                              boldTextStyle(size: 10, color: context.themePrimary),
                         ),
                       ),
                     Text(
@@ -228,7 +228,7 @@ class ClinicLocationScreen extends StatelessWidget {
                   children: [
                     Icon(
                       Icons.location_city_outlined,
-                      color: appColorSecondary,
+                      color: context.themePrimary,
                       size: 18,
                     ),
                     10.width,

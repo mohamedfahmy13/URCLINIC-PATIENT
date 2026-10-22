@@ -1,3 +1,4 @@
+import 'package:kivicare_patient/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import '../../../components/cached_image_widget.dart';
@@ -33,7 +34,7 @@ class CommonSelectionWid extends StatelessWidget {
             if ((errorText ?? '').isNotEmpty)
               Text(
                 errorText!,
-                style: primaryTextStyle(size: 12, color: Colors.red),
+                style: primaryTextStyle(size: 12, color: context.themeDanger),
                 textAlign: TextAlign.left,
               ),
           ],

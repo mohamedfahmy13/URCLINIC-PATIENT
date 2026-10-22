@@ -132,7 +132,7 @@ class PopularClinicCard extends StatelessWidget {
                             launchCall(clinicElement.contactNumber);
                           },
                           child: Text(clinicElement.contactNumber,
-                              style: primaryTextStyle(color: appColorPrimary)),
+                              style: primaryTextStyle(color: context.themePrimary)),
                         ),
                         const Spacer(),
                         Container(
@@ -171,7 +171,7 @@ class PopularClinicCard extends StatelessWidget {
                   overlayColor: WidgetStatePropertyAll(lightSecondaryColor),
                 ),
                 child: Text(locale.value.viewDetail,
-                    style: boldTextStyle(color: appColorSecondary, size: 12)),
+                    style: boldTextStyle(color: context.themePrimary, size: 12)),
               ),
               8.height,
             ],

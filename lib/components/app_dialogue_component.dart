@@ -57,7 +57,7 @@ class AppDialogueComponent extends StatelessWidget {
                     url: confirmationImage ?? Assets.iconsIcConfirmation,
                     height: 35,
                     width: 35,
-                    color: confirmationImage != null ? confirmationImageColor : appColorPrimary,
+                    color: confirmationImage != null ? confirmationImageColor : context.themePrimary,
                   ),
               20.height,
               Text(

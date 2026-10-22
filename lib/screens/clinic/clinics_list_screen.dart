@@ -146,7 +146,7 @@ class _ClinicListScreenState extends State<ClinicListScreen> {
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade300,
+                  color: context.themeBorder,
                   borderRadius: radius(2),
                 ),
               ),
@@ -157,16 +157,16 @@ class _ClinicListScreenState extends State<ClinicListScreen> {
                 (option) => ListTile(
                   leading: Icon(
                     _getSortIcon(option),
-                    color: _currentSort == option ? appColorPrimary : iconColor,
+                    color: _currentSort == option ? context.themePrimary : iconColor,
                   ),
                   title: Text(
                     _getSortLabel(option),
                     style: _currentSort == option
-                        ? boldTextStyle(color: appColorPrimary)
+                        ? boldTextStyle(color: context.themePrimary)
                         : primaryTextStyle(),
                   ),
                   trailing: _currentSort == option
-                      ? const Icon(Icons.check_circle, color: appColorPrimary)
+                      ? Icon(Icons.check_circle, color: context.themePrimary)
                       : null,
                   onTap: () {
                     Navigator.pop(ctx);
@@ -244,7 +244,7 @@ class _ClinicListScreenState extends State<ClinicListScreen> {
                           _getSortIcon(_currentSort),
                           size: 16,
                           color: _currentSort != ClinicSortOption.none
-                              ? appColorPrimary
+                              ? context.themePrimary
                               : iconColor,
                         ),
                         6.width,
@@ -255,7 +255,7 @@ class _ClinicListScreenState extends State<ClinicListScreen> {
                           style: boldTextStyle(
                             size: 12,
                             color: _currentSort != ClinicSortOption.none
-                                ? appColorPrimary
+                                ? context.themePrimary
                                 : null,
                           ),
                         ),
@@ -264,7 +264,7 @@ class _ClinicListScreenState extends State<ClinicListScreen> {
                           Icons.keyboard_arrow_down_rounded,
                           size: 18,
                           color: _currentSort != ClinicSortOption.none
-                              ? appColorPrimary
+                              ? context.themePrimary
                               : iconColor,
                         ),
                       ],
@@ -290,7 +290,7 @@ class _ClinicListScreenState extends State<ClinicListScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.search, size: 64, color: Colors.grey.shade300),
+                      Icon(Icons.search, size: 64, color: context.themeMuted),
                       16.height,
                       Text(
                         locale.value.searchClinicHere,
@@ -419,10 +419,10 @@ class _ClinicListScreenState extends State<ClinicListScreen> {
               ),
             ),
             // Arrow indicator
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(right: 12),
               child: Icon(Icons.arrow_forward_ios_rounded,
-                  size: 16, color: Colors.grey),
+                  size: 16, color: context.themeMuted),
             ),
           ],
         ),

@@ -79,25 +79,10 @@ void hideKeyBoardWithoutContext() {
 }
 
 void toggleThemeMode({required int themeId}) {
-  if (themeId == THEME_MODE_SYSTEM) {
-    Get.changeThemeMode(ThemeMode.system);
-    isDarkMode(Get.isPlatformDarkMode);
-  } else if (themeId == THEME_MODE_LIGHT) {
-    Get.changeThemeMode(ThemeMode.light);
-    isDarkMode(false);
-  } else if (themeId == THEME_MODE_DARK) {
-    Get.changeThemeMode(ThemeMode.dark);
-    isDarkMode(true);
-  }
+  final mode = themeId == THEME_MODE_SYSTEM ? ThemeMode.system
+      : themeId == THEME_MODE_DARK ? ThemeMode.dark : ThemeMode.light;
+  themeModeController.setMode(mode);
   setValueToLocal(SettingsLocalConst.THEME_MODE, themeId);
-  log('toggleDarkLightSwitch: $themeId');
-  if (isDarkMode.value) {
-    textPrimaryColorGlobal = Colors.white;
-    textSecondaryColorGlobal = Colors.white70;
-  } else {
-    textPrimaryColorGlobal = primaryTextColor;
-    textSecondaryColorGlobal = secondaryTextColor;
-  }
 }
 
 List<LanguageDataModel> languageList() {
@@ -620,8 +605,8 @@ InputDecoration inputDecoration(
         const EdgeInsets.only(left: 12, bottom: 10, top: 10, right: 10),
     labelText: labelText,
     hintText: hintText,
-    hintStyle: primaryTextStyle(size: 12),
-    labelStyle: primaryTextStyle(size: 12),
+    hintStyle: primaryTextStyle(size: 12, color: context.themeMuted),
+    labelStyle: primaryTextStyle(size: 12, color: context.themeMuted),
     alignLabelWithHint: true,
     prefixIcon: prefixIcon,
     prefixIconConstraints: prefixIconConstraints,
@@ -629,29 +614,29 @@ InputDecoration inputDecoration(
     suffixIconConstraints: suffixIconConstraints,
     enabledBorder: OutlineInputBorder(
       borderRadius: radius(borderRadius ?? defaultRadius / 2),
-      borderSide: const BorderSide(color: borderColor, width: 0.0),
+      borderSide: BorderSide(color: context.themeBorder, width: 0.0),
     ),
     focusedErrorBorder: OutlineInputBorder(
       borderRadius: radius(borderRadius ?? defaultRadius / 2),
-      borderSide: const BorderSide(color: Colors.red, width: 0.0),
+      borderSide: BorderSide(color: context.themeDanger, width: 0.0),
     ),
     errorBorder: OutlineInputBorder(
       borderRadius: radius(borderRadius ?? defaultRadius / 2),
-      borderSide: const BorderSide(color: Colors.red),
+      borderSide: BorderSide(color: context.themeDanger),
     ),
     errorMaxLines: 2,
     border: OutlineInputBorder(
       borderRadius: radius(borderRadius ?? defaultRadius / 2),
-      borderSide: const BorderSide(color: borderColor, width: 0.0),
+      borderSide: BorderSide(color: context.themeBorder, width: 0.0),
     ),
     disabledBorder: OutlineInputBorder(
       borderRadius: radius(borderRadius ?? defaultRadius / 2),
-      borderSide: const BorderSide(color: borderColor, width: 0.0),
+      borderSide: BorderSide(color: context.themeBorder, width: 0.0),
     ),
-    errorStyle: primaryTextStyle(color: Colors.red, size: 12),
+    errorStyle: primaryTextStyle(color: context.themeDanger, size: 12),
     focusedBorder: OutlineInputBorder(
       borderRadius: radius(borderRadius ?? defaultRadius / 2),
-      borderSide: const BorderSide(color: appColorPrimary, width: 0.0),
+      borderSide: BorderSide(color: context.themePrimary, width: 0.0),
     ),
     filled: filled,
     fillColor: fillColor,
@@ -678,29 +663,29 @@ InputDecoration inputDecorationWithOutBorder(BuildContext context,
     suffixIcon: suffixIcon,
     enabledBorder: OutlineInputBorder(
       borderRadius: radius(borderRadius ?? defaultRadius),
-      borderSide: const BorderSide(color: Colors.transparent, width: 0.0),
+      borderSide: BorderSide(color: Colors.transparent, width: 0.0),
     ),
     focusedErrorBorder: OutlineInputBorder(
       borderRadius: radius(borderRadius ?? defaultRadius),
-      borderSide: const BorderSide(color: Colors.red, width: 0.0),
+      borderSide: BorderSide(color: context.themeDanger, width: 0.0),
     ),
     errorBorder: OutlineInputBorder(
       borderRadius: radius(borderRadius ?? defaultRadius),
-      borderSide: const BorderSide(color: Colors.red),
+      borderSide: BorderSide(color: context.themeDanger),
     ),
     errorMaxLines: 2,
     border: OutlineInputBorder(
       borderRadius: radius(borderRadius ?? defaultRadius),
-      borderSide: const BorderSide(color: Colors.transparent, width: 0.0),
+      borderSide: BorderSide(color: Colors.transparent, width: 0.0),
     ),
     disabledBorder: OutlineInputBorder(
       borderRadius: radius(borderRadius ?? defaultRadius),
-      borderSide: const BorderSide(color: Colors.transparent, width: 0.0),
+      borderSide: BorderSide(color: Colors.transparent, width: 0.0),
     ),
-    errorStyle: primaryTextStyle(color: Colors.red, size: 12),
+    errorStyle: primaryTextStyle(color: context.themeDanger, size: 12),
     focusedBorder: OutlineInputBorder(
       borderRadius: radius(borderRadius ?? defaultRadius),
-      borderSide: const BorderSide(color: appColorPrimary, width: 0.0),
+      borderSide: BorderSide(color: context.themePrimary, width: 0.0),
     ),
     filled: filled,
     fillColor: fillColor,
@@ -752,8 +737,7 @@ Widget backButton({Object? result}) {
     onPressed: () {
       Get.back(result: result);
     },
-    icon: const Icon(Icons.arrow_back_ios_new_outlined,
-        color: Colors.grey, size: 20),
+    icon: const Icon(Icons.arrow_back_ios_new_outlined, size: 20),
   );
 }
 
@@ -1111,15 +1095,15 @@ Color getBookingStatusColor({required String status}) {
   if (status.toLowerCase().contains(StatusConst.pending)) {
     return pendingStatusColor;
   } else if (status.toLowerCase().contains(StatusConst.confirmed)) {
-    return confirmedStatusColor;
+    return isDarkMode.value ? appColorPrimaryOnDark : confirmedStatusColor;
   } else if (status.toLowerCase().contains(StatusConst.checkIn)) {
     return checkInStatusColor;
   } else if (status.toLowerCase().contains(StatusConst.checkOut)) {
     return completedStatusColor;
   } else if (status.toLowerCase().contains(StatusConst.cancel)) {
-    return cancelStatusColor;
+    return isDarkMode.value ? const Color(0xFFFFB4AB) : cancelStatusColor;
   } else {
-    return defaultStatusColor;
+    return isDarkMode.value ? appDarkTextSecondary : defaultStatusColor;
   }
 }
 
@@ -1149,11 +1133,11 @@ Color getPriceStatusColor({required String paymentStatus}) {
   } else if (paymentStatus
       .toLowerCase()
       .contains(PaymentStatus.ADVANCE_REFUNDED)) {
-    return confirmedStatusColor;
+    return isDarkMode.value ? appColorPrimaryOnDark : confirmedStatusColor;
   } else if (paymentStatus.toLowerCase().contains(PaymentStatus.REFUNDED)) {
-    return confirmedStatusColor;
+    return isDarkMode.value ? appColorPrimaryOnDark : confirmedStatusColor;
   } else if (paymentStatus.toLowerCase().contains(PaymentStatus.failed)) {
-    return cancelStatusColor;
+    return isDarkMode.value ? const Color(0xFFFFB4AB) : cancelStatusColor;
   } else {
     return isDarkMode.value ? secondaryTextColor : defaultStatusColor;
   }
@@ -1194,7 +1178,7 @@ Color getPrescriptionStatusColor({required String status}) {
   } else if (status.toLowerCase().contains(StatusConst.completed)) {
     return completedStatusColor;
   } else {
-    return confirmedStatusColor;
+    return isDarkMode.value ? appColorPrimaryOnDark : confirmedStatusColor;
   }
 }
 
@@ -1218,7 +1202,7 @@ Color getPrescriptionPaymentStatusColor({required String paymentStatus}) {
       paymentStatus.toLowerCase().contains(PaymentStatus.PAID)) {
     return completedStatusColor;
   } else {
-    return confirmedStatusColor;
+    return isDarkMode.value ? appColorPrimaryOnDark : confirmedStatusColor;
   }
 }
 
@@ -1228,7 +1212,7 @@ Color getClinicStatusColor({required String clinicStatus}) {
   } else if (clinicStatus.toLowerCase().contains(ClinicStatus.CLOSE)) {
     return pendingStatusColor;
   } else {
-    return defaultStatusColor;
+    return isDarkMode.value ? appDarkTextSecondary : defaultStatusColor;
   }
 }
 
@@ -1242,7 +1226,7 @@ Color getClinicStatusLightColor({required String clinicStatus}) {
         ? lightSecondaryColor.withValues(alpha: 0.1)
         : lightSecondaryColor;
   } else {
-    return defaultStatusColor;
+    return isDarkMode.value ? appDarkTextSecondary : defaultStatusColor;
   }
 }
 

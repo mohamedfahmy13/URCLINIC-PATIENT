@@ -35,7 +35,7 @@ class PasswordSetSuccess extends StatelessWidget {
                   locale.value.yourPasswordHasBeen,
                   textAlign: TextAlign.center,
                   style: secondaryTextStyle(
-                    color: primaryTextColor,
+                    color: context.themeText,
                     size: 22,
                     weight: FontWeight.w500,
                   ),
@@ -47,7 +47,7 @@ class PasswordSetSuccess extends StatelessWidget {
                 child: Text(
                   locale.value.youCanNowLog,
                   textAlign: TextAlign.center,
-                  style: secondaryTextStyle(color: secondaryTextColor),
+                  style: secondaryTextStyle(color: context.themeMuted),
                 ),
               ),
               48.height,

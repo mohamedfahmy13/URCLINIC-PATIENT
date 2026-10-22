@@ -91,7 +91,7 @@ class DoctorDetailScreen extends StatelessWidget {
                                           doctorDetailCont.doctorData.value.expert,
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
-                                          style: primaryTextStyle(color: appColorPrimary),
+                                          style: primaryTextStyle(color: context.themePrimary),
                                         ).flexible(),
                                       ],
                                     ).paddingTop(6).visible(doctorDetailCont.doctorData.value.expert.isNotEmpty),
@@ -152,7 +152,7 @@ class DoctorDetailScreen extends StatelessWidget {
                       ReadMoreText(
                         parseHtmlString(doctorDetailCont.doctorData.value.aboutSelf),
                         trimLines: 4,
-                        style: secondaryTextStyle(size: 14, color: secondaryTextColor),
+                        style: secondaryTextStyle(size: 14, color: context.themeMuted),
                         colorClickableText: appColorPrimary,
                         trimMode: TrimMode.Line,
                         trimCollapsedText: " ...${locale.value.readMore}",

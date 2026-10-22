@@ -46,8 +46,8 @@ class ChangePassword extends StatelessWidget {
                 controller: changePassController.oldPasswordCont, // Optional
                 textFieldType: TextFieldType.PASSWORD, obscureText: true,
                 decoration: inputDecoration(context, fillColor: context.cardColor, filled: true, hintText: "${locale.value.eG} #123@156"),
-                suffixPasswordVisibleWidget: const Icon(Icons.remove_red_eye_outlined, color: borderColor),
-                suffixPasswordInvisibleWidget: commonLeadingWid(imgPath: Assets.iconsIcEyeSlash, color: borderColor).paddingAll(12),
+                suffixPasswordVisibleWidget: Icon(Icons.remove_red_eye_outlined, color: context.themeBorder),
+                suffixPasswordInvisibleWidget: commonLeadingWid(imgPath: Assets.iconsIcEyeSlash, color: context.themeBorder).paddingAll(12),
               ),
               16.height,
               Focus(
@@ -61,7 +61,7 @@ class ChangePassword extends StatelessWidget {
                   textFieldType: TextFieldType.PASSWORD, obscureText: true,
                   onChanged: (val) => changePassController.checkPasswordRules(val),
                   decoration: inputDecoration(context, fillColor: context.cardColor, filled: true, hintText: "${locale.value.eG}  #123@156"),
-                  suffixPasswordVisibleWidget: const Icon(Icons.remove_red_eye_outlined, color: borderColor),
+                  suffixPasswordVisibleWidget: Icon(Icons.remove_red_eye_outlined, color: context.themeBorder),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return locale.value.passwordIsRequired;
@@ -72,7 +72,7 @@ class ChangePassword extends StatelessWidget {
                     }
                     return null;
                   },
-                  suffixPasswordInvisibleWidget: commonLeadingWid(imgPath: Assets.iconsIcEyeSlash, color: borderColor).paddingAll(12),
+                  suffixPasswordInvisibleWidget: commonLeadingWid(imgPath: Assets.iconsIcEyeSlash, color: context.themeBorder).paddingAll(12),
                 ),
               ),
               6.height,
@@ -114,8 +114,8 @@ class ChangePassword extends StatelessWidget {
                   }
                   return null;
                 },
-                suffixPasswordVisibleWidget: const Icon(Icons.remove_red_eye_outlined, color: borderColor),
-                suffixPasswordInvisibleWidget: commonLeadingWid(imgPath: Assets.iconsIcEyeSlash, color: borderColor).paddingAll(12),
+                suffixPasswordVisibleWidget: Icon(Icons.remove_red_eye_outlined, color: context.themeBorder),
+                suffixPasswordInvisibleWidget: commonLeadingWid(imgPath: Assets.iconsIcEyeSlash, color: context.themeBorder).paddingAll(12),
               ),
               64.height,
               AppButton(

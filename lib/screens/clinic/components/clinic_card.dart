@@ -137,7 +137,7 @@ class ClinicCard extends StatelessWidget {
                             12.width,
                             Text(clinicData.contactNumber,
                                 style:
-                                    primaryTextStyle(color: appColorPrimary)),
+                                    primaryTextStyle(color: context.themePrimary)),
                           ],
                         ),
                       )
@@ -177,7 +177,7 @@ class ClinicCard extends StatelessWidget {
                     ),
                     child: Text(locale.value.viewDetail,
                         style:
-                            boldTextStyle(color: appColorSecondary, size: 12)),
+                            boldTextStyle(color: context.themePrimary, size: 12)),
                   ),
                   8.height,
                 ],

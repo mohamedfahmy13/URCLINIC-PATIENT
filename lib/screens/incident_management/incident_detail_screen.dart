@@ -111,7 +111,7 @@ class IncidentDetailScreen extends StatelessWidget {
                     ],
                   ),
                   if (incident.reply.validate().isNotEmpty) ...[
-                    Text(locale.value.reply, style: boldTextStyle(size: 14, color: secondaryTextColor)),
+                    Text(locale.value.reply, style: boldTextStyle(size: 14, color: context.themeMuted)),
                     8.height,
                     Container(
                       width: double.infinity,

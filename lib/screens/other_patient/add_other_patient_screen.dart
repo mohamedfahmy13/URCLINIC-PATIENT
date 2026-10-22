@@ -68,7 +68,7 @@ class AddOtherPatientScreen extends StatelessWidget {
                       fillColor: context.cardColor,
                       filled: true,
                     ),
-                    suffix: commonLeadingWid(imgPath: Assets.navigationIcUserOutlined, color: secondaryTextColor, size: 12).paddingAll(16),
+                    suffix: commonLeadingWid(imgPath: Assets.navigationIcUserOutlined, color: context.themeMuted, size: 12).paddingAll(16),
                   ),
                   16.height,
                   AppTextField(
@@ -84,7 +84,7 @@ class AddOtherPatientScreen extends StatelessWidget {
                       fillColor: context.cardColor,
                       filled: true,
                     ),
-                    suffix: commonLeadingWid(imgPath: Assets.navigationIcUserOutlined, color: secondaryTextColor, size: 12).paddingAll(16),
+                    suffix: commonLeadingWid(imgPath: Assets.navigationIcUserOutlined, color: context.themeMuted, size: 12).paddingAll(16),
                   ),
                   16.height,
                   Row(
@@ -144,7 +144,7 @@ class AddOtherPatientScreen extends StatelessWidget {
                           fillColor: context.cardColor,
                           filled: true,
                         ),
-                        suffix: commonLeadingWid(imgPath: Assets.iconsIcCall, color: secondaryTextColor, size: 12).paddingAll(16),
+                        suffix: commonLeadingWid(imgPath: Assets.iconsIcCall, color: context.themeMuted, size: 12).paddingAll(16),
                       ).expand(flex: 8),
                     ],
                   ),
@@ -177,7 +177,7 @@ class AddOtherPatientScreen extends StatelessWidget {
                         ),
                         suffix: commonLeadingWid(
                           imgPath: Assets.iconsIcCake,
-                          color: secondaryTextColor,
+                          color: context.themeMuted,
                           size: 12,
                         ).paddingAll(16),
                       ),

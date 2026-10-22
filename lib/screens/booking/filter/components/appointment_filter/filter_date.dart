@@ -63,8 +63,8 @@ class FilterDate extends StatelessWidget {
               filled: true,
               hintText: filterCont.selectedLastDate.value.isNotEmpty ? filterCont.selectedLastDate.value : locale.value.selectLastDate,
             ),
-            suffixPasswordVisibleWidget: commonLeadingWid(imgPath: Assets.iconsIcEye, color: appColorPrimary, size: 12).paddingAll(14),
-            suffixPasswordInvisibleWidget: commonLeadingWid(imgPath: Assets.iconsIcEyeSlash, color: appColorPrimary).paddingAll(14),
+            suffixPasswordVisibleWidget: commonLeadingWid(imgPath: Assets.iconsIcEye, color: context.themePrimary, size: 12).paddingAll(14),
+            suffixPasswordInvisibleWidget: commonLeadingWid(imgPath: Assets.iconsIcEyeSlash, color: context.themePrimary).paddingAll(14),
             onTap: () async {
               final DateTime? pickedDate = await showDatePicker(
                 context: getContext,

@@ -56,7 +56,7 @@ class DoctorSelectionCardWidget extends StatelessWidget {
                     expandedText: true,
                     edgeInsets: EdgeInsets.zero,
                     textStyle: secondaryTextStyle(size: 14),
-                    prefix: const CachedImageWidget(url: Assets.iconsIcQualification, color: secondaryTextColor, width: 14, height: 14),
+                    prefix: CachedImageWidget(url: Assets.iconsIcQualification, color: context.themeMuted, width: 14, height: 14),
                   ).paddingTop(12),
                 if (doctorData.email.isNotEmpty)
                   TextIcon(
@@ -65,7 +65,7 @@ class DoctorSelectionCardWidget extends StatelessWidget {
                     expandedText: true,
                     edgeInsets: EdgeInsets.zero,
                     textStyle: secondaryTextStyle(size: 14),
-                    prefix: const CachedImageWidget(url: Assets.iconsIcMail, color: secondaryTextColor, width: 14, height: 14),
+                    prefix: CachedImageWidget(url: Assets.iconsIcMail, color: context.themeMuted, width: 14, height: 14),
                   ).paddingTop(12),
                 if (doctorData.experience.isNotEmpty)
                   TextIcon(
@@ -74,7 +74,7 @@ class DoctorSelectionCardWidget extends StatelessWidget {
                     expandedText: true,
                     edgeInsets: EdgeInsets.zero,
                     textStyle: secondaryTextStyle(size: 14),
-                    prefix: const CachedImageWidget(url: Assets.iconsIcExperience, color: secondaryTextColor, width: 14, height: 14),
+                    prefix: CachedImageWidget(url: Assets.iconsIcExperience, color: context.themeMuted, width: 14, height: 14),
                   ).paddingTop(12),
               ],
             ).expand(),
