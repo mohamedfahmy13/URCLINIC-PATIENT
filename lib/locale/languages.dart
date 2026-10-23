@@ -302,6 +302,13 @@ abstract class BaseLanguage {
 
   String get noTimeSlotsAvailable;
 
+  String get nightAppointments;
+  String get morningAppointments;
+  String get afternoonAppointments;
+  String get eveningAppointments;
+  String get selectedAppointmentTime;
+  String availableAppointmentTimes(int count);
+
   String get chooseTime;
 
   String get rescheduleBooking;

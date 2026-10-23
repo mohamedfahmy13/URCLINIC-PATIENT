@@ -1907,4 +1907,22 @@ class LanguageAr extends BaseLanguage {
 
   @override
   String get openInMaps => 'افتح في الخريطة';
+
+  @override
+  String get nightAppointments => 'ليلًا';
+
+  @override
+  String get morningAppointments => 'صباحًا';
+
+  @override
+  String get afternoonAppointments => 'بعد الظهر';
+
+  @override
+  String get eveningAppointments => 'مساءً';
+
+  @override
+  String get selectedAppointmentTime => 'الموعد المختار';
+
+  @override
+  String availableAppointmentTimes(int count) => 'المواعيد المتاحة: $count';
 }

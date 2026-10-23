@@ -1,5 +1,3 @@
-import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
 import 'package:kivicare_patient/components/cached_image_widget.dart';
 import 'package:kivicare_patient/screens/home/components/clinic_list_widget.dart';
@@ -16,6 +14,7 @@ import '../../../utils/colors.dart';
 import '../../../utils/empty_error_state_widget.dart';
 import '../../../../utils/app_common.dart';
 import '../home_controller.dart';
+import '../../slots/components/time_slot_picker.dart';
 
 class QuickBookComponent extends StatelessWidget {
   QuickBookComponent({super.key});
@@ -158,7 +157,8 @@ class QuickBookComponent extends StatelessWidget {
                 },
                 controller: quickBookController.serviceCont,
                 textFieldType: TextFieldType.NAME,
-                textStyle: primaryTextStyle(decorationColor: context.themePrimary),
+                textStyle:
+                    primaryTextStyle(decorationColor: context.themePrimary),
                 decoration: inputDecorationWithOutBorder(
                   context,
                   hintText: locale.value.selectService,
@@ -215,7 +215,8 @@ class QuickBookComponent extends StatelessWidget {
                 },
                 controller: quickBookController.clinicCont,
                 textFieldType: TextFieldType.NAME,
-                textStyle: primaryTextStyle(decorationColor: context.themePrimary),
+                textStyle:
+                    primaryTextStyle(decorationColor: context.themePrimary),
                 decoration: inputDecorationWithOutBorder(
                   context,
                   hintText: locale.value.selectClinic,
@@ -274,7 +275,8 @@ class QuickBookComponent extends StatelessWidget {
                   }
                 },
                 controller: quickBookController.dateCont,
-                textStyle: primaryTextStyle(decorationColor: context.themePrimary),
+                textStyle:
+                    primaryTextStyle(decorationColor: context.themePrimary),
                 decoration: inputDecorationWithOutBorder(
                   context,
                   hintText: locale.value.chooseDate,
@@ -322,7 +324,8 @@ class QuickBookComponent extends StatelessWidget {
                 },
                 readOnly: true,
                 controller: quickBookController.timeCont,
-                textStyle: primaryTextStyle(decorationColor: context.themePrimary),
+                textStyle:
+                    primaryTextStyle(decorationColor: context.themePrimary),
                 decoration: inputDecorationWithOutBorder(
                   context,
                   hintText: locale.value.chooseTime,
@@ -368,82 +371,22 @@ class QuickBookComponent extends StatelessWidget {
                               quickBookController.serviceCont.text.isNotEmpty);
                     }
 
-                    return Obx(() {
-                      final double slotItemWidth =
-                          math.max(88, ((Get.width - 80) / 3)).toDouble();
-
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          16.height,
-                          ViewAllLabel(
-                                  label: locale.value.chooseTime,
-                                  isShowAll: false)
-                              .paddingOnly(right: 8)
-                              .visible(
-                                  quickBookController.isLoading.value == false),
-                          const LoaderWidget()
-                              .visible(quickBookController.isLoading.value),
-                          Container(
-                            padding: const EdgeInsets.all(16),
-                            width: Get.width,
-                            alignment: Alignment.center,
-                            decoration:
-                                boxDecorationDefault(color: context.cardColor),
-                            child: AnimatedWrap(
-                              spacing: 12,
-                              runSpacing: 12,
-                              alignment: WrapAlignment.start,
-                              crossAxisAlignment: WrapCrossAlignment.start,
-                              children: List.generate(
-                                quickBookController.slots.length,
-                                (i) {
-                                  final String slot =
-                                      quickBookController.slots[i];
-                                  return Obx(
-                                    () => GestureDetector(
-                                      onTap: () {
-                                        quickBookController.selectedSlot(slot);
-                                        quickBookController.onDateTimeChange();
-                                        quickBookController.timeCont.text =
-                                            slot;
-                                      },
-                                      child: Container(
-                                        width: slotItemWidth,
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 12),
-                                        decoration:
-                                            boxDecorationWithRoundedCorners(
-                                          backgroundColor: quickBookController
-                                                      .selectedSlot.value ==
-                                                  slot
-                                              ? appColorPrimary
-                                              : context.scaffoldBackgroundColor,
-                                          borderRadius: BorderRadius.circular(
-                                              defaultRadius / 2),
-                                        ),
-                                        child: Text(
-                                          slot,
-                                          textAlign: TextAlign.center,
-                                          style: primaryTextStyle(
-                                            size: 12,
-                                            color: (quickBookController
-                                                        .selectedSlot.value ==
-                                                    slot)
-                                                ? Colors.white
-                                                : context.themePrimary,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                },
-                              ),
-                            ),
-                          ).visible(!quickBookController.isLoading.value),
-                        ],
-                      );
-                    });
+                    return Obx(
+                      () => Padding(
+                        padding: const EdgeInsets.only(top: 16),
+                        child: TimeSlotPicker(
+                          key: ValueKey(quickBookController.dateCont.text),
+                          slots: quickBookController.slots.toList(),
+                          selectedSlot: quickBookController.selectedSlot.value,
+                          language: locale.value,
+                          onSelected: (slot) {
+                            quickBookController.selectedSlot(slot);
+                            quickBookController.onDateTimeChange();
+                            quickBookController.timeCont.text = slot;
+                          },
+                        ).visible(!quickBookController.isLoading.value),
+                      ),
+                    );
                   },
                 );
               },

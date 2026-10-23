@@ -14,6 +14,7 @@ import '../../../utils/empty_error_state_widget.dart';
 import '../../../utils/view_all_label_component.dart';
 import '../appointment_detail_controller.dart';
 import '../model/appointments_res_model.dart';
+import '../../slots/components/time_slot_picker.dart';
 
 class ReschedulingComponent extends StatelessWidget {
   ReschedulingComponent({super.key, required this.bookingDetail});
@@ -42,60 +43,26 @@ class ReschedulingComponent extends StatelessWidget {
                     },
                   ).paddingSymmetric(horizontal: 32);
                 },
-                loadingWidget: appointmentDetailCont.isLoading.value ? const Offstage() : const LoaderWidget(),
+                loadingWidget: appointmentDetailCont.isLoading.value
+                    ? const Offstage()
+                    : const LoaderWidget(),
                 onSuccess: (p0) {
                   if (appointmentDetailCont.slots.isEmpty) {
-                    return NoDataWidget(title: locale.value.noTimeSlotsAvailable).paddingTop(12);
+                    return NoDataWidget(
+                            title: locale.value.noTimeSlotsAvailable)
+                        .paddingTop(12);
                   }
 
                   return Obx(
-                    () => Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ViewAllLabel(label: locale.value.chooseTime, isShowAll: false).paddingOnly(right: 8),
-                        Container(
-                          padding: const EdgeInsets.all(16),
-                          decoration: boxDecorationDefault(color: context.cardColor),
-                          child: Column(
-                            children: [
-                              AnimatedWrap(
-                                spacing: 12,
-                                runSpacing: 12,
-                                children: List.generate(
-                                  appointmentDetailCont.slots.length,
-                                  (i) {
-                                    final String slot = appointmentDetailCont.slots[i];
-                                    return Obx(
-                                      () => GestureDetector(
-                                        onTap: () {
-                                          appointmentDetailCont.selectedSlot(slot);
-                                          appointmentDetailCont.onDateTimeChange();
-                                        },
-                                        child: Container(
-                                          width: Get.width / 4 - 27,
-                                          padding: const EdgeInsets.symmetric(vertical: 12),
-                                          decoration: boxDecorationWithRoundedCorners(
-                                            backgroundColor: appointmentDetailCont.selectedSlot.value == slot ? appColorPrimary : context.scaffoldBackgroundColor,
-                                            borderRadius: BorderRadius.circular(defaultRadius / 2),
-                                          ),
-                                          child: Text(
-                                            slot,
-                                            textAlign: TextAlign.center,
-                                            style: primaryTextStyle(
-                                              size: 12,
-                                              color: (appointmentDetailCont.selectedSlot.value == slot) ? Colors.white : context.themePrimary,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                    () => TimeSlotPicker(
+                      key: ValueKey(appointmentDetailCont.selectedDate.value),
+                      slots: appointmentDetailCont.slots.toList(),
+                      selectedSlot: appointmentDetailCont.selectedSlot.value,
+                      language: locale.value,
+                      onSelected: (slot) {
+                        appointmentDetailCont.selectedSlot(slot);
+                        appointmentDetailCont.onDateTimeChange();
+                      },
                     ),
                   );
                 },
@@ -104,13 +71,18 @@ class ReschedulingComponent extends StatelessWidget {
             16.height,
           ],
         ),
-        Obx(() => const LoaderWidget().visible(appointmentDetailCont.isLoading.value)),
+        Obx(() => const LoaderWidget()
+            .visible(appointmentDetailCont.isLoading.value)),
       ],
     );
   }
 }
 
-void handleRescheduleClick({required BuildContext context, required RxBool isLoading, required Rx<AppointmentData> appointmentDetail, required AppointmentDetailController appointmentDetailCont}) {
+void handleRescheduleClick(
+    {required BuildContext context,
+    required RxBool isLoading,
+    required Rx<AppointmentData> appointmentDetail,
+    required AppointmentDetailController appointmentDetailCont}) {
   serviceCommonBottomSheet(
     context,
     child: BottomSelectionSheet(
@@ -123,23 +95,27 @@ void handleRescheduleClick({required BuildContext context, required RxBool isLoa
       isLoading: appointmentDetailCont.isUpdateBookingLoading,
       isEmpty: false,
       noDataTitle: locale.value.statusListIsEmpty,
-      noDataSubTitle: locale.value.thereAreNoStatusListedAtTheMomentStayTunedFor,
+      noDataSubTitle:
+          locale.value.thereAreNoStatusListedAtTheMomentStayTunedFor,
       listWidget: Stack(
         children: [
           SingleChildScrollView(
             child: Column(
               children: [
-                ViewAllLabel(label: locale.value.chooseDate, isShowAll: false).paddingOnly(right: 8),
+                ViewAllLabel(label: locale.value.chooseDate, isShowAll: false)
+                    .paddingOnly(right: 8),
                 Container(
                   decoration: boxDecorationDefault(color: context.cardColor),
                   child: DatePicker(
                     DateTime.now(),
+                    locale: Localizations.localeOf(context).toLanguageTag(),
                     initialSelectedDate: DateTime.now(),
                     selectionColor: context.themeSoftPrimary,
-                    selectedTextColor: appColorPrimary,
+                    selectedTextColor: context.themeOnSoftPrimary,
                     height: 90,
                     onDateChange: (date) {
-                      appointmentDetailCont.selectedDate(date.formatDateYYYYmmdd());
+                      appointmentDetailCont
+                          .selectedDate(date.formatDateYYYYmmdd());
                       appointmentDetailCont.selectedSlot("");
                       appointmentDetailCont.getTimeSlot();
                       appointmentDetailCont.onDateTimeChange();
@@ -159,14 +135,21 @@ void handleRescheduleClick({required BuildContext context, required RxBool isLoa
                 width: Get.width,
                 text: locale.value.update,
                 textStyle: appButtonTextStyleWhite,
-                color: appointmentDetailCont.updateBtnVisible.value ? appColorSecondary : null,
-                enabled: appointmentDetailCont.updateBtnVisible.value ? true : false,
-                disabledColor: appointmentDetailCont.updateBtnVisible.value ? null : appColorSecondary.withValues(alpha: 0.5),
-                shapeBorder: RoundedRectangleBorder(borderRadius: radius(defaultAppButtonRadius / 2)),
+                color: appointmentDetailCont.updateBtnVisible.value
+                    ? appColorSecondary
+                    : null,
+                enabled:
+                    appointmentDetailCont.updateBtnVisible.value ? true : false,
+                disabledColor: appointmentDetailCont.updateBtnVisible.value
+                    ? null
+                    : appColorSecondary.withValues(alpha: 0.5),
+                shapeBorder: RoundedRectangleBorder(
+                    borderRadius: radius(defaultAppButtonRadius / 2)),
                 onTap: () {
                   showConfirmDialogCustom(
                     context,
-                    title: locale.value.doYouWantToChangeTheTimeSlotOfThisAppointment,
+                    title: locale
+                        .value.doYouWantToChangeTheTimeSlotOfThisAppointment,
                     positiveText: locale.value.yes,
                     negativeText: locale.value.no,
                     primaryColor: context.primaryColor,

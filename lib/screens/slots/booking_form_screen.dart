@@ -1,5 +1,3 @@
-import 'dart:math' as math;
-
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -24,6 +22,8 @@ import '../other_patient/add_other_patient_screen.dart';
 import '../service/model/service_list_model.dart';
 import 'booking_form_controller.dart';
 import 'components/clinic_selection_card_widget.dart';
+import 'components/time_slot_picker.dart';
+import 'components/booking_time_footer.dart';
 
 import 'components/doctor_selection_card_widget.dart';
 import 'components/service_selection_card_widget.dart';
@@ -40,331 +40,230 @@ class BookingFormScreen extends StatelessWidget {
       scaffoldBackgroundColor: context.scaffoldBackgroundColor,
       appBarVerticalSize: Get.height * 0.12,
       isLoading: timeSlotsCont.isLoading,
-      body: RefreshIndicator(
-        onRefresh: () async => timeSlotsCont.init(showLoader: false),
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            Obx(
-              () => AnimatedScrollView(
-                physics: const AlwaysScrollableScrollPhysics(),
-                listAnimationType: ListAnimationType.FadeIn,
-                padding: const EdgeInsets.only(
-                  left: 16,
-                  right: 16,
-                  bottom: 90,
-                ),
-                children: [
-                  16.height,
-                  ViewAllLabel(label: locale.value.chooseDate, isShowAll: false)
-                      .paddingOnly(right: 8),
-                  Container(
-                    decoration: boxDecorationDefault(color: context.cardColor),
-                    child: DatePicker(
-                      dateTextStyle: boldTextStyle(size: 18),
-                      dayTextStyle: secondaryTextStyle(size: 14),
-                      monthTextStyle: secondaryTextStyle(size: 14),
-                      DateTime.now(),
-                      initialSelectedDate: DateTime.now(),
-                      selectionColor: context.themeSoftPrimary,
-                      selectedTextColor: appColorPrimary,
-                      height: 100,
-                      onDateChange: (date) {
-                        timeSlotsCont.selectedDate(date.formatDateYYYYmmdd());
-                        timeSlotsCont.selectedSlot("");
-                        timeSlotsCont.getTimeSlot();
-                        timeSlotsCont.onDateTimeChange();
-                      },
-                    ),
-                  ),
-                  16.height,
-                  Obx(
-                    () {
-                      return SnapHelperWidget(
-                        future: timeSlotsCont.slotsFuture.value,
-                        errorBuilder: (error) {
-                          return NoDataWidget(
-                            title: error,
-                            retryText: locale.value.reload,
-                            imageWidget: const ErrorStateWidget(),
-                            onRetry: () {
-                              timeSlotsCont.getTimeSlot();
-                            },
-                          ).paddingSymmetric(horizontal: 32);
-                        },
-                        loadingWidget: const LoaderWidget(),
-                        onSuccess: (p0) {
-                          if (timeSlotsCont.slots.isEmpty &&
-                              !timeSlotsCont.isLoading.value) {
-                            return Center(
-                                child: Text(
-                                    timeSlotsCont.timeSlotsMessage.value,
-                                    style: secondaryTextStyle(
-                                        color: context.themeDanger, size: 14)));
-                          }
-
-                          return Obx(
-                            () {
-                              final double slotItemWidth = math
-                                  .max(88, ((Get.width - 80) / 3))
-                                  .toDouble();
-
-                              return Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  ViewAllLabel(
-                                          label: locale.value.chooseTime,
-                                          isShowAll: false)
-                                      .paddingOnly(right: 8),
-                                  Container(
-                                    padding: const EdgeInsets.all(16),
-                                    width: Get.width,
-                                    alignment: Alignment.center,
-                                    decoration: boxDecorationDefault(
-                                        color: context.cardColor),
-                                    child: AnimatedWrap(
-                                      spacing: 12,
-                                      runSpacing: 12,
-                                      alignment: WrapAlignment.start,
-                                      crossAxisAlignment:
-                                          WrapCrossAlignment.start,
-                                      children: List.generate(
-                                        timeSlotsCont.slots.length,
-                                        (i) {
-                                          final String slot =
-                                              timeSlotsCont.slots[i];
-                                          return Obx(
-                                            () => GestureDetector(
-                                              onTap: () {
-                                                timeSlotsCont
-                                                    .selectedSlot(slot);
-                                                timeSlotsCont
-                                                    .onDateTimeChange();
-                                              },
-                                              child: Container(
-                                                width: slotItemWidth,
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        vertical: 12),
-                                                decoration:
-                                                    boxDecorationWithRoundedCorners(
-                                                  backgroundColor: timeSlotsCont
-                                                              .selectedSlot
-                                                              .value ==
-                                                          slot
-                                                      ? appColorPrimary
-                                                      : context
-                                                          .scaffoldBackgroundColor,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          defaultRadius / 2),
-                                                ),
-                                                child: Text(
-                                                  slot,
-                                                  textAlign: TextAlign.center,
-                                                  style: primaryTextStyle(
-                                                    size: 12,
-                                                    color: (timeSlotsCont
-                                                                .selectedSlot
-                                                                .value ==
-                                                            slot)
-                                                        ? Colors.white
-                                                        : context.themePrimary,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        },
-                      );
-                    },
-                  ),
-                  16.height,
-                  ViewAllLabel(
-                    label: locale.value.bookingFor,
-                    trailingText: locale.value.addOtherPatient,
-                    onTap: () {
-                      Get.to(() => AddOtherPatientScreen(
-                          titleText: locale.value.addPatient,
-                          memberData: UserData()))?.then(
-                        (value) {
-                          if (value == true) {
-                            timeSlotsCont.manageOtherPatientController
-                                .getOtherPatientList();
-                          }
-                        },
-                      );
-                    },
-                  ),
-                  SnapHelperWidget(
-                    future: timeSlotsCont.manageOtherPatientController
-                        .otherPatientListFuture.value,
-                    loadingWidget: SizedBox(),
-                    errorBuilder: (error) {
-                      return NoDataWidget(
-                        title: error,
-                        retryText: locale.value.reload,
-                        imageWidget: const ErrorStateWidget(),
-                        onRetry: () async {
-                          await timeSlotsCont.manageOtherPatientController
-                              .onRefresh();
-                        },
-                      ).paddingSymmetric(horizontal: 32);
-                    },
-                    onSuccess: (data) {
-                      if (data.isEmpty) return const Offstage();
-                      return AnimatedWrap(
-                        listAnimationType: ListAnimationType.None,
-                        spacing: 16,
-                        runSpacing: 16,
-                        crossAxisAlignment: WrapCrossAlignment.center,
-                        children: data.map((userData) {
-                          return Obx(() {
-                            return GestureDetector(
-                              onTap: () {
-                                if (timeSlotsCont.selectedMember.value.id ==
-                                    userData.id) {
-                                  timeSlotsCont.selectedMember(UserData());
-                                } else {
-                                  timeSlotsCont.selectedMember(userData);
-                                }
-                              },
-                              child: AnimatedOpacity(
-                                opacity: 1,
-                                duration: const Duration(milliseconds: 500),
-                                child: Container(
-                                  width: Get.width / 3 - 24,
-                                  decoration: boxDecorationDefault(
-                                    color:
-                                        timeSlotsCont.selectedMember.value.id ==
-                                                userData.id
-                                            ? appColorPrimary
-                                            : context.cardColor,
-                                  ),
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8, vertical: 8),
-                                  child: Row(
-                                    spacing: 12,
-                                    children: [
-                                      CachedImageWidget(
-                                        url: userData.profileImage,
-                                        circle: true,
-                                        height: 28,
-                                        width: 28,
-                                        fit: BoxFit.cover,
-                                      ),
-                                      Text(
-                                        userData.firstName,
-                                        style: boldTextStyle(
-                                          size: 14,
-                                          color: timeSlotsCont.selectedMember
-                                                      .value.id ==
-                                                  userData.id
-                                              ? Colors.white
-                                              : isDarkMode.value
-                                                  ? Colors.white
-                                                  : Colors.black,
-                                        ),
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                      ).expand(),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            );
-                          });
-                        }).toList(),
-                      );
-                    },
-                  ),
-                  16.height,
-                  Text(locale.value.addMedicalHistory,
-                      style: boldTextStyle(size: Constants.labelTextSize)),
-                  8.height,
-                  AppTextField(
-                    textStyle: primaryTextStyle(size: 12),
-                    textFieldType: TextFieldType.MULTILINE,
-                    isValidationRequired: false,
-                    minLines: 5,
-                    maxLength: 250,
-                    controller: timeSlotsCont.medicalReportCont,
-                    decoration: inputDecoration(context,
-                        labelText: locale.value.addMedicalHistory,
-                        fillColor: context.cardColor,
-                        filled: true),
-                  ),
-                  8.height,
-                  Text(locale.value.addMedicalReport,
-                      style: boldTextStyle(size: Constants.labelTextSize)),
-                  8.height,
-                  AddFilesWidget(
-                    width: Get.width * 0.9,
-                    fileList: timeSlotsCont.medicalReportFiles,
-                    onFilePick: timeSlotsCont.handleFilesPickerClick,
-                    onFilePathRemove: (index) {
-                      timeSlotsCont.medicalReportFiles
-                          .remove(timeSlotsCont.medicalReportFiles[index]);
-                    },
-                  ),
-
-                  /// Price section hidden from patient view
-                  const SizedBox.shrink(),
-                ],
-              ),
-            ),
-            Positioned(
-              bottom: 16,
-              left: 16,
-              right: 16,
-              height: 50,
+      body: Column(
+        children: [
+          Expanded(
+            child: RefreshIndicator(
+              onRefresh: () async => timeSlotsCont.init(showLoader: false),
               child: Obx(
-                () {
-                  return AppButton(
-                    width: Get.width,
-                    color: timeSlotsCont.nextBtnVisible.value
-                        ? appColorSecondary
-                        : null,
-                    enabled: timeSlotsCont.nextBtnVisible.value ? true : false,
-                    disabledColor: timeSlotsCont.nextBtnVisible.value
-                        ? null
-                        : appColorSecondary.withValues(alpha: 0.5),
-                    shapeBorder: RoundedRectangleBorder(
-                        borderRadius: radius(defaultAppButtonRadius / 2)),
-                    onTap: () {
-                      if (timeSlotsCont.nextBtnVisible.value) {
-                        doIfLoggedIn(() {
-                          timeSlotsCont.handleNextClick(context);
-                        });
-                      }
-                    },
-                    child: FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: Text(
-                        locale.value.next,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: boldTextStyle(
-                            color: timeSlotsCont.nextBtnVisible.value
-                                ? Colors.white
-                                : Colors.white70,
-                            size: 14),
+                () => AnimatedScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  listAnimationType: ListAnimationType.FadeIn,
+                  padding: const EdgeInsets.only(
+                    left: 16,
+                    right: 16,
+                    bottom: 24,
+                  ),
+                  children: [
+                    16.height,
+                    ViewAllLabel(
+                            label: locale.value.chooseDate, isShowAll: false)
+                        .paddingOnly(right: 8),
+                    Container(
+                      decoration:
+                          boxDecorationDefault(color: context.cardColor),
+                      child: DatePicker(
+                        locale: Localizations.localeOf(context).toLanguageTag(),
+                        dateTextStyle: boldTextStyle(size: 18),
+                        dayTextStyle: secondaryTextStyle(size: 14),
+                        monthTextStyle: secondaryTextStyle(size: 14),
+                        DateTime.now(),
+                        initialSelectedDate: DateTime.now(),
+                        selectionColor: context.themeSoftPrimary,
+                        selectedTextColor: context.themeOnSoftPrimary,
+                        height: 100,
+                        onDateChange: (date) {
+                          timeSlotsCont.selectedDate(date.formatDateYYYYmmdd());
+                          timeSlotsCont.selectedSlot("");
+                          timeSlotsCont.getTimeSlot();
+                          timeSlotsCont.onDateTimeChange();
+                        },
                       ),
                     ),
-                  );
-                },
+                    16.height,
+                    Obx(
+                      () {
+                        return SnapHelperWidget(
+                          future: timeSlotsCont.slotsFuture.value,
+                          errorBuilder: (error) {
+                            return NoDataWidget(
+                              title: error,
+                              retryText: locale.value.reload,
+                              imageWidget: const ErrorStateWidget(),
+                              onRetry: () {
+                                timeSlotsCont.getTimeSlot();
+                              },
+                            ).paddingSymmetric(horizontal: 32);
+                          },
+                          loadingWidget: const LoaderWidget(),
+                          onSuccess: (p0) {
+                            return Obx(
+                              () => TimeSlotPicker(
+                                key: ValueKey(timeSlotsCont.selectedDate.value),
+                                slots: timeSlotsCont.slots.toList(),
+                                selectedSlot: timeSlotsCont.selectedSlot.value,
+                                language: locale.value,
+                                emptyMessage:
+                                    timeSlotsCont.timeSlotsMessage.value,
+                                onSelected: (slot) {
+                                  timeSlotsCont.selectedSlot(slot);
+                                  timeSlotsCont.onDateTimeChange();
+                                },
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    ),
+                    16.height,
+                    ViewAllLabel(
+                      label: locale.value.bookingFor,
+                      trailingText: locale.value.addOtherPatient,
+                      onTap: () {
+                        Get.to(() => AddOtherPatientScreen(
+                            titleText: locale.value.addPatient,
+                            memberData: UserData()))?.then(
+                          (value) {
+                            if (value == true) {
+                              timeSlotsCont.manageOtherPatientController
+                                  .getOtherPatientList();
+                            }
+                          },
+                        );
+                      },
+                    ),
+                    SnapHelperWidget(
+                      future: timeSlotsCont.manageOtherPatientController
+                          .otherPatientListFuture.value,
+                      loadingWidget: SizedBox(),
+                      errorBuilder: (error) {
+                        return NoDataWidget(
+                          title: error,
+                          retryText: locale.value.reload,
+                          imageWidget: const ErrorStateWidget(),
+                          onRetry: () async {
+                            await timeSlotsCont.manageOtherPatientController
+                                .onRefresh();
+                          },
+                        ).paddingSymmetric(horizontal: 32);
+                      },
+                      onSuccess: (data) {
+                        if (data.isEmpty) return const Offstage();
+                        return AnimatedWrap(
+                          listAnimationType: ListAnimationType.None,
+                          spacing: 16,
+                          runSpacing: 16,
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          children: data.map((userData) {
+                            return Obx(() {
+                              return GestureDetector(
+                                onTap: () {
+                                  if (timeSlotsCont.selectedMember.value.id ==
+                                      userData.id) {
+                                    timeSlotsCont.selectedMember(UserData());
+                                  } else {
+                                    timeSlotsCont.selectedMember(userData);
+                                  }
+                                },
+                                child: AnimatedOpacity(
+                                  opacity: 1,
+                                  duration: const Duration(milliseconds: 500),
+                                  child: Container(
+                                    width: Get.width / 3 - 24,
+                                    decoration: boxDecorationDefault(
+                                      color: timeSlotsCont
+                                                  .selectedMember.value.id ==
+                                              userData.id
+                                          ? appColorPrimary
+                                          : context.cardColor,
+                                    ),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8, vertical: 8),
+                                    child: Row(
+                                      spacing: 12,
+                                      children: [
+                                        CachedImageWidget(
+                                          url: userData.profileImage,
+                                          circle: true,
+                                          height: 28,
+                                          width: 28,
+                                          fit: BoxFit.cover,
+                                        ),
+                                        Text(
+                                          userData.firstName,
+                                          style: boldTextStyle(
+                                            size: 14,
+                                            color: timeSlotsCont.selectedMember
+                                                        .value.id ==
+                                                    userData.id
+                                                ? Colors.white
+                                                : isDarkMode.value
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                          ),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ).expand(),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            });
+                          }).toList(),
+                        );
+                      },
+                    ),
+                    16.height,
+                    Text(locale.value.addMedicalHistory,
+                        style: boldTextStyle(size: Constants.labelTextSize)),
+                    8.height,
+                    AppTextField(
+                      textStyle: primaryTextStyle(size: 12),
+                      textFieldType: TextFieldType.MULTILINE,
+                      isValidationRequired: false,
+                      minLines: 5,
+                      maxLength: 250,
+                      controller: timeSlotsCont.medicalReportCont,
+                      decoration: inputDecoration(context,
+                          labelText: locale.value.addMedicalHistory,
+                          fillColor: context.cardColor,
+                          filled: true),
+                    ),
+                    8.height,
+                    Text(locale.value.addMedicalReport,
+                        style: boldTextStyle(size: Constants.labelTextSize)),
+                    8.height,
+                    AddFilesWidget(
+                      width: Get.width * 0.9,
+                      fileList: timeSlotsCont.medicalReportFiles,
+                      onFilePick: timeSlotsCont.handleFilesPickerClick,
+                      onFilePathRemove: (index) {
+                        timeSlotsCont.medicalReportFiles
+                            .remove(timeSlotsCont.medicalReportFiles[index]);
+                      },
+                    ),
+
+                    /// Price section hidden from patient view
+                    const SizedBox.shrink(),
+                  ],
+                ),
               ),
             ),
-          ],
-        ),
+          ),
+          Obx(
+            () => BookingTimeFooter(
+              language: locale.value,
+              date: DateTime.parse(timeSlotsCont.selectedDate.value),
+              selectedSlot: timeSlotsCont.selectedSlot.value,
+              onNext: timeSlotsCont.nextBtnVisible.value
+                  ? () => doIfLoggedIn(() {
+                        timeSlotsCont.handleNextClick(context);
+                      })
+                  : null,
+            ),
+          ),
+        ],
       ),
     );
   }

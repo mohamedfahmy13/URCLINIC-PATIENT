@@ -6,7 +6,6 @@ import '../../../components/app_scaffold.dart';
 import '../../../generated/assets.dart';
 import '../../../main.dart';
 import '../../Encounter/all_encounters_screen.dart';
-import '../../incident_management/incident_management_list_screen.dart';
 import '../../other_patient/manage_other_patient_screen.dart';
 import 'common_horizontal_profile_widget.dart';
 import 'edit_user_profile_controller.dart';
@@ -103,23 +102,6 @@ class ProfileScreen extends StatelessWidget {
                   titleTextStyle: boldTextStyle(size: 14),
                   leading: commonLeadingWid(
                           imgPath: Assets.iconsIcEncounter,
-                          color: context.themePrimary)
-                      .circularLightPrimaryBg(),
-                  trailing: trailing,
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
-                ).paddingTop(16),
-                SettingItemWidget(
-                  decoration: boxDecorationDefault(color: context.cardColor),
-                  title: locale.value.incidentManagement,
-                  subTitle: locale.value.requestHelpForAnyMistakeHappen,
-                  splashColor: transparentColor,
-                  onTap: () {
-                    Get.to(() => IncidentManagementListScreen());
-                  },
-                  titleTextStyle: boldTextStyle(size: 14),
-                  leading: commonLeadingWid(
-                          imgPath: Assets.iconsIcIncidentLock,
                           color: context.themePrimary)
                       .circularLightPrimaryBg(),
                   trailing: trailing,

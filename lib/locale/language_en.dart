@@ -1920,4 +1920,22 @@ class LanguageEn extends BaseLanguage {
 
   @override
   String get openInMaps => 'Open in Maps';
+  @override
+  String get nightAppointments => 'Night';
+
+  @override
+  String get morningAppointments => 'Morning';
+
+  @override
+  String get afternoonAppointments => 'Afternoon';
+
+  @override
+  String get eveningAppointments => 'Evening';
+
+  @override
+  String get selectedAppointmentTime => 'Selected appointment';
+
+  @override
+  String availableAppointmentTimes(int count) =>
+      count == 1 ? '1 available appointment' : '$count available appointments';
 }
